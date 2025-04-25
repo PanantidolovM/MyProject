@@ -7,6 +7,7 @@ public interface IEmployeeRepository{
 
     //検索
     Employee GetById(int id);
+    
     IEnumerable<Employee> GetAll();
 
     //更新

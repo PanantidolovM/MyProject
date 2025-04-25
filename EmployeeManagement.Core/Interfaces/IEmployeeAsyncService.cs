@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using EmployeeManagement.Core.Enities;
 
 
-public interface IEmployeeService{
+public interface IEmployeeAsyncService{
     Task<Employee> GetEmployeeDetailsAsync(int id);
     Task<IEnumerable<Employee>> GetAllEmployeesAsync();
     Task AddEmployeeAsync(Employee employee);

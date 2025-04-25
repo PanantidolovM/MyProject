@@ -11,7 +11,7 @@ public class EmployeeDomainService  : IEmployeeDomainService
         
         _employeeRepository = employeeRepository;
     }
-    // 社員登録
+    // 社員登録処理
     public void AddEmployee(Employee employee){
          // 入力チェック
         if (employee == null)
@@ -23,7 +23,7 @@ public class EmployeeDomainService  : IEmployeeDomainService
             throw new ArgumentException("姓名を入力してください！");
         }
 
-        //　
+        // Ví dụ: đảm bảo rằng các thông tin bắt buộc không được để trống
         if (string.IsNullOrWhiteSpace(employee.Mail))
         {
             throw new ArgumentException("メールを入力してください！");
@@ -31,7 +31,7 @@ public class EmployeeDomainService  : IEmployeeDomainService
         _employeeRepository.AddEmployee(employee);
     }
 
-    // 社員更新
+    // 社員更新処理
     public void UpdateEmployee(Employee employee){
          // Kiểm tra đầu vào
         if (employee == null)
@@ -50,26 +50,42 @@ public class EmployeeDomainService  : IEmployeeDomainService
         _employeeRepository.UpdateEmployee(employee);
     }
 
-    // 社員検索
+    // 社員検索処理
     public Employee GetEmployeeDetails(int id){
-        // Áp dụng các quy tắc nghiệp vụ phức tạp hoặc tính toán nếu cần trước khi trả về
         var employee = _employeeRepository.GetById(id);
-        // Ví dụ: kiểm tra điều kiện, tính toán thêm các thông tin…
-        return employee;
-    }
-
-    //社員一覧検索
-    public IEnumerable<Employee> GetAllEmployees(){
-        return _employeeRepository.GetAll();
-    }
-
-    // 社員削除
-    public void DelEmployee(int id){
-        var employee = _employeeRepository.GetById(id);
+        if (id <= 0)
+        {
+            throw new ArgumentException($"無効な{id}.");
+        }
         if (employee == null)
         {
             throw new KeyNotFoundException($"社員の{id}が検索できません.");
         }
-        _employeeRepository.DelEmployee(id);
+        return employee;
+    }
+
+    //社員一覧検索処理
+    public IEnumerable<Employee> GetAllEmployees(){
+        List<Employee> employees = _employeeRepository.GetAll().ToList();
+        // Kiểm tra xem danh sách nhân viên có rỗng hay không
+        if (_employeeRepository.GetAll() == null || !_employeeRepository.GetAll().Any())
+        {
+            throw new InvalidOperationException("Không có nhân viên nào trong danh sách.");
+        }
+        // Lấy danh sách nhân viên từ repository
+        return employees;
+    }
+
+    // 社員削除処理
+    public void DelEmployee(int id){
+        var employee = _employeeRepository.GetById(id);
+        if (id <= 0)
+        {
+            throw new ArgumentException($"無効な{id}.");
+        }
+        if (employee == null)
+        {
+            throw new KeyNotFoundException($"社員の{id}が検索できません.");
+        }
     }
 }
