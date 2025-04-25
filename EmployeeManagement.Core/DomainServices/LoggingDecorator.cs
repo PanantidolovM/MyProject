@@ -76,10 +76,12 @@ public class LoggingDecorator : IEmployeeAsyncService{
     public async Task<IEnumerable<Employee>> GetAllEmployeesAsync(){
         _logger.LogInformation("Getting all employees");
         IEnumerable<Employee> employees = await _innerService.GetAllEmployeesAsync();
+        // Employeeのnullチェック
         if (employees == null || !employees.Any())
         {
-            _logger.LogWarning("No employees found");
-            return employees;
+            _logger.LogWarning("No employees found"); // もしnullなら、エラーログを出力して、ArgumentExceptionをスローする
+            // throw new ArgumentException("社員が見つかりません。");
+            return Enumerable.Empty<Employee>();
         }
         foreach (var employee in employees)
         {
