@@ -1,0 +1,5 @@
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\EmployeeManagement.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\EmployeeManagement.Web.AssemblyInfoInputs.cache
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\EmployeeManagement.Web.AssemblyInfo.cs
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\EmployeeManagement.Web.csproj.CoreCompileInputs.cache
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\EmployeeManagement.Web.MvcApplicationPartsAssemblyInfo.cache
