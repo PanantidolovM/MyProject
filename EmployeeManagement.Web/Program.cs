@@ -1,5 +1,7 @@
 using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Core.Interfaces;
+using EmployeeManagement.Services.ApplicationServices;
+using EmployeeManagement.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,11 +10,12 @@ builder.Services.AddLogging(logging =>{
     logging.AddConsole();
 });
 
-// Đăng ký triển khai gốc của IEmployeeDomainService
-builder.Services.AddScoped<EmployeeDomainService>();
+// Apply Domain Service 
+builder.Services.AddScoped<IEmployeeDomainService, EmployeeDomainService>();
+builder.Services.AddScoped<IEmployeeAsyncService, LoggingDecorator>();
 
-// Đăng ký Decorator (cần cài đặt package Scrutor qua NuGet)
-// builder.Services.Decorate<IEmployeeDomainService, LoggingDecorator>();
+// Apply Application Service
+builder.Services.AddScoped<IEmployeeAppService, EmployeeAppService>();
 
 // Sau đó đăng ký IEmployeeDomainService thông qua factory:( thu cong khi khong co Scrutor) 
 builder.Services.AddScoped<IEmployeeDomainService>(provider => {
@@ -29,3 +32,6 @@ var app = builder.Build();
 app.MapGet("/", () => "Hello World!");
 
 app.Run();
+
+// Đăng ký Decorator (cần cài đặt package Scrutor qua NuGet)
+// builder.Services.Decorate<IEmployeeDomainService, LoggingDecorator>();

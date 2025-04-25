@@ -11,6 +11,30 @@
         "runtime": {
           "bin/placeholder/EmployeeManagement.Core.dll": {}
         }
+      },
+      "EmployeeManagement.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/EmployeeManagement.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EmployeeManagement.Data.dll": {}
+        }
+      },
+      "EmployeeManagement.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "EmployeeManagement.Core": "1.0.0",
+          "EmployeeManagement.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EmployeeManagement.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EmployeeManagement.Services.dll": {}
+        }
       }
     }
   },
@@ -19,11 +43,22 @@
       "type": "project",
       "path": "../EmployeeManagement.Core/EmployeeManagement.Core.csproj",
       "msbuildProject": "../EmployeeManagement.Core/EmployeeManagement.Core.csproj"
+    },
+    "EmployeeManagement.Data/1.0.0": {
+      "type": "project",
+      "path": "../EmployeeManagement.Data/EmployeeManagement.Data.csproj",
+      "msbuildProject": "../EmployeeManagement.Data/EmployeeManagement.Data.csproj"
+    },
+    "EmployeeManagement.Services/1.0.0": {
+      "type": "project",
+      "path": "../EmployeeManagement.Services/EmployeeManagement.Services.csproj",
+      "msbuildProject": "../EmployeeManagement.Services/EmployeeManagement.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "EmployeeManagement.Core >= 1.0.0"
+      "EmployeeManagement.Core >= 1.0.0",
+      "EmployeeManagement.Services >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -50,6 +85,9 @@
           "projectReferences": {
             "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
               "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
+            },
+            "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {
+              "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj"
             }
           }
         }
