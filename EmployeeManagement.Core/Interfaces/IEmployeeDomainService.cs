@@ -1,7 +1,6 @@
 using EmployeeManagement.Core.Enities;
 
 namespace EmployeeManagement.Core.Interfaces;
-
 public interface IEmployeeDomainService
 {
     //社員情報検索取得

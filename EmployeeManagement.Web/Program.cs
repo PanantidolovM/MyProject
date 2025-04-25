@@ -1,6 +1,5 @@
 using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Core.Interfaces;
-using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 

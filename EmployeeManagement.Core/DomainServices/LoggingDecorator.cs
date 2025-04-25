@@ -79,8 +79,7 @@ public class LoggingDecorator : IEmployeeAsyncService{
         // Employeeのnullチェック
         if (employees == null || !employees.Any())
         {
-            _logger.LogWarning("No employees found"); // もしnullなら、エラーログを出力して、ArgumentExceptionをスローする
-            // throw new ArgumentException("社員が見つかりません。");
+            _logger.LogWarning("No employees found"); // もしnullなら、エラーログを出力して、Empty list を返す
             return Enumerable.Empty<Employee>();
         }
         foreach (var employee in employees)

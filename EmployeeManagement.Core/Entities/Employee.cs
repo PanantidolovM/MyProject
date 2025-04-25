@@ -17,7 +17,7 @@ public class Employee
 
     // public Employee(){}
 
-    public Employee(int id,string firstname,string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary){
+    public Employee(BigInteger id,string firstname,string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary){
             Id = id;
             FirstName = firstname;
             LastName = lastname;

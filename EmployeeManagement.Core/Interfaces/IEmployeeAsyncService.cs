@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
 using EmployeeManagement.Core.Enities;
 
-
+namespace EmployeeManagement.Core.Interfaces;
 public interface IEmployeeAsyncService{
     Task<Employee> GetEmployeeDetailsAsync(int id);
     Task<IEnumerable<Employee>> GetAllEmployeesAsync();

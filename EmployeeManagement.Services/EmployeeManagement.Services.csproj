@@ -1,4 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeManagement.Core\EmployeeManagement.Core.csproj" />
+    <ProjectReference Include="..\EmployeeManagement.Data\EmployeeManagement.Data.csproj" />
+  </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
