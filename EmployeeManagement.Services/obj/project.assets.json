@@ -43,35 +43,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Minh\\.nuget\\packages\\": {}
+    "C:\\Users\\gttan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
+      "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
       "projectName": "EmployeeManagement.Services",
-      "projectPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
-      "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Services\\obj\\",
+      "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
+      "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
-      "sources": {
-        "https://api.nuget.org/v3/index.json": {}
-      },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
-              "projectPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
+            "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
+              "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
             },
-            "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
-              "projectPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj"
+            "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
+              "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj"
             }
           }
         }

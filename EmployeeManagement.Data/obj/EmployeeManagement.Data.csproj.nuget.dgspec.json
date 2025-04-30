@@ -1,27 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {}
+    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
+    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
+        "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
         "projectName": "EmployeeManagement.Data",
-        "projectPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
-        "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Data\\obj\\",
+        "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
+        "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",

@@ -2,7 +2,7 @@ using System.Numerics;
 namespace EmployeeManagement.Core.Enities;
 public class Employee
 {
-    public BigInteger Id { get; private set; }
+    public BigInteger Id { get; internal set; }
     public string FirstName { get;  set; }
     public string LastName { get;  set; }
     public string KokuSeki { get;  set; }

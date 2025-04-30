@@ -1,8 +1,63 @@
 {
   "version": 2,
-  "dgSpecHash": "Hf+clDJZ7js=",
-  "success": true,
-  "projectFilePath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj",
+  "dgSpecHash": "PiF4zaEkwoA=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "'net9.0' に対する 'coverlet.collector (>= 6.0.2)' を解決できません。",
+      "libraryId": "coverlet.collector",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "'net9.0' に対する 'Microsoft.NET.Test.Sdk (>= 17.12.0)' を解決できません。",
+      "libraryId": "Microsoft.NET.Test.Sdk",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "'net9.0' に対する 'xunit (>= 2.9.2)' を解決できません。",
+      "libraryId": "xunit",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "'net9.0' に対する 'xunit.runner.visualstudio (>= 2.8.2)' を解決できません。",
+      "libraryId": "xunit.runner.visualstudio",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "'net9.0' に対する 'Moq (>= 4.18.4)' を解決できません。",
+      "libraryId": "Moq",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "'net9.0' に対する 'FluentAssertions (>= 6.16.0)' を解決できません。",
+      "libraryId": "FluentAssertions",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

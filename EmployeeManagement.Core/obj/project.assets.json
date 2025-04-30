@@ -8,26 +8,23 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Minh\\.nuget\\packages\\": {}
+    "C:\\Users\\gttan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
+      "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
       "projectName": "EmployeeManagement.Core",
-      "projectPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
-      "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Core\\obj\\",
+      "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
+      "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
-      "sources": {
-        "https://api.nuget.org/v3/index.json": {}
-      },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",

@@ -10,7 +10,12 @@
     <Reference Include="Microsoft.Extensions.Logging">
         <HintPath>libs\Microsoft.Extensions.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+        <HintPath>libs\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>EmployeeManagement.Services</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
-
-
+  
 </Project>
