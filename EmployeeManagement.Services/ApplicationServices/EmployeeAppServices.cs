@@ -3,8 +3,6 @@ using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Core.Enities;
 using EmployeeManagement.Core.Interfaces;
 
-
-
 namespace EmployeeManagement.Services.ApplicationServices;
 
 public class EmployeeAppService : IEmployeeAppService
