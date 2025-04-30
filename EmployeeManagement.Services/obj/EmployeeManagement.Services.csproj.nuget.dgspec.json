@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {}
   },
   "projects": {
@@ -13,22 +12,9 @@
         "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
         "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\obj\\",
-=======
-    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
-        "projectName": "EmployeeManagement.Core",
-        "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
-        "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\obj\\",
->>>>>>> refs/remotes/origin/feature/update-code
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -83,7 +69,6 @@
         }
       }
     },
-<<<<<<< HEAD
     "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -92,19 +77,9 @@
         "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
         "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\obj\\",
-=======
-    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
-        "projectName": "EmployeeManagement.Data",
-        "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
-        "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\obj\\",
->>>>>>> refs/remotes/origin/feature/update-code
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -153,7 +128,6 @@
         }
       }
     },
-<<<<<<< HEAD
     "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -162,19 +136,9 @@
         "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
         "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\obj\\",
-=======
-    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
-        "projectName": "EmployeeManagement.Services",
-        "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
-        "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\obj\\",
->>>>>>> refs/remotes/origin/feature/update-code
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -186,19 +150,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-<<<<<<< HEAD
               "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
                 "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
               },
               "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
                 "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj"
-=======
-              "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
-                "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
-              },
-              "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
-                "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj"
->>>>>>> refs/remotes/origin/feature/update-code
               }
             }
           }
