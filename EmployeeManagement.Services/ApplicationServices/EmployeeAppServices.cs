@@ -2,6 +2,7 @@ using EmployeeManagement.Services.DtoEntities;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Core.Enities;
 using EmployeeManagement.Core.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.Services.ApplicationServices;
 

@@ -4,7 +4,7 @@ namespace EmployeeManagement.Services.DtoEntities;
 
     public class DtoEmployee
     {
-        public BigInteger Id { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string KokuSeki { get; set; }
@@ -16,7 +16,7 @@ namespace EmployeeManagement.Services.DtoEntities;
         public string Keitai{get; set;}
         public string Mail{get; set;}
         public decimal Salary { get; set; }
-        public DtoEmployee(BigInteger id,string firstname, string lastname, string kokuseki, string passport, string shikaku, string mynumber, string bikou, string juusho, string keitai, string mail, decimal salary)
+        public DtoEmployee(int id,string firstname, string lastname, string kokuseki, string passport, string shikaku, string mynumber, string bikou, string juusho, string keitai, string mail, decimal salary)
         {
             Id = id;
             FirstName = firstname;

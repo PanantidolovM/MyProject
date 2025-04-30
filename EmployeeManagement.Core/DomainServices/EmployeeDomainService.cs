@@ -87,5 +87,12 @@ public class EmployeeDomainService  : IEmployeeDomainService
         {
             throw new KeyNotFoundException($"社員の{id}が検索できません.");
         }
+        _employeeRepository.DelEmployee(id);
+        // Kiểm tra xem nhân viên đã bị xóa hay chưa
+        // var deletedEmployee = _employeeRepository.GetById(id);
+        // if (deletedEmployee != null)
+        // {
+        //     throw new InvalidOperationException($"社員の{id}が削除できません.");
+        // }
     }
 }

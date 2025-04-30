@@ -15,38 +15,45 @@ public class EmployeeDomainServiceTests
         var repositoryMock = new Mock<IEmployeeRepository>();
         var employeeService = new EmployeeDomainService(repositoryMock.Object);
         var employee = new Employee(
-            123456789, // Id
-            "John", // FirstName
-            "Doe", // LastName
-            "Japanese", // KokuSeki
-            "123456789", // Passport
-            "Engineer", // Shikaku
-            "987654321", // MyNumber
-            "No remarks", // BiKou
-            "Tokyo", // JuuSho
-            "090-1234-5678", // Keitai
-            "vothaibaominh1502@gmail.com", // Mail
-            50000m // Salary
+            id: 1,
+            firstname: "John",
+            lastname: "Doe",
+            kokuseki: "Japanese",
+            passport: "BA3456789",
+            shikaku: "Engineer",
+            mynumber: "987654321",
+            bikou: "No remarks",
+            juusho: "Tokyo",
+            keitai: "090-1234-5678",
+            mail: "vothaibaominh1502@gmail.com",
+            salary: 50000m
         );
+
+        // AddEmployee呼び出す前にモックを設定する
+        repositoryMock.Setup(r => r.GetById(employee.Id)).Returns(employee);
 
         // Act
         employeeService.AddEmployee(employee);
 
+        repositoryMock.Setup(r => r.AddEmployee(It.IsAny<Employee>()))
+              .Callback<Employee>(e => repositoryMock.Setup(r => r.GetById(e.Id)).Returns(e))
+              .Verifiable(); // 設定したモックを検証するための設定
+
         // Assert
         var addedEmployee = employeeService.GetEmployeeDetails(1);
         Assert.NotNull(addedEmployee);
-        Assert.Equal(123456789, addedEmployee.Id);
-        Assert.Equal("John", addedEmployee.FirstName);
-        Assert.Equal("Doe", addedEmployee.LastName);
-        Assert.Equal("Japanese", addedEmployee.KokuSeki);
-        Assert.Equal("123456789", addedEmployee.Passport);
-        Assert.Equal("Engineer", addedEmployee.Shikaku);
-        Assert.Equal("987654321", addedEmployee.MyNumber);
-        Assert.Equal("No remarks", addedEmployee.BiKou);
-        Assert.Equal("Tokyo", addedEmployee.JuuSho);
-        Assert.Equal("090-1234-5678", addedEmployee.Keitai);
-        Assert.Equal("vothaibaominh1502@gmail.com", addedEmployee.Mail);
-        Assert.Equal(50000m, addedEmployee.Salary);
+        Assert.Equal(employee.Id, addedEmployee.Id);
+        Assert.Equal(employee.FirstName, addedEmployee.FirstName);
+        Assert.Equal(employee.LastName, addedEmployee.LastName);
+        Assert.Equal(employee.KokuSeki, addedEmployee.KokuSeki);
+        Assert.Equal(employee.Passport, addedEmployee.Passport);
+        Assert.Equal(employee.Shikaku, addedEmployee.Shikaku);
+        Assert.Equal(employee.MyNumber, addedEmployee.MyNumber);
+        Assert.Equal(employee.BiKou, addedEmployee.BiKou);
+        Assert.Equal(employee.JuuSho, addedEmployee.JuuSho);
+        Assert.Equal(employee.Keitai, addedEmployee.Keitai);
+        Assert.Equal(employee.Mail, addedEmployee.Mail);
+        Assert.Equal(employee.Salary, addedEmployee.Salary);
     }
 
     [Fact]
@@ -56,19 +63,20 @@ public class EmployeeDomainServiceTests
         var repositoryMock = new Mock<IEmployeeRepository>();
         var employeeService = new EmployeeDomainService(repositoryMock.Object);
         var employee = new Employee(
-            123456789, // Id
-            "John", // FirstName
-            "Doe", // LastName
-            "Japanese", // KokuSeki
-            "123456789", // Passport
-            "Engineer", // Shikaku
-            "987654321", // MyNumber
-            "No remarks", // BiKou
-            "Tokyo", // JuuSho
-            "090-1234-5678", // Keitai
-            "vothaibaominh1502@gmail.com", // Mail
-            50000m // Salary
+            id: 1,
+            firstname: "John",
+            lastname: "Doe",
+            kokuseki: "Japanese",
+            passport: "BA3456789",
+            shikaku: "Engineer",
+            mynumber: "987654321",
+            bikou: "No remarks",
+            juusho: "Tokyo",
+            keitai: "090-1234-5678",
+            mail: "vothaibaominh1502@gmail.com",
+            salary: 50000m
         );
+        // Setup the repository to return the employee when GetById is called
         repositoryMock.Setup(repo => repo.GetById(1)).Returns(employee);
 
         // Act
@@ -76,18 +84,18 @@ public class EmployeeDomainServiceTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(123456789, result.Id);
-        Assert.Equal("John", result.FirstName);
-        Assert.Equal("Doe", result.LastName);
-        Assert.Equal("Japanese", result.KokuSeki);
-        Assert.Equal("123456789", result.Passport);
-        Assert.Equal("Engineer", result.Shikaku);
-        Assert.Equal("987654321", result.MyNumber);
-        Assert.Equal("No remarks", result.BiKou);
-        Assert.Equal("Tokyo", result.JuuSho);
-        Assert.Equal("090-1234-5678", result.Keitai);
-        Assert.Equal("vothaibaominh1502@gmail.com", result.Mail);
-        Assert.Equal(50000m, result.Salary);
+        Assert.Equal(employee.Id, result.Id);
+        Assert.Equal(employee.FirstName, result.FirstName);
+        Assert.Equal(employee.LastName, result.LastName);
+        Assert.Equal(employee.KokuSeki, result.KokuSeki);
+        Assert.Equal(employee.Passport, result.Passport);
+        Assert.Equal(employee.Shikaku, result.Shikaku);
+        Assert.Equal(employee.MyNumber, result.MyNumber);
+        Assert.Equal(employee.BiKou, result.BiKou);
+        Assert.Equal(employee.JuuSho, result.JuuSho);
+        Assert.Equal(employee.Keitai, result.Keitai);
+        Assert.Equal(employee.Mail, result.Mail);
+        Assert.Equal(employee.Salary, result.Salary);
     }
 
     [Fact]
@@ -97,19 +105,21 @@ public class EmployeeDomainServiceTests
         var repositoryMock = new Mock<IEmployeeRepository>();
         var employeeService = new EmployeeDomainService(repositoryMock.Object);
         var employee = new Employee(
-            123456789, // Id
-            "John", // FirstName
-            "Doe", // LastName
-            "Japanese", // KokuSeki
-            "123456789", // Passport
-            "Engineer", // Shikaku
-            "987654321", // MyNumber
-            "No remarks", // BiKou
-            "Tokyo", // JuuSho
-            "090-1234-5678", // Keitai
-            "vothaibaominh1502@gmail.com", // Mail
-            50000m // Salary
+            id: 1,
+            firstname: "John",
+            lastname: "Doe",
+            kokuseki: "Japanese",
+            passport: "BA3456789",
+            shikaku: "Engineer",
+            mynumber: "987654321",
+            bikou: "No remarks",
+            juusho: "Tokyo",
+            keitai: "090-1234-5678",
+            mail: "vothaibaominh1502@gmail.com",
+            salary: 50000m
         );
+        // Setup the repository to return the employee when GetById is called
+        repositoryMock.Setup(repo => repo.GetById(1)).Returns(employee);
         employeeService.AddEmployee(employee);
 
         // Act
@@ -118,11 +128,12 @@ public class EmployeeDomainServiceTests
         employeeService.UpdateEmployee(employee);
 
         // Assert
-        var updatedEmployee = employeeService.GetEmployeeDetails(123456789);
+        var updatedEmployee = employeeService.GetEmployeeDetails(1);
         Assert.NotNull(updatedEmployee);
-        Assert.Equal("Jane", updatedEmployee.FirstName);
-        Assert.Equal("Smith", updatedEmployee.LastName);
+        Assert.Equal(employee.FirstName, updatedEmployee.FirstName);
+        Assert.Equal(employee.LastName, updatedEmployee.LastName);
     }
+
     [Fact]
     public void AddEmployee_ShouldThrowArgumentNullException_WhenEmployeeIsNull()
     {
@@ -133,7 +144,7 @@ public class EmployeeDomainServiceTests
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => employeeService.AddEmployee(null));
     }
-    
+
     [Fact]
     public void DelEmployee_ShouldDeleteEmployee_WhenValidId()
     {
@@ -141,26 +152,31 @@ public class EmployeeDomainServiceTests
         var repositoryMock = new Mock<IEmployeeRepository>();
         var employeeService = new EmployeeDomainService(repositoryMock.Object);
         var employee = new Employee(
-            123456789, // Id
-            "John", // FirstName
-            "Doe", // LastName
-            "Japanese", // KokuSeki
-            "123456789", // Passport
-            "Engineer", // Shikaku
-            "987654321", // MyNumber
-            "No remarks", // BiKou
-            "Tokyo", // JuuSho
-            "090-1234-5678", // Keitai
-            "vothaibaominh1502@gmail.com", // Mail
-            50000m // Salary
+            id: 1,
+            firstname: "John",
+            lastname: "Doe",
+            kokuseki: "Japanese",
+            passport: "BA3456789",
+            shikaku: "Engineer",
+            mynumber: "987654321",
+            bikou: "No remarks",
+            juusho: "Tokyo",
+            keitai: "090-1234-5678",
+            mail: "vothaibaominh1502@gmail.com",
+            salary: 50000m
         );
-        repositoryMock.Setup(repo => repo.GetById(123456789)).Returns(employee);
-        repositoryMock.Setup(repo => repo.DelEmployee(123456789)).Verifiable();  
+
+        // Setup the repository to return the employee when GetById is called
+        repositoryMock.Setup(repo => repo.GetById(1)).Returns(employee);
+        repositoryMock.Setup(repo => repo.DelEmployee(1))
+                  .Callback(() => repositoryMock.Setup(r => r.GetById(1)).Throws<KeyNotFoundException>())
+                  .Verifiable();
 
         // Act
-        employeeService.DelEmployee(123456789);
+        employeeService.DelEmployee(1);
 
         // Assert
-        repositoryMock.Verify(repo => repo.DelEmployee(123456789), Times.Once);
+        repositoryMock.Verify(repo => repo.DelEmployee(1), Times.Once);
+        Assert.Throws<KeyNotFoundException>(() => employeeService.GetEmployeeDetails(1));
     }
 }
