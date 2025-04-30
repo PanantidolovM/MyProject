@@ -2,7 +2,7 @@ using System.Numerics;
 namespace EmployeeManagement.Core.Enities;
 public class Employee
 {
-    public BigInteger Id { get; private set; }
+    public int Id { get; internal set; }
     public string FirstName { get;  set; }
     public string LastName { get;  set; }
     public string KokuSeki { get;  set; }
@@ -17,7 +17,7 @@ public class Employee
 
     // public Employee(){}
 
-    public Employee(BigInteger id,string firstname,string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary){
+    public Employee(int id,string firstname,string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary){
             Id = id;
             FirstName = firstname;
             LastName = lastname;

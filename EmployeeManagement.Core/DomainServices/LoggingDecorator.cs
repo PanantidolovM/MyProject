@@ -1,5 +1,6 @@
 using EmployeeManagement.Core.Enities;
 using EmployeeManagement.Core.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.Core.DomainServices;
 public class LoggingDecorator : IEmployeeAsyncService{

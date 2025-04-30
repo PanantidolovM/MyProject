@@ -9,3 +9,10 @@ C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\obj\Debug\net9.0\Empl
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\obj\Debug\net9.0\refint\EmployeeManagement.Services.dll
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\obj\Debug\net9.0\EmployeeManagement.Services.pdb
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\obj\Debug\net9.0\ref\EmployeeManagement.Services.dll
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\obj\Debug\net9.0\EmployeeManagement.Services.csproj.AssemblyReference.cache
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\obj\Debug\net9.0\EmployeeManagement.Services.sourcelink.json
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\bin\Debug\net9.0\EmployeeManagement.Core.dll
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\bin\Debug\net9.0\EmployeeManagement.Data.dll
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\bin\Debug\net9.0\EmployeeManagement.Core.pdb
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\bin\Debug\net9.0\EmployeeManagement.Data.pdb
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Services\obj\Debug\net9.0\Employee.1BEFFB16.Up2Date

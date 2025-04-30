@@ -9,3 +9,4 @@ C:\Users\gttan\EmployeeProject\EmployeeManagement.Data\obj\Debug\net9.0\Employee
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Data\obj\Debug\net9.0\refint\EmployeeManagement.Data.dll
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Data\obj\Debug\net9.0\EmployeeManagement.Data.pdb
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Data\obj\Debug\net9.0\ref\EmployeeManagement.Data.dll
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Data\obj\Debug\net9.0\EmployeeManagement.Data.sourcelink.json

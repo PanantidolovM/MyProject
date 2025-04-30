@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "ALG2Ejwq/Qg=",
   "success": true,
   "projectFilePath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
+=======
+  "dgSpecHash": "Wj+FtIMxnLc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
+>>>>>>> refs/remotes/origin/feature/update-code
   "expectedPackageFiles": [],
   "logs": []
 }
