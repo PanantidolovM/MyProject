@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj": {}
+    "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj": {
+    "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj",
         "projectName": "EmployeeManagement.Tests",
-        "projectPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj",
+        "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Tests\\EmployeeManagement.Tests.csproj",
         "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Minh\\EmployeeProject\\MyProject\\EmployeeManagement.Tests\\obj\\",
+        "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,6 +43,24 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.12.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.2, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.8.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
