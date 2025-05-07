@@ -2,7 +2,6 @@ using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Services.ApplicationServices;
 using EmployeeManagement.Services.Interfaces;
-using EmployeeManagement.Core.DomainServices.NullEmployeeRepository;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +15,7 @@ builder.Services.AddLogging(logging =>{
 builder.Services.AddScoped<IEmployeeDomainService, EmployeeDomainService>();
 builder.Services.AddScoped<LoggingDecorator>();
 builder.Services.AddScoped<IEmployeeRepository, NullEmployeeRepository>();
+
 // Apply Application Service
 builder.Services.AddScoped<IEmployeeAppService, EmployeeAppService>();
 

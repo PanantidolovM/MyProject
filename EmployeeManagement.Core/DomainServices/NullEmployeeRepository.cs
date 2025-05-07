@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using EmployeeManagement.Core.Enities;
 using EmployeeManagement.Core.Interfaces;
 namespace EmployeeManagement.Core.DomainServices.NullEmployeeRepository;
@@ -12,3 +13,33 @@ public class NullEmployeeRepository : IEmployeeRepository
     public void DelEmployee(int id) { /* ko làm gì */ }
     // Các phương thức khác nếu có...
 }
+=======
+using EmployeeManagement.Core.Interfaces;
+using EmployeeManagement.Core.Enities;
+namespace EmployeeManagement.Core.DomainServices;
+
+    public class NullEmployeeRepository : IEmployeeRepository
+    {
+        public void AddEmployee(Employee employee)
+        {
+            // Do nothing
+        }
+        public Employee GetById(int id)
+        {
+            return null; // Return null for non-existing employee
+        }
+        public IEnumerable<Employee> GetAll()
+        {
+            return Enumerable.Empty<Employee>(); // Return empty list for no employees
+        }
+        public void UpdateEmployee(Employee employee)
+        {
+            // Do nothing
+        }
+        public void DelEmployee(int id)
+        {
+            // Do nothing
+        }
+        
+    }
+>>>>>>> e71eef15e9ce9729b87bf22f34796ef6909ad53f

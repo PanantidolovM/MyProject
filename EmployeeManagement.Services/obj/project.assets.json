@@ -391,19 +391,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gttan\\.nuget\\packages\\": {}
+    "C:\\Users\\Minh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
+      "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
       "projectName": "EmployeeManagement.Services",
-      "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
-      "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\obj\\",
+      "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
+      "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -415,11 +415,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
-              "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
+            "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
+              "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
             },
-            "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
-              "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj"
+            "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
+              "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj"
             }
           }
         }
@@ -458,5 +458,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
