@@ -32,6 +32,3 @@ namespace EmployeeManagement.Services.DtoEntities;
             Salary = salary;
         }
     }
-   
-// public EmployeeDto(){}
-// public EmployeeDto(int id,string firstname,string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary){

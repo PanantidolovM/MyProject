@@ -9,7 +9,8 @@
       "EmployeeManagement.Web/1.0.0": {
         "dependencies": {
           "EmployeeManagement.Core": "1.0.0",
-          "EmployeeManagement.Services": "1.0.0"
+          "EmployeeManagement.Services": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.4"
         },
         "runtime": {
           "EmployeeManagement.Web.dll": {}

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Web\\EmployeeManagement.Web.csproj": {}
+    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Web\\EmployeeManagement.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
+    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
+        "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
         "projectName": "EmployeeManagement.Core",
-        "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
-        "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\obj\\",
+        "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj",
+        "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -69,17 +69,17 @@
         }
       }
     },
-    "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
+    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
+        "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
         "projectName": "EmployeeManagement.Data",
-        "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
-        "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\obj\\",
+        "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
+        "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -128,17 +128,17 @@
         }
       }
     },
-    "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {
+    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
+        "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
         "projectName": "EmployeeManagement.Services",
-        "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
-        "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\obj\\",
+        "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
+        "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -150,11 +150,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
-                "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
+              "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
+                "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
               },
-              "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
-                "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj"
+              "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj": {
+                "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj"
               }
             }
           }
@@ -194,17 +194,17 @@
         }
       }
     },
-    "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Web\\EmployeeManagement.Web.csproj": {
+    "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Web\\EmployeeManagement.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Web\\EmployeeManagement.Web.csproj",
+        "projectUniqueName": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Web\\EmployeeManagement.Web.csproj",
         "projectName": "EmployeeManagement.Web",
-        "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Web\\EmployeeManagement.Web.csproj",
-        "packagesPath": "C:\\Users\\Minh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Web\\obj\\",
+        "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Web\\EmployeeManagement.Web.csproj",
+        "packagesPath": "C:\\Users\\gttan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Minh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gttan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -216,11 +216,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
-                "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
+              "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj": {
+                "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Core\\EmployeeManagement.Core.csproj"
               },
-              "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {
-                "projectPath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj"
+              "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj": {
+                "projectPath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj"
               }
             }
           }
@@ -240,6 +240,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

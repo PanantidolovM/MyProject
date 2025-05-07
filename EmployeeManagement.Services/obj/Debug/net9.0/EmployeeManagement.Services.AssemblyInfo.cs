@@ -13,11 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EmployeeManagement.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< Updated upstream
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+492db20f431c16846d30c0a22923ce344558faea")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e455d8627d30f43c47fd11a4bb8bffffc801379")]
->>>>>>> Stashed changes
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b50c7981f0e4e46207bdef084edb5ad03aaec72a")]
 [assembly: System.Reflection.AssemblyProductAttribute("EmployeeManagement.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EmployeeManagement.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

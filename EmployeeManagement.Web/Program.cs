@@ -3,8 +3,11 @@ using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Services.ApplicationServices;
 using EmployeeManagement.Services.Interfaces;
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+// Apply controller
+builder.Services.AddControllers();
+
 
 // Apply logging
 builder.Services.AddLogging(logging =>{
@@ -30,6 +33,11 @@ builder.Services.AddScoped<IEmployeeAsyncService>(provider => {
 });
 
 var app = builder.Build();
+
+// Middleware
+app.UseRouting();
+app.UseAuthorization();
+app.MapControllers();
 
 app.MapGet("/", () => 
 {

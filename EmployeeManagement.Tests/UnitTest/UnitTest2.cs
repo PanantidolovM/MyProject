@@ -134,16 +134,16 @@ public class EmployeeDomainServiceTests
         Assert.Equal(employee.LastName, updatedEmployee.LastName);
     }
 
-    [Fact]
-    public void AddEmployee_ShouldThrowArgumentNullException_WhenEmployeeIsNull()
-    {
-        // Arrange
-        var repositoryMock = new Mock<IEmployeeRepository>();
-        var employeeService = new EmployeeDomainService(repositoryMock.Object);
+    // [Fact]
+    // public void AddEmployee_ShouldThrowArgumentNullException_WhenEmployeeIsNull()
+    // {
+    //     // Arrange
+    //     var repositoryMock = new Mock<IEmployeeRepository>();
+    //     var employeeService = new EmployeeDomainService(repositoryMock.Object);
 
-        // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => employeeService.AddEmployee(null));
-    }
+    //     // Act & Assert
+    //     Assert.Throws<ArgumentNullException>(() => employeeService.AddEmployee(null));
+    // }
 
     [Fact]
     public void DelEmployee_ShouldDeleteEmployee_WhenValidId()

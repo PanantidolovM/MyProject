@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ALG2Ejwq/Qg=",
+  "dgSpecHash": "Wj+FtIMxnLc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
+  "projectFilePath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Data\\EmployeeManagement.Data.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\Minh\\EmployeeProject\\EmployeeManagement.Data\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
