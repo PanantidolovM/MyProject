@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Services.DtoEntities;
-
-[Route("api/employees")]
 [ApiController]
+[Route("api/emp")]
 public class EmployeeController : ControllerBase
 {
     private readonly IEmployeeAppService _employeeAppService;

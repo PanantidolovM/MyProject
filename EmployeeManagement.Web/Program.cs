@@ -2,16 +2,14 @@ using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Services.ApplicationServices;
 using EmployeeManagement.Services.Interfaces;
+using EmployeeManagement.Tests.UnitTest;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Apply controller
-builder.Services.AddControllers();
-
 
 // Apply logging
 builder.Services.AddLogging(logging =>{
     logging.AddConsole();
+    logging.AddDebug();
 });
 
 // Apply Domain Service 
@@ -31,6 +29,12 @@ builder.Services.AddScoped<IEmployeeAsyncService>(provider => {
     // Trả về instance của decorator bọc lớp gốc
     return new LoggingDecorator(innerService, logger);
 });
+
+// Apply UserApiTestController for testing
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
+
+// Apply controller
+builder.Services.AddControllers();
 
 var app = builder.Build();
 

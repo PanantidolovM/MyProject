@@ -3,10 +3,8 @@
   <ItemGroup>
     <ProjectReference Include="..\EmployeeManagement.Core\EmployeeManagement.Core.csproj" />
     <ProjectReference Include="..\EmployeeManagement.Services\EmployeeManagement.Services.csproj" />
-    <!-- <ProjectReference Include="..\EmployeeManagement.Infrastructure\EmployeeManagement.Infrastructure.csproj" />
-    <ProjectReference Include="..\EmployeeManagement.Application\EmployeeManagement.Application.csproj" />  
-    <ProjectReference Include="..\EmployeeManagement.WebApi\EmployeeManagement.WebApi.csproj" />  
-    <ProjectReference Include="..\EmployeeManagement.WebUI\EmployeeManagement.WebUI.csproj" />  -->
+    <ProjectReference Include="..\EmployeeManagement.Data\EmployeeManagement.Data.csproj" />
+    <ProjectReference Include="..\EmployeeManagement.Tests\EmployeeManagement.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

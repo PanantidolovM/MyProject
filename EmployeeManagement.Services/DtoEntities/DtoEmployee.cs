@@ -1,5 +1,3 @@
-using System.Numerics;
-
 namespace EmployeeManagement.Services.DtoEntities;
 
     public class DtoEmployee

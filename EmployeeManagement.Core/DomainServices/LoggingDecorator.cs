@@ -55,23 +55,6 @@ public class LoggingDecorator : IEmployeeAsyncService{
         }
         _logger.LogInformation("Employee updated: {Employee}", employee);
     }   
-
-    // public List<Employee> GetAllEmployees(){
-    //     _logger.LogInformation("Getting all employees");
-    //     List<Employee> employees = new List<Employee>();
-    //     employees = _innerService.GetAllEmployees().ToList();
-    //     if (employees == null || employees.Count == 0)
-    //     {
-    //         _logger.LogWarning("No employees found");
-    //         return employees;
-    //     }
-    //     foreach (var employee in employees)
-    //     {
-    //         _logger.LogInformation("Employee: {Employee}", employee);
-    //     }
-    //     _logger.LogInformation("Retrieved {Count} employees", employees.Count);
-    //     return employees;
-    // }
     
     // 社員一覧検索処理
     public async Task<IEnumerable<Employee>> GetAllEmployeesAsync(){
