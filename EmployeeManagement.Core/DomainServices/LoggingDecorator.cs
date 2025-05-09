@@ -3,10 +3,10 @@ using EmployeeManagement.Core.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.Core.DomainServices;
+
 public class LoggingDecorator : IEmployeeAsyncService{
     private readonly IEmployeeAsyncService _innerService;
     private readonly ILogger<LoggingDecorator> _logger;
-
     public LoggingDecorator(IEmployeeAsyncService innerService,ILogger<LoggingDecorator> logger){
         _innerService = innerService;
         _logger = logger;
@@ -107,4 +107,3 @@ public class LoggingDecorator : IEmployeeAsyncService{
     }
     
 }
-

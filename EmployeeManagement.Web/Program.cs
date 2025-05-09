@@ -3,6 +3,7 @@ using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Services.ApplicationServices;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Tests.UnitTest;
+using EmployeeManagement.Tests.ApiTests;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,14 +15,14 @@ builder.Services.AddLogging(logging =>{
 
 // Apply Domain Service 
 builder.Services.AddScoped<IEmployeeDomainService, EmployeeDomainService>();
-builder.Services.AddScoped<LoggingDecorator>();
 builder.Services.AddScoped<IEmployeeRepository, NullEmployeeRepository>();
 
 // Apply Application Service
-builder.Services.AddScoped<IEmployeeAppService, EmployeeAppService>();
+builder.Services.AddSingleton<IEmployeeAppService, EmployeeAppService>();
 
-// Sau đó đăng ký IEmployeeDomainService thông qua factory:( thu cong khi khong co Scrutor) 
-builder.Services.AddScoped<IEmployeeAsyncService>(provider => {
+builder.Services.AddSingleton<LoggingDecorator>();
+// Apply IEmployeeDomainService by factory:( manual when not have Scrutor package ) 
+builder.Services.AddSingleton<IEmployeeAsyncService>(provider => {
     // Lấy instance của EmployeeDomainService từ container
     var innerService = provider.GetRequiredService<LoggingDecorator>();
     // Lấy ILogger của lớp decorator
@@ -29,6 +30,10 @@ builder.Services.AddScoped<IEmployeeAsyncService>(provider => {
     // Trả về instance của decorator bọc lớp gốc
     return new LoggingDecorator(innerService, logger);
 });
+
+
+// Apply EmployeeApiTestController for testing
+builder.Services.AddSingleton<EmployeeApiTester>();
 
 // Apply UserApiTestController for testing
 builder.Services.AddSingleton<IUserRepository, UserRepository>();

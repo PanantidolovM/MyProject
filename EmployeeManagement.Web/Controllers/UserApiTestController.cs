@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using EmployeeManagement.Tests.UnitTest;
-namespace ApiTestExample
+namespace UserApiTestController
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/users")]
     public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> _logger;

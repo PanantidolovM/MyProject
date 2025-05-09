@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Services.DtoEntities;
 [ApiController]
-[Route("api/emp")]
+[Route("api/employees")]
 public class EmployeeController : ControllerBase
 {
     private readonly IEmployeeAppService _employeeAppService;
@@ -16,6 +16,8 @@ public class EmployeeController : ControllerBase
 
     [HttpPost("add")] // POST api/employees/add
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> AddEmployee([FromBody] DtoEmployee employeeDto)
     {
         _logger.LogInformation("Controller: Adding new employee");
@@ -23,8 +25,22 @@ public class EmployeeController : ControllerBase
         {
             return BadRequest("Invalid employee data.");
         }
-        await _employeeAppService.AddEmployeeAsync(employeeDto);
-        return CreatedAtAction(nameof(GetEmployeeDetails), new { id = employeeDto.Id }, employeeDto);
+        try
+        {
+            await _employeeAppService.AddEmployeeAsync(employeeDto);
+            // Make sure employeeDto.Id is updated from server 
+            if (employeeDto.Id < 0)
+            {
+                return StatusCode(500, "Lỗi: ID nhân viên không hợp lệ sau khi thêm.");
+            }
+            _logger.LogInformation("✅ Nhân viên được tạo: {@newEmployee}", employeeDto);
+            return CreatedAtAction(nameof(GetEmployeeDetails), new { id = employeeDto.Id }, employeeDto);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Error checking for adding employee: {Message}", ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while checking for adding employee.");
+        }
     }
 
     [HttpGet("get/{id}")] // GET api/employees/get/{id}
