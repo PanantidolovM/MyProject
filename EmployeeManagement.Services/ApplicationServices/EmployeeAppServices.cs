@@ -44,11 +44,6 @@ public class EmployeeAppService : IEmployeeAppService
         var employees = await _employeeAsyncService.GetAllEmployeesAsync();
         // mapping từ Employee sang DtoEmployee
         var employeeDtos = employees.Select(employee => new DtoEmployee(employee.Id, employee.FirstName, employee.LastName, employee.KokuSeki, employee.Passport, employee.Shikaku, employee.MyNumber, employee.BiKou, employee.JuuSho, employee.Keitai, employee.Mail, employee.Salary)).ToList();
-        // var employeeDtos = new List<DtoEmployee>();
-        // foreach (var employee in employees)
-        // {
-        //     employeeDtos.Add(new DtoEmployee(employee.Id, employee.FirstName, employee.LastName, employee.KokuSeki, employee.Passport, employee.Shikaku, employee.MyNumber, employee.BiKou, employee.JuuSho, employee.Keitai, employee.Mail, employee.Salary));
-        // }
         return employeeDtos;
     }
     public async Task DelEmployeeAsync(int id)

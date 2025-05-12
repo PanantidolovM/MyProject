@@ -105,5 +105,4 @@ public class LoggingDecorator : IEmployeeAsyncService{
         }
         _logger.LogInformation("Employee with ID {Id} deleted", id);
     }
-    
 }

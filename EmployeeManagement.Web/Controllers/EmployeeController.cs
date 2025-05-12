@@ -21,26 +21,9 @@ public class EmployeeController : ControllerBase
     public async Task<IActionResult> AddEmployee([FromBody] DtoEmployee employeeDto)
     {
         _logger.LogInformation("Controller: Adding new employee");
-        if (employeeDto == null)
-        {
-            return BadRequest("Invalid employee data.");
-        }
-        try
-        {
-            await _employeeAppService.AddEmployeeAsync(employeeDto);
-            // Make sure employeeDto.Id is updated from server 
-            if (employeeDto.Id < 0)
-            {
-                return StatusCode(500, "Lỗi: ID nhân viên không hợp lệ sau khi thêm.");
-            }
-            _logger.LogInformation("✅ Nhân viên được tạo: {@newEmployee}", employeeDto);
-            return CreatedAtAction(nameof(GetEmployeeDetails), new { id = employeeDto.Id }, employeeDto);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError("Error checking for adding employee: {Message}", ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while checking for adding employee.");
-        }
+        await _employeeAppService.AddEmployeeAsync(employeeDto);
+        _logger.LogInformation("✅ Nhân viên được tạo: {@newEmployee}", employeeDto);
+        return Ok(new { message = "Employee added successfully!" });
     }
 
     [HttpGet("get/{id}")] // GET api/employees/get/{id}

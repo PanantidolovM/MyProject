@@ -34,18 +34,18 @@ public class Employee
 
 // 社員情報更新
 public void UpdateInfo(string firstname, string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary)
-        {
-            // Thực hiện các validate nghiệp vụ (nếu có) ở đây...
-            FirstName = firstname;
-            LastName = lastname;
-            KokuSeki = kokuseki;
-            Passport = passport;
-            Shikaku = shikaku;
-            MyNumber = mynumber;
-            BiKou = bikou;
-            JuuSho = juusho;
-            Keitai = keitai;
-            Mail = mail;
-            Salary = salary;
-        }
+    {
+        // Thực hiện các validate nghiệp vụ (nếu có) ở đây...
+        FirstName = firstname;
+        LastName = lastname;
+        KokuSeki = kokuseki;
+        Passport = passport;
+        Shikaku = shikaku;
+        MyNumber = mynumber;
+        BiKou = bikou;
+        JuuSho = juusho;
+        Keitai = keitai;
+        Mail = mail;
+        Salary = salary;
+    }
 }

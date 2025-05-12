@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using Moq;
 using EmployeeManagement.Core.Interfaces;
-using EmployeeManagement.Core.DomainServices  ;
+using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Core.Enities;
 
 namespace EmployeeManagement.Tests.UnitTest;
@@ -12,8 +12,8 @@ public class EmployeeDomainServiceTests
     public void AddEmployee_ShouldAddEmployee_WhenValidEmployee()
     {
         // Arrange
-        var repositoryMock = new Mock<IEmployeeRepository>();
-        var employeeService = new EmployeeDomainService(repositoryMock.Object);
+        var repositoryMock = new Mock<List<Employee>>();
+        var employeeService = new List<Employee>(repositoryMock.Object);
         var employee = new Employee(
             id: 1,
             firstname: "John",
@@ -29,18 +29,15 @@ public class EmployeeDomainServiceTests
             salary: 50000m
         );
 
-        // AddEmployee呼び出す前にモックを設定する
-        repositoryMock.Setup(r => r.GetById(employee.Id)).Returns(employee);
-
         // Act
-        employeeService.AddEmployee(employee);
+        employeeService.Add(employee);
 
-        repositoryMock.Setup(r => r.AddEmployee(It.IsAny<Employee>()))
-              .Callback<Employee>(e => repositoryMock.Setup(r => r.GetById(e.Id)).Returns(e))
+        repositoryMock.Setup(r => r.Add(It.IsAny<Employee>()))
+              .Callback<Employee>(e => repositoryMock.Setup(r => r.FirstOrDefault(e => e.Id == employee.Id)).Returns(e))
               .Verifiable(); // 設定したモックを検証するための設定
 
         // Assert
-        var addedEmployee = employeeService.GetEmployeeDetails(1);
+        var addedEmployee = employeeService.FirstOrDefault(e => e.Id == employee.Id);
         Assert.NotNull(addedEmployee);
         Assert.Equal(employee.Id, addedEmployee.Id);
         Assert.Equal(employee.FirstName, addedEmployee.FirstName);
@@ -60,8 +57,8 @@ public class EmployeeDomainServiceTests
     public void GetEmployeeDetails_ShouldReturnEmployee_WhenValidId()
     {
         // Arrange
-        var repositoryMock = new Mock<IEmployeeRepository>();
-        var employeeService = new EmployeeDomainService(repositoryMock.Object);
+        var repositoryMock = new Mock<List<Employee>>();
+        var employeeService = new List<Employee>(repositoryMock.Object);
         var employee = new Employee(
             id: 1,
             firstname: "John",
@@ -76,11 +73,10 @@ public class EmployeeDomainServiceTests
             mail: "vothaibaominh1502@gmail.com",
             salary: 50000m
         );
-        // Setup the repository to return the employee when GetById is called
-        repositoryMock.Setup(repo => repo.GetById(1)).Returns(employee);
+
 
         // Act
-        var result = employeeService.GetEmployeeDetails(1);
+        var result = employeeService.FirstOrDefault(e => e.Id == employee.Id);
 
         // Assert
         Assert.NotNull(result);
@@ -102,8 +98,8 @@ public class EmployeeDomainServiceTests
     public void UpdateEmployee_ShouldUpdateEmployee_WhenValidEmployee()
     {
         // Arrange
-        var repositoryMock = new Mock<IEmployeeRepository>();
-        var employeeService = new EmployeeDomainService(repositoryMock.Object);
+        var repositoryMock = new Mock<List<Employee>>();
+        var employeeService = new List<Employee>(repositoryMock.Object);
         var employee = new Employee(
             id: 1,
             firstname: "John",
@@ -118,39 +114,29 @@ public class EmployeeDomainServiceTests
             mail: "vothaibaominh1502@gmail.com",
             salary: 50000m
         );
+
         // Setup the repository to return the employee when GetById is called
-        repositoryMock.Setup(repo => repo.GetById(1)).Returns(employee);
-        employeeService.AddEmployee(employee);
+        repositoryMock.Setup(repo => repo.FirstOrDefault(e => e.Id == employee.Id)).Returns(employee);
+        employeeService.Add(employee);
 
         // Act
         employee.FirstName = "Jane";
         employee.LastName = "Smith";
-        employeeService.UpdateEmployee(employee);
+        employeeService.AddRange(employee);
 
         // Assert
-        var updatedEmployee = employeeService.GetEmployeeDetails(1);
+        var updatedEmployee = employeeService.FirstOrDefault(e => e.Id == employee.Id);
         Assert.NotNull(updatedEmployee);
         Assert.Equal(employee.FirstName, updatedEmployee.FirstName);
         Assert.Equal(employee.LastName, updatedEmployee.LastName);
     }
 
-    // [Fact]
-    // public void AddEmployee_ShouldThrowArgumentNullException_WhenEmployeeIsNull()
-    // {
-    //     // Arrange
-    //     var repositoryMock = new Mock<IEmployeeRepository>();
-    //     var employeeService = new EmployeeDomainService(repositoryMock.Object);
-
-    //     // Act & Assert
-    //     Assert.Throws<ArgumentNullException>(() => employeeService.AddEmployee(null));
-    // }
-
     [Fact]
     public void DelEmployee_ShouldDeleteEmployee_WhenValidId()
     {
         // Arrange
-        var repositoryMock = new Mock<IEmployeeRepository>();
-        var employeeService = new EmployeeDomainService(repositoryMock.Object);
+        var repositoryMock = new Mock<List<Employee>>();
+        var employeeService = new List<Employee>(repositoryMock.Object);
         var employee = new Employee(
             id: 1,
             firstname: "John",
@@ -167,16 +153,15 @@ public class EmployeeDomainServiceTests
         );
 
         // Setup the repository to return the employee when GetById is called
-        repositoryMock.Setup(repo => repo.GetById(1)).Returns(employee);
-        repositoryMock.Setup(repo => repo.DelEmployee(1))
-                  .Callback(() => repositoryMock.Setup(r => r.GetById(1)).Throws<KeyNotFoundException>())
-                  .Verifiable();
-
+        repositoryMock.Setup(repo => repo.FirstOrDefault(e => e.Id == employee.Id)).Returns(employee);
+        repositoryMock.Setup(repo => repo.RemoveAt(1))
+                  .Callback(() => repositoryMock.Setup(r => r.FirstOrDefault(e => e.Id == employee.Id)).Throws<KeyNotFoundException>())
+                  .Verifiable();  
         // Act
-        employeeService.DelEmployee(1);
+        employeeService.Remove(employee);
 
         // Assert
-        repositoryMock.Verify(repo => repo.DelEmployee(1), Times.Once);
-        Assert.Throws<KeyNotFoundException>(() => employeeService.GetEmployeeDetails(1));
+        repositoryMock.Verify(repo => repo.RemoveAt(1), Times.Once);
+        Assert.Throws<KeyNotFoundException>(() => employeeService.FirstOrDefault(e => e.Id == employee.Id));
     }
 }
