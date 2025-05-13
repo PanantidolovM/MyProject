@@ -112,21 +112,20 @@ public class EmployeeApiTester
 
     public  async Task TestUpdateEmployee()
     {
-        var updatedEmployee = new DtoEmployee
-        {
-            Id = 1, // ID của nhân viên cần cập nhật
-            FirstName = "Vo Thai Bao",
-            LastName = "Minh",
-            KokuSeki = "Viet Nam",
-            Passport = "VN123456",
-            Shikaku = "Senior Engineer",
-            MyNumber = "123456789",
-            BiKou = "Updated remarks",
-            JuuSho = "456 Main St",
-            Keitai = "0987654321",
-            Mail = "vothaibaominh1111@gmail.com",
-            Salary = 7000
-        };
+        var updatedEmployee = new DtoEmployee(
+            1, // ID của nhân viên cần cập nhật
+            "Vo Thai Bao",
+            "Minh",
+            "Viet Nam",
+            "VN123456",
+            "Senior Engineer",
+            "123456789",
+            "Updated remarks",
+            "456 Main St",
+            "0987654321",
+            "vothaibaominh1111@gmail.com",
+            7000
+        );
         var response = await _client.PutAsJsonAsync("api/emp/update", updatedEmployee);
         if (response.IsSuccessStatusCode)
         {

@@ -15,8 +15,6 @@ public class Employee
     public string Mail{get;  set;} = string.Empty;
     public decimal Salary { get;  set; }
 
-    // public Employee(){}
-
     public Employee(int id,string firstname,string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary){
             Id = id;
             FirstName = firstname;
@@ -30,22 +28,5 @@ public class Employee
             Keitai = keitai;
             Mail = mail;
             Salary = salary;
-    }
-
-// 社員情報更新
-public void UpdateInfo(string firstname, string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary)
-    {
-        // Thực hiện các validate nghiệp vụ (nếu có) ở đây...
-        FirstName = firstname;
-        LastName = lastname;
-        KokuSeki = kokuseki;
-        Passport = passport;
-        Shikaku = shikaku;
-        MyNumber = mynumber;
-        BiKou = bikou;
-        JuuSho = juusho;
-        Keitai = keitai;
-        Mail = mail;
-        Salary = salary;
     }
 }

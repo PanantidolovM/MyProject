@@ -1,7 +1,5 @@
 ﻿using Xunit;
 using Moq;
-using EmployeeManagement.Core.Interfaces;
-using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Core.Enities;
 
 namespace EmployeeManagement.Tests.UnitTest;

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using EmployeeManagement.Tests.ApiTests;
-using EmployeeManagement.Services.DtoEntities;
 
 namespace EmpApiTestController
 {

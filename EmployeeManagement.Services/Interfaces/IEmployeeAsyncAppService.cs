@@ -1,10 +1,12 @@
 using EmployeeManagement.Services.DtoEntities;
 
 namespace EmployeeManagement.Services.Interfaces;
-public interface IEmployeeAppService{
+
+public interface IEmployeeAsyncAppService
+{
     Task AddEmployeeAsync(DtoEmployee employeeDto);
-    Task UpdateEmployeeAsync(DtoEmployee employeeDto);
     Task<DtoEmployee> GetEmployeeDetailsAsync(int id);
     Task<IEnumerable<DtoEmployee>> GetAllEmployeesAsync();
+    Task UpdateEmployeeAsync(DtoEmployee employeeDto);
     Task DelEmployeeAsync(int id);
 }

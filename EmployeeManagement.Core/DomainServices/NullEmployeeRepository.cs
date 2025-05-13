@@ -10,5 +10,4 @@ namespace EmployeeManagement.Core.DomainServices;
         public void UpdateEmployee(Employee employee) { /* Do nothing */ }
         public void AddEmployee(Employee employee) { /* Do nothing */ }
         public void DelEmployee(int id) { /* Do nothing */ }
-        
     }
