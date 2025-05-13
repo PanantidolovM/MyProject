@@ -3,16 +3,16 @@ namespace EmployeeManagement.Core.Enities;
 public class Employee
 {
     public int Id { get; internal set; }
-    public string FirstName { get;  set; }
-    public string LastName { get;  set; }
-    public string KokuSeki { get;  set; }
-    public string Passport { get;  set; }
-    public string Shikaku { get;  set; }
-    public string MyNumber { get;  set; }
-    public string BiKou{get;  set;}
-    public string JuuSho{get;  set;}
-    public string Keitai{get;  set;}
-    public string Mail{get;  set;}
+    public string FirstName { get;  set; } = string.Empty;
+    public string LastName { get;  set; } = string.Empty;
+    public string KokuSeki { get;  set; } = string.Empty;
+    public string Passport { get;  set; } = string.Empty;
+    public string Shikaku { get;  set; } = string.Empty;
+    public string MyNumber { get;  set; } = string.Empty;
+    public string BiKou{get;  set;} = string.Empty;
+    public string JuuSho{get;  set;} = string.Empty;
+    public string Keitai{get;  set;} = string.Empty;
+    public string Mail{get;  set;} = string.Empty;
     public decimal Salary { get;  set; }
 
     // public Employee(){}

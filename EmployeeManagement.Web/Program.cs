@@ -1,7 +1,5 @@
 using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Core.Interfaces;
-using EmployeeManagement.Services.ApplicationServices;
-using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Tests.UnitTest;
 using EmployeeManagement.Tests.ApiTests;
 
@@ -18,17 +16,17 @@ builder.Services.AddScoped<IEmployeeDomainService, EmployeeDomainService>();
 builder.Services.AddScoped<IEmployeeRepository, NullEmployeeRepository>();
 
 // Apply LoggingDecorator impliment IEmployeeAsyncService, base class cover:( manual when not have Scrutor package ) 
-builder.Services.AddScoped<IEmployeeAsyncService, LoggingDecorator>(provider => {
+builder.Services.AddScoped<IEmployeeAsyncService, EmployeeAppServices>(provider => {
     // Lấy instance của EmployeeDomainService từ container
     var innerService = provider.GetRequiredService<IEmployeeAsyncService >(); // dịch vụ gốc
     // Lấy ILogger của lớp decorator
-    var logger = provider.GetRequiredService<ILogger<LoggingDecorator>>(); // Logger cho decorator
+    var logger = provider.GetRequiredService<ILogger<EmployeeAppServices>>(); // Logger cho decorator
     // Trả về instance của decorator bọc lớp gốc
-    return new LoggingDecorator(innerService, logger);
+    return new EmployeeAppServices(innerService, logger);
 });
 
 // Apply Application Service for using IEmployeeAsyncService (covered by LoggingDecorator)
-builder.Services.AddScoped<IEmployeeAppService, EmployeeAppService>();
+// builder.Services.AddScoped<IEmployeeAppService, EmployeeAppService>();
 
 // Apply EmployeeApiTestController for testing
 builder.Services.AddSingleton<EmployeeApiTester>();

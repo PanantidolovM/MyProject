@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Services.DtoEntities;
+
+namespace EmployeeManagement.Web.Controllers;
 [ApiController]
 [Route("api/employees")]
 public class EmployeeController : ControllerBase
@@ -31,12 +33,26 @@ public class EmployeeController : ControllerBase
     public async Task<IActionResult> GetEmployeeDetails(int id)
     {
         _logger.LogInformation("Controller: Getting employee details for ID: {Id}", id);
-        var employee = await _employeeAppService.GetEmployeeDetailsAsync(id);
+        var employee = await _employeeAppService.GetEmployeeDetailsAsync(id); // employee from API
         if (employee == null)
         {
             return NotFound($"Employee with ID {id} not found.");
         }
-        return Ok(employee);
+        DtoEmployee employeeDto = new DtoEmployee
+        {
+            FirstName = employee.FirstName,
+            LastName = employee.LastName,
+            KokuSeki = employee.KokuSeki,
+            Passport = employee.Passport,
+            Shikaku = employee.Shikaku,
+            MyNumber = employee.MyNumber,
+            BiKou = employee.BiKou,
+            JuuSho = employee.JuuSho,
+            Keitai = employee.Keitai,
+            Mail = employee.Mail,
+            Salary = employee.Salary
+        };
+        return Ok(employeeDto); // returning DTO
     }
 
     [HttpGet("getAll")] // GET api/employees/getAll

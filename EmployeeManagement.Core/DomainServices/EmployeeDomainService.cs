@@ -3,7 +3,7 @@ using EmployeeManagement.Core.Interfaces;
 
 namespace EmployeeManagement.Core.DomainServices;
 
-public class EmployeeDomainService  : IEmployeeDomainService
+public class EmployeeDomainService : IEmployeeDomainService
 {
     // 一時的なリポジトリの実装
     // ここでは、リストを使用して社員情報を保存します。

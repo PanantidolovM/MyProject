@@ -1,13 +1,14 @@
 using EmployeeManagement.Core.Enities;
-using EmployeeManagement.Core.Interfaces;
+using EmployeeManagement.Services.Interfaces;
 using Microsoft.Extensions.Logging;
+using EmployeeManagement.Services.Interfaces; // Ensure the namespace containing IEmployeeAsyncAppService is imported
 
-namespace EmployeeManagement.Core.DomainServices;
+namespace EmployeeManagement.Services.ApplicationServices;
 
-public class LoggingDecorator : IEmployeeAsyncService{
-    private readonly IEmployeeAsyncService _innerService;
-    private readonly ILogger<LoggingDecorator> _logger;
-    public LoggingDecorator(IEmployeeAsyncService innerService,ILogger<LoggingDecorator> logger){
+public class EmployeeAsyncAppServices : IEmployeeAsyncAppService{
+    private readonly IEmployeeAsyncAppService _innerService;
+    private readonly ILogger<EmployeeAsyncAppServices> _logger;
+    public EmployeeAsyncAppServices(IEmployeeAsyncAppService innerService,ILogger<EmployeeAppServices> logger){
         _innerService = innerService;
         _logger = logger;
     }
