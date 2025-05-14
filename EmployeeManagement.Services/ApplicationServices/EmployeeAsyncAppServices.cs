@@ -50,7 +50,6 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
         );
 
         await _employeeDomainService.AddEmployee(employee);
-        _logger.LogInformation("Employee added: {EmployeeJson}", JsonSerializer.Serialize(employee, new JsonSerializerOptions { WriteIndented = true }));
     }
 
     // 社員更新処理
@@ -93,12 +92,10 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
         );
 
         await _employeeDomainService.UpdateEmployee(employee);
-        _logger.LogInformation("Employee updated: {EmployeeJson}", JsonSerializer.Serialize(employee, new JsonSerializerOptions { WriteIndented = true }));
     }   
     
     // 社員一覧検索処理
     public async Task<IEnumerable<DtoEmployee>> GetAllEmployeesAsync(){
-        _logger.LogInformation("Getting all employees");
         var employees = await _employeeDomainService.GetAllEmployees();
 
         // Employeeのnullチェック
@@ -118,14 +115,12 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             e.Id, e.FirstName, e.LastName, e.KokuSeki, e.Passport, e.Shikaku,
             e.MyNumber, e.BiKou, e.JuuSho, e.Keitai, e.Mail, e.Salary
         ));
-
-        _logger.LogInformation("Retrieved {Count} employees", employees.Count());
+        
         return employeeDtos;
     }
 
     // 社員詳細検索処理
     public async Task<DtoEmployee> GetEmployeeDetailsAsync(int id){
-        _logger.LogInformation("Getting employee details for ID: {Id}", id);
         var employee = await _employeeDomainService.GetEmployeeDetails(id);
 
         // idが0以下の場合、ArgumentExceptionをスローします。
@@ -163,7 +158,6 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
 
     // 社員削除処理
     public async Task DelEmployeeAsync(int id){
-        _logger.LogInformation("Deleting employee with ID: {Id}", id);
         await _employeeDomainService.DelEmployee(id);
         // idが0以下の場合、ArgumentExceptionをスローします。
         if (id <= 0)
@@ -171,7 +165,5 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             _logger.LogWarning("Invalid employee ID: {Id}", id); // もし無効なら、エラーログを出力して、ArgumentExceptionをスローする
             throw new ArgumentException($"無効な{id}.");
         }
-        
-        _logger.LogInformation("Employee with ID {Id} deleted", id);
     }
 }

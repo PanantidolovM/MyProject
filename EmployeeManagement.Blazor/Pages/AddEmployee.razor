@@ -1,0 +1,31 @@
+@page "/add-employee"
+@using EmployeeManagement.Blazor.Models
+@inject HttpClient Http
+
+<h3>Adding new Employee</h3>
+
+<form @onsubmit="HandleSubmit">
+    <label>Họ:</label>
+    <input type="text" @bind="newEmployee.FirstName" />
+
+    <label>Tên:</label>
+    <input type="text" @bind="newEmployee.LastName" />
+
+    <label>Chức vụ:</label>
+    <input type="text" @bind="newEmployee.Shikaku" />
+
+    <label>Lương:</label>
+    <input type="number" @bind="newEmployee.Salary" />
+
+    <button type="submit">Thêm nhân viên</button>
+</form>
+
+@code {
+    private DtoEmployee newEmployee = new();
+
+    private async Task HandleSubmit()
+    {
+        await Http.PostAsJsonAsync("api/employees/add", newEmployee);
+        newEmployee = new(); // Reset form
+    }
+}

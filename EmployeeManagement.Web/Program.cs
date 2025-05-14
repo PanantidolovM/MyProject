@@ -29,34 +29,47 @@ builder.Services.AddSingleton<IUserRepository, UserRepository>();
 // Apply controller
 builder.Services.AddControllers();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
 // Middleware
 app.UseRouting();
+app.UseCors("AllowAllOrigins");
 app.UseAuthorization();
 app.MapControllers();
 
-app.MapGet("/", () => 
-{
-    var html = @"
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset=""utf-8"" />
-        <title>Trang Chủ</title>
-        <link rel=""stylesheet"" href=""/css/bootstrap.min.css"" />
-    </head>
-    <body>
-        <div class=""container"">
-            <h1>Chào mừng đến với Employee Management</h1>
-            <p>Đây là giao diện được tạo từ endpoint.</p>
-        </div>
-        <script src=""/js/bootstrap.bundle.min.js""></script>
-    </body>
-    </html>";
-    return Results.Content(html, "text/html");
-});
-
+app.MapGet("/", () => "Employee Management API is running.");
+// app.MapGet("/", () => 
+// {
+//     var html = @"
+//     <!DOCTYPE html>
+//     <html>
+//     <head>
+//         <meta charset=""utf-8"" />
+//         <title>Trang Chủ</title>
+//         <link rel=""stylesheet"" href=""/css/bootstrap.min.css"" />
+//     </head>
+//     <body>
+//         <div class=""container"">
+//             <h1>Chào mừng đến với Employee Management</h1>
+//             <p>Đây là giao diện được tạo từ endpoint.</p>
+//         </div>
+//         <script src=""/js/bootstrap.bundle.min.js""></script>
+//     </body>
+//     </html>";
+//     return Results.Content(html, "text/html");
+// });
 app.Run();
 
 // Aplly Decorator (need install Scrutor package by using NuGet)

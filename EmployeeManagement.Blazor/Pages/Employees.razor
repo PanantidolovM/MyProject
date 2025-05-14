@@ -1,0 +1,73 @@
+@page "/employees"
+@using System.Net.Http.Json
+@using EmployeeManagement.Blazor.Models
+@inject HttpClient Http
+
+<h3>Danh sách nhân viên</h3>
+
+@if (employeeDtos == null || employeeDtos.Count == 0)
+{
+    <p><em>No employees found </em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Họ</th>
+                <th>Tên</th>
+                <th>Quốc tịch</th>
+                <th>Hộ chiếu</th>
+                <th>Chứng chỉ</th>
+                <th>Số My Number</th>
+                <th>Ghi chú</th>
+                <th>Địa chỉ</th>
+                <th>Điện thoại</th>
+                <th>Email</th>
+                <th>Lương</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in employeeDtos)
+            {
+                <tr>
+                    <td>@emp.Id</td>
+                    <td>@emp.FirstName</td>
+                    <td>@emp.LastName</td>
+                    <td>@emp.KokuSeki</td>
+                    <td>@emp.Passport</td>
+                    <td>@emp.Shikaku</td>
+                    <td>@emp.MyNumber</td>
+                    <td>@emp.BiKou</td>
+                    <td>@emp.JuuSho</td>
+                    <td>@emp.Keitai</td>
+                    <td>@emp.Mail</td>
+                    <td>@emp.Salary</td>
+                    <td>
+                        <a href="/employee-details/@emp.Id">🔍 employee details</a> @* 社員情報詳細 *@
+                        <a href="/edit-employee/@emp.Id">✏️ Edit</a> @* 社員情報更新 *@
+                        <a href="/delete-employee/@emp.Id">🗑 Delete</a> @* 社員情報削除*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<DtoEmployee> employeeDtos = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Gọi API từ nhánh backend để lấy danh sách nhân viên
+            employeeDtos = await Http.GetFromJsonAsync<List<DtoEmployee>>("api/employees/getAll") ?? new List<DtoEmployee>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error While calling Api: {ex.Message}");
+        }
+    }
+}

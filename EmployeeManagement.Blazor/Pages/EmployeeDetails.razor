@@ -1,0 +1,37 @@
+@page "/employee-details/{id:int}"
+@using System.Net.Http.Json
+@using EmployeeManagement.Blazor.Models
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Employee Details</h3>
+
+@if (employee == null || employee.Id == 0)
+{
+    <p><em>No employee found</em></p>
+}
+else
+{
+    <div>
+        <p><strong>Full Name:</strong> @employee.FirstName @employee.LastName</p>
+        <p><strong>Position:</strong> @employee.Shikaku</p>
+        <p><strong>Email:</strong> @employee.Mail</p>
+        <button @onclick="GoBack">Back to List</button>
+    </div>
+}
+
+@code {
+    
+    [Parameter] public int Id { get; set; }
+    private DtoEmployee employee = new DtoEmployee();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employee = await Http.GetFromJsonAsync<DtoEmployee>($"api/employees/get/{Id}") 
+            ?? new DtoEmployee();
+    }
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/employees");
+    }
+}
