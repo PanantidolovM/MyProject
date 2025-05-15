@@ -1,0 +1,75 @@
+@page "/delete-employee/{Id:int}"
+@using EmployeeManagement.Blazor.Models
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private DtoEmployee deletedEmployee = new DtoEmployee();
+    private bool isDeleted = false;
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            deletedEmployee = await Http.GetFromJsonAsync<DtoEmployee>($"api/employees/get/{Id}") ?? new DtoEmployee();
+
+            if (deletedEmployee != null)
+            {
+                var response = await Http.DeleteAsync($"api/employees/delete/{Id}");
+                // Optionally, you can navigate to another page or show a success message
+                if (response.IsSuccessStatusCode)
+                {
+                    isDeleted = true;
+                }
+                else
+                {
+                    errorMessage = "Failed to delete employee.";
+                }
+            }
+            else
+            {
+                errorMessage = "Employee not found.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error deleting employee: {ex.Message}";
+        }
+    }
+}
+
+<h3>Delete Employee</h3>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (isDeleted && deletedEmployee != null)
+{
+    <div class="alert alert-success">
+        <p>Employee deleted successfully!</p>
+        <ul>
+            <li><strong>ID:</strong> @deletedEmployee.Id</li>
+            <li><strong>Name:</strong> @deletedEmployee.FirstName @deletedEmployee.LastName</li>
+            <li><strong>Country:</strong> @deletedEmployee.KokuSeki</li>
+            <li><strong>Passport:</strong> @deletedEmployee.Passport</li>
+            <li><strong>Qualification:</strong> @deletedEmployee.Shikaku</li>
+            <li><strong>My Number:</strong> @deletedEmployee.MyNumber</li>
+            <li><strong>Notes:</strong> @deletedEmployee.BiKou</li>
+            <li><strong>Address:</strong> @deletedEmployee.JuuSho</li>
+            <li><strong>Phone:</strong> @deletedEmployee.Keitai</li>
+            <li><strong>Email:</strong> @deletedEmployee.Mail</li>
+            <li><strong>Salary:</strong> @deletedEmployee.Salary</li>
+            @* <li><strong>Created At:</strong> @deletedEmployee.CreatedAt.ToString("yyyy/MM/dd HH:mm:ss")</li>
+            <li><strong>Updated At:</strong> @deletedEmployee.UpdatedAt.ToString("yyyy/MM/dd HH:mm:ss")</li> *@
+        </ul>
+    </div>
+}
+else
+{
+    <p>Deleting employee...</p>
+}

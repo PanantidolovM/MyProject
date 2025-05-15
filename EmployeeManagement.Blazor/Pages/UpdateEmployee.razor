@@ -1,0 +1,115 @@
+@page "/update-employee/{Id:int}"
+@using EmployeeManagement.Blazor.Models
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+<h3>Updating The Employee Details</h3>
+<p><em>Fill in the details below to update the employee.</em></p>
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else
+{
+    <EditForm Model="employee" OnValidSubmit="UpdateAsJsonAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="mb-3">
+            <label class="form-label">FirstName</label>
+            <InputText class="form-control" @bind-Value="employee.FirstName" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">LastName</label>
+            <InputText class="form-control" @bind-Value="employee.LastName" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Country</label>
+            <InputText class="form-control" @bind-Value="employee.KokuSeki" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Passport</label>
+            <InputText class="form-control" @bind-Value="employee.Passport" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Qualification</label>
+            <InputText class="form-control" @bind-Value="employee.Shikaku" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">My Number</label>
+            <InputText class="form-control" @bind-Value="employee.MyNumber" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Note</label>
+            <InputText class="form-control" @bind-Value="employee.BiKou" /> 
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Address</label>
+            <InputText class="form-control" @bind-Value="employee.JuuSho" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <InputText class="form-control" @bind-Value="employee.Keitai" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <InputText class="form-control" @bind-Value="employee.Mail" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Salary</label>
+            <InputNumber class="form-control" @bind-Value="employee.Salary" />
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-secondary" @onclick="GoBack">Cancel</button>
+    </EditForm>
+}
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private DtoEmployee employee = new DtoEmployee();
+    private bool isLoading = true;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            employee = await Http.GetFromJsonAsync<DtoEmployee>($"api/employees/get/{Id}") ?? new DtoEmployee();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading employee: {ex.Message}";
+        }
+        isLoading = false;
+    }
+
+    private async Task UpdateAsJsonAsync()
+    {
+        try
+        {
+            var response = await Http.PutAsJsonAsync($"api/employees/update/{Id}", employee);
+            if (response.IsSuccessStatusCode)
+            {
+                NavigationManager.NavigateTo("/employees");
+            }
+            else
+            {
+                errorMessage = "Failed to update employee.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error updating employee: {ex.Message}";
+        }
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/employees");
+    }
+}

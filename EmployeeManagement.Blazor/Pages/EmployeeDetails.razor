@@ -14,14 +14,22 @@ else
 {
     <div>
         <p><strong>Full Name:</strong> @employee.FirstName @employee.LastName</p>
-        <p><strong>Position:</strong> @employee.Shikaku</p>
+        <p><strong>Country:</strong> @employee.KokuSeki</p>
+        <p><strong>Passport:</strong> @employee.Passport</p>
+        <p><strong>Qualification:</strong> @employee.Shikaku</p>
+        <p><strong>My Number:</strong> @employee.MyNumber</p>
+        <p><strong>Notes:</strong> @employee.BiKou</p>
+        <p><strong>Address:</strong> @employee.JuuSho</p>
+        <p><strong>Phone:</strong> @employee.Keitai</p>
         <p><strong>Email:</strong> @employee.Mail</p>
+        <p><strong>Salary:</strong> @employee.Salary</p>
+        @* <p><strong>Created At:</strong> @employee.CreatedAt.ToString("yyyy/MM/dd HH:mm:ss")</p> *@
+        @* <p><strong>Updated At:</strong> @employee.UpdatedAt.ToString("yyyy/MM/dd HH:mm:ss")</p> *@
         <button @onclick="GoBack">Back to List</button>
     </div>
 }
 
 @code {
-    
     [Parameter] public int Id { get; set; }
     private DtoEmployee employee = new DtoEmployee();
 

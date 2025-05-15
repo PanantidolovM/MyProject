@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ApplicationBundle</AssetTraitValue>
-      <Fingerprint>t1iakeqtev</Fingerprint>
-      <Integrity>4eWbF+vxNy80DdriYdmpK3eHj0sPGN5DHfbztst3ZyY=</Integrity>
+      <Fingerprint>yotmgn87ug</Fingerprint>
+      <Integrity>0ksJyeVm0v1NKJM1mYUS9xHXjV2KptKV4BBARbinP/A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\EmployeeManagement.Blazor.styles.css'))</OriginalItemSpec>
