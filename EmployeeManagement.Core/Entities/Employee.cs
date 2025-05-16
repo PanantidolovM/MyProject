@@ -2,7 +2,7 @@
 namespace EmployeeManagement.Core.Enities;
 public class Employee
 {
-    public int Id { get; internal set; }
+    public int Id { get; internal  set; }
     public string FirstName { get;  set; } = string.Empty;
     public string LastName { get;  set; } = string.Empty;
     public string KokuSeki { get;  set; } = string.Empty;

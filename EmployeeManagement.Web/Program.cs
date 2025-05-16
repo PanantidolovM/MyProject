@@ -1,4 +1,5 @@
 using EmployeeManagement.Core.DomainServices;
+using EmployeeManagement.Core.Infrastructure;
 using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Tests.UnitTest;
@@ -16,7 +17,7 @@ builder.Services.AddLogging(logging =>{
 // Apply Domain Service 
 builder.Services.AddSingleton<IEmployeeDomainService, EmployeeDomainService>();
 builder.Services.AddSingleton<IEmployeeRepository, NullEmployeeRepository>();
-
+builder.Services.AddSingleton<IEmployeeIdGenerator, InMemoryEmployeeIdGenerator>();
 // Apply Application Service
 builder.Services.AddSingleton<IEmployeeAsyncAppService, EmployeeAsyncAppServices>();
 
@@ -47,8 +48,9 @@ var app = builder.Build();
 app.UseRouting();
 app.UseCors("AllowAllOrigins");
 app.UseAuthorization();
-app.MapControllers();
 
+// Map controllers
+app.MapControllers();
 app.MapGet("/", () => "Employee Management API is running.");
 // app.MapGet("/", () => 
 // {

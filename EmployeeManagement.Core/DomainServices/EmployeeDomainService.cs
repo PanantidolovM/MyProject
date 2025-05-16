@@ -9,10 +9,19 @@ public class EmployeeDomainService : IEmployeeDomainService
     // ここでは、リストを使用して社員情報を保存します。
     // 実際のアプリケーションでは、データベースや他の永続化ストレージを使用することが一般的です。
     // 社員情報を保存するリスト
-    private readonly List<Employee> _employees = [];
+    private readonly List<Employee> _employees = new List<Employee>();
+    // 社員IDを生成するためのインターフェース
+    private readonly IEmployeeIdGenerator _idGenerator;
+
+    // コンストラクタ
+    public EmployeeDomainService(IEmployeeIdGenerator idGenerator)
+    {
+        _idGenerator = idGenerator ?? throw new ArgumentNullException(nameof(idGenerator));
+    }
 
     // 社員登録処理
-    public async Task AddEmployee(Employee employee){
+    public async Task AddEmployee(Employee employee)
+    {
         // 社員が nullの場合、ArgumentNullExceptionをスローします。
         if (employee == null) throw new ArgumentNullException(nameof(employee));
 
@@ -27,6 +36,13 @@ public class EmployeeDomainService : IEmployeeDomainService
         if (string.IsNullOrWhiteSpace(employee.Mail))
         {
             throw new ArgumentException("メールを入力してください！");
+        }
+        // 社員IDの生成
+        // ここでは、IDを生成するためのインターフェースを使用しています。
+        // Nếu employee.Id == 0, lấy số ID mới từ service
+        if (employee.Id == 0)
+        {
+            employee.Id = _idGenerator.GetNextEmployeeId();
         }
 
         // 社員情報の追加
