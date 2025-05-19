@@ -1,7 +1,21 @@
-@page "/update-employee/{Id:int}"
+@page "/update/{Id:int}"
 @using EmployeeManagement.Blazor.Models
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
+
+@code {
+
+    [CascadingParameter]
+    public Action<string> SetTitle { get; set; } = default!;
+    protected override void OnInitialized()
+        {
+            // Cập nhật tiêu đề cho trang
+            SetTitle?.Invoke("Edit Employee");
+        }
+}
+
+@* <EmployeeManagement.Blazor.Layout.PageTitle>@currentPageTitle</EmployeeManagement.Blazor.Layout.PageTitle> *@
+
 <h3>Updating The Employee Details</h3>
 <p><em>Fill in the details below to update the employee.</em></p>
 @if (isLoading)

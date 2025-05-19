@@ -3,7 +3,18 @@
 @using EmployeeManagement.Blazor.Models
 @using EmployeeManagement.Blazor.Layout
 @inject HttpClient Http
-<Microsoft.AspNetCore.Components.Web.PageTitle Title="Employees" />
+@code {
+
+    [CascadingParameter]
+    public Action<string> SetTitle { get; set; } = default!;
+    protected override void OnInitialized()
+        {
+            // Cập nhật tiêu đề cho trang Employees
+            SetTitle?.Invoke("Employees");
+        }
+}
+
+@* <EmployeeManagement.Blazor.Layout.PageTitle>@currentPageTitle</EmployeeManagement.Blazor.Layout.PageTitle> *@
 
 <h3>Employee List</h3>
 
@@ -47,9 +58,9 @@ else
                     <td>@emp.Mail</td>
                     <td>@emp.Salary</td>
                     <td>
-                        <a href="/employee-details/@emp.Id">🔍 employee details</a> @* 社員情報詳細 *@
-                        <a href="/update-employee/@emp.Id">✏️ Edit</a> @* 社員情報更新 *@
-                        <a href="/delete-employee/@emp.Id">🗑 Delete</a> @* 社員情報削除*@
+                        <a href="/details/@emp.Id">🔍 employee details</a> @* 社員情報詳細 *@
+                        <a href="/update/@emp.Id">✏️ Edit</a> @* 社員情報更新 *@
+                        <a href="/delete/@emp.Id">🗑 Delete</a> @* 社員情報削除*@
                     </td>
                 </tr>
             }
@@ -58,7 +69,7 @@ else
 }
 
 @code {
-    List<DtoEmployee> employeeDtos = [];
+    private List<DtoEmployee> employeeDtos = [];
 
     protected override async Task OnInitializedAsync()
     {

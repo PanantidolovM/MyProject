@@ -1,7 +1,18 @@
-@page "/add-employee"
+@page "/add"
 @using EmployeeManagement.Blazor.Models
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
+
+@code {
+
+    [CascadingParameter]
+    public Action<string> SetTitle { get; set; } = default!;
+    protected override void OnInitialized()
+        {
+            // Cập nhật tiêu đề cho trang
+            SetTitle?.Invoke("Add Employee");
+        }
+}
 
 <h3>Adding new Employee</h3>
 <p><em>Fill in the details below to add a new employee.</em></p>

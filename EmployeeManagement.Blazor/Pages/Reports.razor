@@ -1,0 +1,78 @@
+@page "/reports"
+@using System.Text
+@using Microsoft.JSInterop
+@using EmployeeManagement.Blazor.Models
+@inject IJSRuntime JS
+@inject HttpClient Http
+
+@code {
+
+    [CascadingParameter]
+    public Action<string> SetTitle { get; set; } = default!;
+    protected override void OnInitialized()
+        {
+            // Cập nhật tiêu đề cho trang Reports
+            SetTitle?.Invoke("Reports");
+        }
+}
+
+<h3>Employee & Salary Reports</h3>
+
+<button class="btn btn-primary" @onclick="DownloadEmployeeReport">Download Employee Report (CSV)</button>
+<button class="btn btn-secondary" @onclick="DownloadSalaryStatsReport">Download Salary Statistics (CSV)</button>
+
+@code {
+    private List<DtoEmployee> employeeDtos = new List<DtoEmployee>();
+
+    private async Task DownloadEmployeeReport()
+    {
+        // Gọi API từ nhánh backend để lấy danh sách nhân viên
+        employeeDtos = await Http.GetFromJsonAsync<List<DtoEmployee>>("api/employees/getAll") ?? new List<DtoEmployee>();
+        // Kiểm tra xem danh sách nhân viên có rỗng không
+        if (employeeDtos == null || employeeDtos.Count == 0)
+        {
+            // Nếu danh sách rỗng, hiển thị thông báo
+            await JS.InvokeVoidAsync("alert", "No employees found.");
+            return;
+        }
+
+        // Tạo một StringBuilder để xây dựng nội dung CSV
+        var csv = new StringBuilder();
+        csv.AppendLine("Id,FirstName,LastName,KokuSeki,Passport,Shikaku,MyNumber,BiKou,JuuSho,Keitai,Mail,Salary");
+        // Thêm tiêu đề cột vào CSV
+        foreach (var emp in employeeDtos)
+        {
+            csv.AppendLine($"{emp.Id},{emp.FirstName},{emp.LastName},{emp.KokuSeki},{emp.Passport},{emp.Shikaku},{emp.MyNumber},{emp.BiKou},{emp.JuuSho},{emp.Keitai},{emp.Mail},{emp.Salary}");
+        }
+        await DownloadCsvAsync("EmployeeReport.csv", csv.ToString());
+    }
+
+    private async Task DownloadSalaryStatsReport()
+    {
+        var csv = new StringBuilder();
+        csv.AppendLine("Qualification,EmployeeCount,TotalSalary,AverageSalary");
+
+        var stats = employeeDtos
+            .GroupBy(e => e.Shikaku)
+            .Select(g => new
+            {
+                Shikaku = g.Key,
+                EmployeeCount = g.Count(),
+                TotalSalary = g.Sum(e => e.Salary),
+                AverageSalary = g.Average(e => e.Salary)
+            });
+
+        foreach (var stat in stats)
+        {
+            csv.AppendLine($"{stat.Shikaku},{stat.EmployeeCount},{stat.TotalSalary},{stat.AverageSalary:F2}");
+        }
+        await DownloadCsvAsync("SalaryStatistics.csv", csv.ToString());
+    }
+
+    private async Task DownloadCsvAsync(string filename, string content)
+    {
+        var bytes = Encoding.UTF8.GetBytes(content);
+        var base64 = Convert.ToBase64String(bytes);
+        await JS.InvokeVoidAsync("downloadFileFromBytes", filename, base64);
+    }
+}

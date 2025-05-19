@@ -1,0 +1,29 @@
+@* OfflineAlert.razor *@
+@if (!isOnline)
+{
+    <div class="alert alert-warning" role="alert">
+        You are currently offline. Some features may not be available.
+    </div>
+}
+
+@code {
+    private bool isOnline = true;
+
+    protected override void OnInitialized()
+    {
+        isOnline = true;
+        DotNetObjectReference<OfflineAlert>? objRef = null;
+        objRef = DotNetObjectReference.Create(this);
+        JS.InvokeVoidAsync("offlineAlert.register", objRef);
+    }
+
+    [JSInvokable]
+    public void SetOnlineStatus(bool online)
+    {
+        isOnline = online;
+        StateHasChanged();
+    }
+
+    [Inject]
+    private IJSRuntime JS { get; set; } = default!;
+}

@@ -19,8 +19,23 @@ main[b-vk7gyd07cy] {
     height: 3.5rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
 }
+    .top-row-left[b-vk7gyd07cy] {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        justify-content: flex-start;
+        margin-right: 1.5rem;
+    }
 
+    .top-row-right[b-vk7gyd07cy] {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Các quy tắc dành cho link nằm trong top-row */
     .top-row[b-vk7gyd07cy]  a, .top-row[b-vk7gyd07cy]  .btn-link {
         white-space: nowrap;
         margin-left: 1.5rem;

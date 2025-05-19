@@ -27,6 +27,20 @@
         <span class="dismiss">🗙</span>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    
+    <!-- Định nghĩa hàm downloadFileFromBytes để tải file CSV -->
+    <script>
+        window.downloadFileFromBytes = (fileName, base64Data) => {
+            const link = document.createElement('a');
+            link.download = fileName;
+            // Sử dụng media type "text/csv" với charset UTF-8
+            link.href = `data:text/csv;charset=utf-8;base64,${base64Data}`;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+    </script>
 </body>
 
 </html>

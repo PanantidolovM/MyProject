@@ -32,32 +32,48 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XFBhZ2VUaXRsZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/AddEmployee.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkRW1wbG95ZWUucmF6b3I=
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Common/OfflineAlert.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tbW9uXE9mZmxpbmVBbGVydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/DeleteEmployee.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVsZXRlRW1wbG95ZWUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/EmployeeDetails.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVEZXRhaWxzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Employees.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Employee/AddEmployee.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVcQWRkRW1wbG95ZWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Employee/DeleteEmployee.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVcRGVsZXRlRW1wbG95ZWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Employee/EmployeeDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVcRW1wbG95ZWVEZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Employee/UpdateEmployee.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVcVXBkYXRlRW1wbG95ZWUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/UpdateEmployee.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBkYXRlRW1wbG95ZWUucmF6b3I=
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Reports.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Statistics.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RhdGlzdGljcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Weather.razor]

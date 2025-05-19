@@ -1,13 +1,15 @@
 @code {
     // Nhận từ layout hàm để cập nhật tiêu đề
-    [CascadingParameter] public Action<string> SetPageTitle { get; set; } = default!;
+    [CascadingParameter] 
+    public Action<string> SetPageTitle { get; set; } = default!;
 
     // Tham số truyền vào là tiêu đề của trang
-    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] 
+    public string Title { get; set; } = string.Empty;
 
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
-        // Khi component được khởi tạo, gọi hàm cập nhật tiêu đề
+        // Mỗi khi tham số Title được set hoặc thay đổi, gọi hàm cập nhật tiêu đề
         SetPageTitle?.Invoke(Title);
     }
 }

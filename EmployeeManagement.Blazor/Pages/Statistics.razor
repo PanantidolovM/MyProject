@@ -1,0 +1,125 @@
+@page "/statistics"
+@using System.Globalization
+@using EmployeeManagement.Blazor.Models
+@inherits ComponentBase
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+@code {
+
+    [CascadingParameter]
+    public Action<string> SetTitle { get; set; } = default!;
+    protected override void OnInitialized()
+        {
+            // Cập nhật tiêu đề cho trang Statistics
+            SetTitle?.Invoke("Statistics");
+        }
+}
+
+@code {
+    private List<DtoEmployee> employeeDtos = new();
+    private int totalEmployees;
+    private decimal averageSalary;
+    private int newThisMonth = 0;
+    private List<SalaryDistribution> salaryDistributions = new();
+    private int selectedTab = 0;
+    protected override async Task OnInitializedAsync()
+    {
+        employeeDtos = await Http.GetFromJsonAsync<List<DtoEmployee>>("api/employee") ?? new List<DtoEmployee>();
+        var employees = employeeDtos.Where(e => e.Shikaku == "Employee").ToList();
+        totalEmployees = employees.Count;
+        averageSalary = employees.Any() ? employees.Average(e => e.Salary) : 0;
+        @* newThisMonth = employees.Count(e => e.HireDate.Month == DateTime.Now.Month && e.HireDate.Year == DateTime.Now.Year); *@
+
+        // Group salaries into ranges for distribution
+        var ranges = new[] { 0, 2000, 4000, 6000, 8000, 10000, int.MaxValue };
+        salaryDistributions = ranges.Zip(ranges.Skip(1), (min, max) => new SalaryDistribution
+        {
+            Range = max == int.MaxValue ? $"{min:C0}+" : $"{min:C0} - {max - 1:C0}",
+            Count = employees.Count(e => e.Salary >= min && e.Salary < max)
+        }).ToList();
+    }
+
+    class SalaryDistribution
+    {
+        public string Range { get; set; } = string.Empty;
+        public int Count { get; set; }
+    }
+}
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link @(selectedTab == 0 ? "active" : "")" href="#" @onclick="() => selectedTab = 0">Overview</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(selectedTab == 1 ? "active" : "")" href="#" @onclick="() => selectedTab = 1">Distribution</a>
+        </li>
+    </ul>
+    <div class="tab-content mt-3">
+        @if (selectedTab == 0)
+        {
+            <div class="tab-pane active">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Employees</h5>
+                                <p class="card-text display-6">@totalEmployees</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Average Salary</h5>
+                                <p class="card-text display-6">@averageSalary.ToString("C0", CultureInfo.CurrentCulture)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">New This Month</h5>
+                                <p class="card-text display-6">@newThisMonth</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (selectedTab == 1)
+        {
+            <div class="tab-pane active">
+                <h5>Salary Distribution</h5>
+                <canvas id="salaryChart" width="600" height="300"></canvas>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await RenderChartAsync();
+        }
+        else if (selectedTab == 1)
+        {
+            await RenderChartAsync();
+        }
+    }
+
+    private async Task RenderChartAsync()
+    {
+        if (selectedTab == 1)
+        {
+            var labels = salaryDistributions.Select(d => d.Range).ToArray();
+            var data = salaryDistributions.Select(d => d.Count).ToArray();
+            await JS.InvokeVoidAsync("renderSalaryChart", labels, data);
+        }
+    }
+
+    [Inject] private IJSRuntime JS { get; set; } = default!;
+}

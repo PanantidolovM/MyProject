@@ -1,37 +1,37 @@
 ﻿@inherits LayoutComponentBase
 <!-- Bọc toàn bộ nội dung với CascadingValue truyền hàm cập nhật tiêu đề -->
-<CascadingValue Value="(Action<string>)SetTitle">
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-        <!-- Phần bên trái hiển thị tiêu đề do trang cung cấp -->
-            <div class="top-row-left">
-                @currentPageTitle
-            </div>
-        <!-- Phần bên phải giữ nguyên link About -->
-            <div class="top-row-right">
-                <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-            </div>
+<CascadingValue Value="SetTitle">
+    <div class="page">
+        <div class="sidebar">
+            <NavMenu />
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+        <main>
+            <div class="top-row px-4">
+                <!-- Phần bên trái hiển thị tiêu đề do trang cung cấp -->
+                <div class="top-row-left">
+                    <h2>@currentPageTitle</h2>
+                </div>
+                <!-- Phần bên phải giữ nguyên link About -->
+                <div class="top-row-right">
+                    <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+                </div>
+            </div>
+
+            <article class="content px-4">
+                @Body
+            </article>
+        </main>
+    </div>  
 </CascadingValue>
 <!-- Đoạn mã này sẽ được sử dụng để cập nhật tiêu đề trang -->
 
 @code {
     // You can set this value dynamically as needed
-    private string currentPageTitle = string.Empty;
+    public string currentPageTitle = "Home";
 
     // Hàm này được truyền xuống các component con thông qua CascadingValue
-    private void SetTitle(string title)
+    public void SetTitle(string title)
     {
         currentPageTitle = title;
         StateHasChanged();

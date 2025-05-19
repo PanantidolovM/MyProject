@@ -1,0 +1,133 @@
+@page "/settings"
+@using Microsoft.AspNetCore.Components.Forms
+
+@code {
+
+    [CascadingParameter]
+    private Action<string> SetTitle { get; set; } = default!;
+    protected override void OnInitialized()
+        {
+            // Cập nhật tiêu đề cho trang Statistics
+            SetTitle?.Invoke("Settings");
+        }
+}
+
+<h3>Application Preferences</h3>
+<EditForm Model="@preferences" OnValidSubmit="SavePreferences">
+    <div class="mb-3">
+        <label>Theme:</label>
+        <InputSelect @bind-Value="preferences.Theme">
+            <option value="Light">Light</option>
+            <option value="Dark">Dark</option>
+            <option value="HighContrast">High Contrast</option>
+            <option value="ColorBlind">Color Blind</option>
+            <option value="Custom">Custom</option>
+            <option value="System">System default</option>
+        </InputSelect>
+    </div>
+    <div class="mb-3">
+        <label>Language:</label>
+        <InputSelect @bind-Value="preferences.Language">
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="ja">Japanese</option>
+            <option value="vn">Vietnamese</option>
+            <option value="zh">Chinese</option>
+        </InputSelect>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Preferences</button>
+</EditForm>
+
+<hr />
+
+<h3>Notifications</h3>
+<EditForm Model="@preferences" OnValidSubmit="SavePreferences">
+    <div class="mb-3">
+        <label>Enable Notifications:</label>
+        <InputCheckbox @bind-Value="preferences.EnableNotifications" />
+    </div>
+    <div class="mb-3">
+        <label>Notification Frequency:</label>
+        <InputSelect @bind-Value="preferences.NotificationFrequency">
+            <option value="Immediate">Immediate</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+        </InputSelect>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Notification Settings</button>
+</EditForm>
+
+<hr />
+
+<h3>Export Settings</h3>
+<EditForm Model="@preferences" OnValidSubmit="SavePreferences">
+    <div class="mb-3">
+        <label>Export Format:</label>
+        <InputSelect @bind-Value="preferences.ExportFormat">
+            <option value="CSV">CSV</option>
+            <option value="Excel">Excel</option>
+            <option value="PDF">PDF</option>
+        </InputSelect>
+    </div>
+    <div class="mb-3">
+        <label>Include Headers:</label>
+        <InputCheckbox @bind-Value="preferences.IncludeHeaders" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save Export Settings</button>
+</EditForm>
+
+<hr />
+
+<h3>Account Settings</h3>
+<EditForm Model="@account" OnValidSubmit="SaveAccount">
+    <div class="mb-3">
+        <label>Email:</label>
+        <InputText @bind-Value="account.Email" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Display Name:</label>
+        <InputText @bind-Value="account.DisplayName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Change Password:</label>
+        <InputText @bind-Value="account.NewPassword" type="password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save Account Settings</button>
+</EditForm>
+
+@code {
+    private Preferences preferences = new Preferences();
+    private AccountSettings account = new AccountSettings();
+
+    private void SavePreferences()
+    {
+        // Save preferences logic here
+    }
+
+    private void SaveAccount()
+    {
+        // Save account settings logic here
+    }
+
+    public class Preferences
+    {
+        public string Theme { get; set; } = "Light";
+        public string Language { get; set; } = "en";
+        public bool EnableNotifications { get; set; } = true;
+        public string NotificationFrequency { get; set; } = "Immediate";
+        public string ExportFormat { get; set; } = "CSV";
+        public bool IncludeHeaders { get; set; } = true;
+        public string CustomTheme { get; set; } = "";
+        public string CustomFont { get; set; } = "";
+    }
+
+    public class AccountSettings
+    {
+        public string Email { get; set; } = "";
+        public string DisplayName { get; set; } = "";
+        public string NewPassword { get; set; } = "";
+    }
+}
