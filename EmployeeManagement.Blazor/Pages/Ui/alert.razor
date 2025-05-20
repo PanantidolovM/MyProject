@@ -1,0 +1,61 @@
+@using Microsoft.AspNetCore.Components.Web
+
+<div class="alert-popup-overlay" @onclick="CancelClicked">
+    <div class="alert-popup-content" @onclick="StopPropagation">
+        <h4>@Title</h4>
+        <p>@Message</p>
+        <div class="alert-buttons">
+            <button class="btn btn-danger" @onclick="ConfirmClicked">@ConfirmButtonText</button>
+            <button class="btn btn-secondary" @onclick="CancelClicked">@CancelButtonText</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Title { get; set; } = "Confirmation";
+    [Parameter] public string Message { get; set; } = "Are you sure you want to proceed?";
+    [Parameter] public string ConfirmButtonText { get; set; } = "Confirm";
+    [Parameter] public string CancelButtonText { get; set; } = "Cancel";
+
+    [Parameter] public EventCallback OnConfirm { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+
+    // Khi bấm Confirm, gọi callback đã truyền vào
+    private Task ConfirmClicked(MouseEventArgs e)
+    {
+        return OnConfirm.InvokeAsync(null);
+    }
+
+    // Khi bấm Cancel, gọi callback đã truyền vào
+    private Task CancelClicked(MouseEventArgs e = null)
+    {
+        return OnCancel.InvokeAsync(null);
+    }
+
+    // Ngăn sự kiện bấm lan ra ngoài overlay để popup không tự đóng khi click bên trong
+    private void StopPropagation(MouseEventArgs e)
+    {
+        e.StopPropagation();
+    }
+}
+
+
+@code {
+    private bool isShowingPopup = false;
+    private int employeeIdToDelete;
+    protected void ConfirmDelete(int id)
+    {
+        employeeIdToDelete = id;
+        isShowingPopup = true;
+    }
+
+    private void DeleteEmployee()
+    {
+        NavigationManager.NavigateTo($"/delete/{employeeIdToDelete}");
+        isShowingPopup = false;
+    }
+    private void CancelDelete()
+    {
+        isShowingPopup = false;
+    }
+}

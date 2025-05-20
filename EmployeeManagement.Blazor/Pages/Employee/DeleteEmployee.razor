@@ -2,7 +2,7 @@
 @using EmployeeManagement.Blazor.Models
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
-
+<h3>Deleted Employee</h3>
 @code {
     [Parameter]
     public int Id { get; set; }
@@ -41,8 +41,6 @@
         }
     }
 }
-
-<h3>Delete Employee</h3>
 
 @if (!string.IsNullOrEmpty(errorMessage))
 {

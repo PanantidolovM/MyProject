@@ -28,7 +28,7 @@ else if (!string.IsNullOrEmpty(errorMessage))
 }
 else
 {
-    <EditForm Model="employee" OnValidSubmit="UpdateAsJsonAsync">
+    <EditForm Model="employee" OnValidSubmit="HandleSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="mb-3">
@@ -102,11 +102,11 @@ else
         isLoading = false;
     }
 
-    private async Task UpdateAsJsonAsync()
+    private async Task HandleSubmit()
     {
         try
         {
-            var response = await Http.PutAsJsonAsync($"api/employees/update/{Id}", employee);
+            var response = await Http.PutAsJsonAsync($"api/employees/update", employee);
             if (response.IsSuccessStatusCode)
             {
                 NavigationManager.NavigateTo("/employees");

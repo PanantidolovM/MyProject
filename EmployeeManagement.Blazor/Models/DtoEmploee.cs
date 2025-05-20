@@ -1,4 +1,5 @@
 namespace EmployeeManagement.Blazor.Models;
+
 public class DtoEmployee
 {
     public int Id { get; set; }
@@ -13,5 +14,8 @@ public class DtoEmployee
     public string Keitai { get; set; } = string.Empty;
     public string Mail { get; set; } = string.Empty;
     public decimal Salary { get; set; }
+    public DateTime NyushaBi { get; set; }
+    public DateTime CreateDate { get; set; }
+    public DateTime UpdateDate { get; set; }
 }
 

@@ -66,6 +66,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Add Employee</button>
+    <button type="button" class="btn btn-secondary" @onclick="GoBack">Cancel</button>
 
     <ValidationSummary />
 </EditForm>
@@ -92,5 +93,10 @@
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/employees");
     }
 }
