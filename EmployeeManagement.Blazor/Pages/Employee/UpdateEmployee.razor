@@ -1,5 +1,6 @@
 @page "/update/{Id:int}"
 @using EmployeeManagement.Blazor.Models
+@using EmployeeManagement.Blazor.Ui
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
 
@@ -81,10 +82,13 @@ else
         <button type="button" class="btn btn-secondary" @onclick="GoBack">Cancel</button>
     </EditForm>
 }
+    <!-- Include component Alert, sử dụng @ref để gọi phương thức ShowAsync -->
+    <Alert @ref="alert" Title= "Update Employee" Message="Are you sure want to update employee?" OnConfirm="ConfirmUpdate" OnCancel="CancelUpdate" />
+
 @code {
     [Parameter]
     public int Id { get; set; }
-
+    private Alert alert = default!;
     private DtoEmployee employee = new DtoEmployee();
     private bool isLoading = true;
     private string? errorMessage;
@@ -104,6 +108,17 @@ else
 
     private async Task HandleSubmit()
     {
+        // Hiện popup xác nhận
+        await alert.ShowAsync();
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/employees");
+    }
+
+    private async Task ConfirmUpdate()
+    {
         try
         {
             var response = await Http.PutAsJsonAsync($"api/employees/update", employee);
@@ -121,9 +136,9 @@ else
             errorMessage = $"Error updating employee: {ex.Message}";
         }
     }
-
-    private void GoBack()
+    private void CancelUpdate()
     {
-        NavigationManager.NavigateTo("/employees");
+        // Xử lý hủy thêm nhân viên ở đây
+        Console.WriteLine("Người dùng đã hủy thao tác cập nhật nhân viên.");
     }
 }

@@ -811,7 +811,6 @@ C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\scoped
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\scopedcss\projectbundle\EmployeeManagement.Blazor.bundle.scp.css
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\blazor.build.boot-extension.json
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\blazor.boot.json
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\oazljvvnvl-8rbvw3on5j.gz
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\p9atkoqhdt-bqjiyaj88i.gz
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\ei6c29txay-c2jlpeoesf.gz
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\q078ry7gfg-erw9l3u2r3.gz
@@ -1075,10 +1074,11 @@ C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\ref\Em
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\ek5l29p5i3-7zbg614h7e.gz
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\s694myau78-7zbg614h7e.gz
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\r9nxlnh8g3-6m9py4iwi6.gz
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\bin\Debug\net9.0\wwwroot\_framework\EmployeeManagement.Blazor.3pk8r298hc.pdb
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\bin\Debug\net9.0\wwwroot\_framework\EmployeeManagement.Blazor.jr6i7d10x1.wasm
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\bin\Debug\net9.0\wwwroot\_framework\EmployeeManagement.Blazor.3pk8r298hc.pdb.gz
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\bin\Debug\net9.0\wwwroot\_framework\EmployeeManagement.Blazor.jr6i7d10x1.wasm.gz
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\bvowgiewqk-jr6i7d10x1.gz
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\0s1exxz9ut-3pk8r298hc.gz
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\8qw4i5lfwx-fk9vzh5h00.gz
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\oazljvvnvl-plrj4ajoux.gz
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\bin\Debug\net9.0\wwwroot\_framework\EmployeeManagement.Blazor.9plhsp67vi.pdb
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\bin\Debug\net9.0\wwwroot\_framework\EmployeeManagement.Blazor.og8dzs5vlz.wasm
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\bin\Debug\net9.0\wwwroot\_framework\EmployeeManagement.Blazor.9plhsp67vi.pdb.gz
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\bin\Debug\net9.0\wwwroot\_framework\EmployeeManagement.Blazor.og8dzs5vlz.wasm.gz
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\bvowgiewqk-og8dzs5vlz.gz
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\0s1exxz9ut-9plhsp67vi.gz
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Blazor\obj\Debug\net9.0\compressed\8qw4i5lfwx-jbrhafvalm.gz

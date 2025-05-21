@@ -1,0 +1,49 @@
+@using Microsoft.AspNetCore.Components.Web
+
+@if (IsShowing){
+    <div class="alert-popup-overlay" @onclick="CancelClicked">
+        <div class="alert-popup-content" @onclick:stopPropagation>
+            <h4>@Title</h4>
+            <p>@Message</p>
+            <div class="alert-buttons">
+                <button class="btn btn-danger" @onclick="ConfirmClicked">@ConfirmButtonText</button>
+                <button class="btn btn-secondary" @onclick="CancelClicked">@CancelButtonText</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Title { get; set; } = "Confirmation";
+    [Parameter] public string Message { get; set; } = "Are you sure you want to proceed?";
+    [Parameter] public string ConfirmButtonText { get; set; } = "Confirm";
+    [Parameter] public string CancelButtonText { get; set; } = "Cancel";
+
+    [Parameter] public EventCallback OnConfirm { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+    [Parameter] public bool IsShowing { get; set; } = false;
+
+    /// <summary>
+    /// Phương thức gọi từ bên ngoài để hiển thị Alert.
+    /// </summary>
+    public Task ShowAsync()
+    {
+        IsShowing = true;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    // Khi bấm Confirm, gọi callback đã truyền vào
+    private async Task ConfirmClicked(MouseEventArgs e)
+    {
+        IsShowing = false;
+        await OnConfirm.InvokeAsync();
+    }
+
+    // Khi bấm Cancel, gọi callback đã truyền vào
+    private async Task CancelClicked(MouseEventArgs e)
+    {
+        IsShowing = false;
+        await OnCancel.InvokeAsync();
+    }
+}

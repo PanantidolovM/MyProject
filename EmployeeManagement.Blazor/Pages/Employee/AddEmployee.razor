@@ -1,5 +1,6 @@
 @page "/add"
 @using EmployeeManagement.Blazor.Models
+@using EmployeeManagement.Blazor.Ui
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
 
@@ -71,17 +72,35 @@
     <ValidationSummary />
 </EditForm>
 
+<!-- Include component Alert, sử dụng @ref để gọi phương thức ShowAsync -->
+<Alert @ref="alert" Title= "Add Employee" Message="Are you sure want to add this employee?" OnConfirm="ConfirmAdd" OnCancel="CancelAdd" />
+
 @code {
     private DtoEmployee newEmployee = new();
+    // Reference đến component Alert
+    private Alert alert = default!;
 
     private async Task HandleSubmit()
     {
+        // Hiện popup xác nhận
+        await alert.ShowAsync();
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/employees");
+    }
+
+    private async Task ConfirmAdd()
+    {
+        // Xử lý thêm nhân viên ở đây
         try
         {
             var response = await Http.PostAsJsonAsync("api/employees/add", newEmployee);
             if (response.IsSuccessStatusCode)
             {
                 newEmployee = new(); // Reset form nếu thành công
+                NavigationManager.NavigateTo("/employees"); // Quay lại danh sách nhân viên
                 Console.WriteLine("Employee added successfully!");
             }
             else
@@ -94,9 +113,10 @@
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
-
-    private void GoBack()
+    private void CancelAdd()
     {
-        NavigationManager.NavigateTo("/employees");
+        // Xử lý hủy thêm nhân viên ở đây
+        Console.WriteLine("Người dùng đã hủy thao tác thêm nhân viên.");
     }
 }
+

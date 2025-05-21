@@ -76,12 +76,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RhdGlzdGljcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Ui/alert.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVWlcYWxlcnQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Ui/Alert.razor]
+build_metadata.AdditionalFiles.TargetPath = VWlcQWxlcnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/_Imports.razor]
