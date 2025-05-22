@@ -14,19 +14,26 @@ public class Employee
     public string Keitai{get;  set;} = string.Empty;
     public string Mail{get;  set;} = string.Empty;
     public decimal Salary { get;  set; }
+    public DateTime NyushaBi { get; set; }
+    public DateTime CreateDate { get; set; }
+    public DateTime UpdateDate { get; set; }
 
-    public Employee(int id,string firstname,string lastname, string kokuseki, string passport, string shikaku, string mynumber,string bikou, string juusho, string keitai, string mail ,decimal salary){
-            Id = id;
-            FirstName = firstname;
-            LastName = lastname;
-            KokuSeki = kokuseki;
-            Passport = passport;
-            Shikaku = shikaku;
-            MyNumber = mynumber;
-            BiKou = bikou;
-            JuuSho = juusho;
-            Keitai = keitai;
-            Mail = mail;
-            Salary = salary;
+    public Employee(int id, string firstname, string lastname, string kokuseki, string passport, string shikaku, string mynumber, string bikou, string juusho, string keitai, string mail, decimal salary, DateTime nyushabi, DateTime createDate, DateTime updateDate)
+    {
+        Id = id;
+        FirstName = firstname;
+        LastName = lastname;
+        KokuSeki = kokuseki;
+        Passport = passport;
+        Shikaku = shikaku;
+        MyNumber = mynumber;
+        BiKou = bikou;
+        JuuSho = juusho;
+        Keitai = keitai;
+        Mail = mail;
+        Salary = salary;
+        NyushaBi = nyushabi;
+        CreateDate = createDate;
+        UpdateDate = updateDate;
     }
 }

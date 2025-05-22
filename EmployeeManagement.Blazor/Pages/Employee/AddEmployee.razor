@@ -23,49 +23,52 @@
 
     <div class="mb-3">
         <label>First Name:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.FirstName" />
+        <InputText class="form-control" @bind-Value="newEmployee.FirstName" placeholder="姓" />
     </div>
     <div class="mb-3">
         <label>Last Name:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.LastName" />
+        <InputText class="form-control" @bind-Value="newEmployee.LastName" placeholder="名" />
     </div>
     <div class="mb-3">
         <label>Country:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.KokuSeki" />
+        <InputText class="form-control" @bind-Value="newEmployee.KokuSeki" placeholder="国籍" />
     </div>
     <div class="mb-3">
         <label>Passport:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.Passport" />
+        <InputText class="form-control" @bind-Value="newEmployee.Passport" placeholder="パスポート" />
     </div>
     <div class="mb-3">
-        <label>Qualification:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.Shikaku" />
+        <label>Position:</label>
+        <InputText class="form-control" @bind-Value="newEmployee.Shikaku" placeholder="エンジニア,..." />
     </div>
     <div class="mb-3">
         <label>My Number:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.MyNumber" />
+        <InputText class="form-control" @bind-Value="newEmployee.MyNumber" placeholder="マイナンバー" />
     </div>
     <div class="mb-3">
         <label>Note:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.BiKou" />
+        <InputText class="form-control" @bind-Value="newEmployee.BiKou" placeholder="備考..." />
     </div>
     <div class="mb-3">
         <label>Address:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.JuuSho" />
+        <InputText class="form-control" @bind-Value="newEmployee.JuuSho" placeholder="〇〇市〇〇区〇〇丁目ー〇番ー〇号ー〇号室" />
     </div>
     <div class="mb-3">
         <label>Phone:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.Keitai" />
+        <InputText class="form-control" @bind-Value="newEmployee.Keitai" placeholder="ハイフンなしで入力" />
     </div>
     <div class="mb-3">
         <label>Email:</label>
-        <InputText class="form-control" @bind-Value="newEmployee.Mail" />
+        <InputText class="form-control" @bind-Value="newEmployee.Mail" placeholder="example@jp.co" />
     </div>
     <div class="mb-3">
         <label>Salary:</label>
-        <InputNumber  class="form-control" @bind-Value="newEmployee.Salary" />
+        <InputNumber class="form-control" @bind-Value="newEmployee.Salary" placeholder="〇〇￥" />
     </div>
-
+    <div class="mb-3">
+        <label>Hire Date:</label>
+        <InputDate class="form-control" @bind-Value="newEmployee.NyushaBi"/>
+    </div>
     <button type="submit" class="btn btn-primary">Add Employee</button>
     <button type="button" class="btn btn-secondary" @onclick="GoBack">Cancel</button>
 

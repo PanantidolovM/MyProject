@@ -124,7 +124,10 @@ public class EmployeeApiTester
             "456 Main St",
             "0987654321",
             "vothaibaominh1111@gmail.com",
-            7000
+            7000,
+            DateTime.Now,
+            DateTime.Now,
+            DateTime.Now
         );
         var response = await _client.PutAsJsonAsync("api/emp/update", updatedEmployee);
         if (response.IsSuccessStatusCode)

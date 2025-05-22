@@ -24,7 +24,10 @@ public class EmployeeDomainServiceTests
             juusho: "Tokyo",
             keitai: "090-1234-5678",
             mail: "vothaibaominh1502@gmail.com",
-            salary: 50000m
+            salary: 50000m,
+            nyushabi: DateTime.Now,
+            createDate: DateTime.Now,
+            updateDate: DateTime.Now
         );
 
         // Act
@@ -49,6 +52,9 @@ public class EmployeeDomainServiceTests
         Assert.Equal(employee.Keitai, addedEmployee.Keitai);
         Assert.Equal(employee.Mail, addedEmployee.Mail);
         Assert.Equal(employee.Salary, addedEmployee.Salary);
+        Assert.Equal(employee.NyushaBi, addedEmployee.NyushaBi);
+        Assert.Equal(employee.CreateDate, addedEmployee.CreateDate);
+        Assert.Equal(employee.UpdateDate, addedEmployee.UpdateDate);
     }
 
     [Fact]
@@ -69,7 +75,10 @@ public class EmployeeDomainServiceTests
             juusho: "Tokyo",
             keitai: "090-1234-5678",
             mail: "vothaibaominh1502@gmail.com",
-            salary: 50000m
+            salary: 50000m,
+            nyushabi: DateTime.Now,
+            createDate: DateTime.Now,
+            updateDate: DateTime.Now
         );
 
 
@@ -90,6 +99,9 @@ public class EmployeeDomainServiceTests
         Assert.Equal(employee.Keitai, result.Keitai);
         Assert.Equal(employee.Mail, result.Mail);
         Assert.Equal(employee.Salary, result.Salary);
+        Assert.Equal(employee.NyushaBi, result.NyushaBi);
+        Assert.Equal(employee.CreateDate, result.CreateDate);
+        Assert.Equal(employee.UpdateDate, result.UpdateDate);
     }
 
     [Fact]
@@ -110,7 +122,10 @@ public class EmployeeDomainServiceTests
             juusho: "Tokyo",
             keitai: "090-1234-5678",
             mail: "vothaibaominh1502@gmail.com",
-            salary: 50000m
+            salary: 50000m,
+            nyushabi: DateTime.Now,
+            createDate: DateTime.Now,
+            updateDate: DateTime.Now
         );
 
         // Setup the repository to return the employee when GetById is called
@@ -147,7 +162,10 @@ public class EmployeeDomainServiceTests
             juusho: "Tokyo",
             keitai: "090-1234-5678",
             mail: "vothaibaominh1502@gmail.com",
-            salary: 50000m
+            salary: 50000m,
+            nyushabi: DateTime.Now,
+            createDate: DateTime.Now,
+            updateDate: DateTime.Now
         );
 
         // Setup the repository to return the employee when GetById is called

@@ -22,52 +22,41 @@ public class EmployeeDomainService : IEmployeeDomainService
     // 社員登録処理
     public async Task AddEmployee(Employee employee)
     {
-        // 社員が nullの場合、ArgumentNullExceptionをスローします。
         if (employee == null) throw new ArgumentNullException(nameof(employee));
 
         // バリデーションチェック
-        // 名前が空でないことの確認。
         if (string.IsNullOrWhiteSpace(employee.FirstName) || string.IsNullOrWhiteSpace(employee.LastName))
         {
             throw new ArgumentException("姓名を入力してください！");
         }
 
-        // メールが空でないことの確認。
         if (string.IsNullOrWhiteSpace(employee.Mail))
         {
             throw new ArgumentException("メールを入力してください！");
         }
-        // 社員IDの生成
-        // ここでは、IDを生成するためのインターフェースを使用しています。
-        // Nếu employee.Id == 0, lấy số ID mới từ service
+
         if (employee.Id == 0)
         {
             employee.Id = _idGenerator.GetNextEmployeeId();
         }
 
-        // 社員情報の追加
+        // CreateDateは追加時のみ設定
         _employees.Add(employee);
 
-        // メソッドが非同期パターンに従っていることを確認します
-        // ここでは、Task.CompletedTaskを使用して、非同期メソッドのように振る舞います。
         await Task.CompletedTask;
     }
 
-    // 社員更新処理
-    public async Task UpdateEmployee(Employee employee){
-        // 社員がnullの場合、ArgumentNullExceptionをスローします。
+    public async Task UpdateEmployee(Employee employee)
+    {
         if (employee == null)
             throw new ArgumentNullException(nameof(employee));
 
-        // バリデーションチェック
-        // 名前が空でないことの確認。
         if (string.IsNullOrWhiteSpace(employee.FirstName) ||
             string.IsNullOrWhiteSpace(employee.LastName))
         {
             throw new ArgumentException("姓名を入力してください！");
         }
 
-        // メールが空でないことの確認。
         if (string.IsNullOrWhiteSpace(employee.Mail))
         {
             throw new ArgumentException("メールを入力してください！");
@@ -75,13 +64,12 @@ public class EmployeeDomainService : IEmployeeDomainService
 
         var existingEmployee = _employees.FirstOrDefault(e => e.Id == employee.Id);
 
-        // リストに社員存在の確認
         if (existingEmployee == null)
         {
             throw new KeyNotFoundException($"社員の{employee.Id}が存在しません.");
         }
 
-        // 社員情報の更新
+        // CreateDateは変更しない
         existingEmployee.FirstName = employee.FirstName;
         existingEmployee.LastName = employee.LastName;
         existingEmployee.KokuSeki = employee.KokuSeki;
@@ -93,9 +81,10 @@ public class EmployeeDomainService : IEmployeeDomainService
         existingEmployee.Keitai = employee.Keitai;
         existingEmployee.Mail = employee.Mail;
         existingEmployee.Salary = employee.Salary;
-
-        // メソッドが非同期パターンに従っていることを確認します
-        // ここでは、Task.CompletedTaskを使用して、非同期メソッドのように振る舞います。
+        existingEmployee.NyushaBi = employee.NyushaBi;
+        // UpdateDateのみ更新
+        existingEmployee.UpdateDate = DateTime.Now;
+        // CreateDateは変更しない（何もしない）
         await Task.CompletedTask;
     }
 

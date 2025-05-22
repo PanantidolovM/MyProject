@@ -25,18 +25,19 @@
     private int selectedTab = 0;
     protected override async Task OnInitializedAsync()
     {
-        employeeDtos = await Http.GetFromJsonAsync<List<DtoEmployee>>("api/employee") ?? new List<DtoEmployee>();
-        var employees = employeeDtos.Where(e => e.Shikaku == "Employee").ToList();
-        totalEmployees = employees.Count;
-        averageSalary = employees.Any() ? employees.Average(e => e.Salary) : 0;
-        @* newThisMonth = employees.Count(e => e.HireDate.Month == DateTime.Now.Month && e.HireDate.Year == DateTime.Now.Year); *@
+        employeeDtos = await Http.GetFromJsonAsync<List<DtoEmployee>>("api/employees/getAll") ?? new List<DtoEmployee>();
+        @* var employees = employeeDtos.Where(e => e.Shikaku == "Employee").ToList(); *@
+        // Calculate total employees and average salary
+        totalEmployees = employeeDtos.Count;
+        averageSalary = employeeDtos.Any() ? employeeDtos.Average(e => e.Salary) : 0;
+        newThisMonth = employeeDtos.Count(e => e.NyushaBi.Month == DateTime.Now.Month && e.NyushaBi.Year == DateTime.Now.Year);
 
         // Group salaries into ranges for distribution
         var ranges = new[] { 0, 2000, 4000, 6000, 8000, 10000, int.MaxValue };
         salaryDistributions = ranges.Zip(ranges.Skip(1), (min, max) => new SalaryDistribution
         {
             Range = max == int.MaxValue ? $"{min:C0}+" : $"{min:C0} - {max - 1:C0}",
-            Count = employees.Count(e => e.Salary >= min && e.Salary < max)
+            Count = employeeDtos.Count(e => e.Salary >= min && e.Salary < max)
         }).ToList();
     }
 

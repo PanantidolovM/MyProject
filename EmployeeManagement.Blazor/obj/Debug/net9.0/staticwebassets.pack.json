@@ -21,6 +21,18 @@
       "PackagePath": "staticwebassets\\icon-192.png"
     },
     {
+      "Id": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Blazor\\wwwroot\\images\\column-chart-icon.png",
+      "PackagePath": "staticwebassets\\images\\column-chart-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Blazor\\wwwroot\\images\\group-icon.png",
+      "PackagePath": "staticwebassets\\images\\group-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Blazor\\wwwroot\\images\\settings-icon.png",
+      "PackagePath": "staticwebassets\\images\\settings-icon.png"
+    },
+    {
       "Id": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Blazor\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },

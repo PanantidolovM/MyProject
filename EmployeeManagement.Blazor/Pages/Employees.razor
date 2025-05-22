@@ -23,10 +23,13 @@
 </div>
 
 <hr>
-
-<div class="mb-3">
-    <a class="btn btn-primary" href="/add">Add New Employee</a>
-    <a class="btn btn-secondary" href="/reports">View Reports</a>
+<div class="top-row">
+    <div class="top-row-right" style="text-align: right;">
+        <div class="mb-3">
+            <a class="btn btn-primary" href="/add">Add New Employee</a>
+            <a class="btn btn-secondary" href="/reports">View Reports</a>
+        </div>
+    </div>
 </div>
 
 @if (employeeDtos == null || employeeDtos.Count == 0)
@@ -39,17 +42,20 @@ else
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Họ</th>
-                <th>Tên</th>
-                <th>Quốc tịch</th>
-                <th>Hộ chiếu</th>
-                <th>Chứng chỉ</th>
-                <th>Số My Number</th>
-                <th>Ghi chú</th>
-                <th>Địa chỉ</th>
-                <th>Điện thoại</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Country</th>
+                <th>Passport</th>
+                <th>Position</th>
+                <th>My Number</th>
+                <th>Note</th>
+                <th>Address</th>
+                <th>Phone</th>
                 <th>Email</th>
-                <th>Lương</th>
+                <th>Salary</th>
+                <th>Hire Date</th>
+                <th>Created Date</th>
+                <th>Updated Date</th>
             </tr>
         </thead>
         <tbody>
@@ -67,9 +73,10 @@ else
                     <td>@emp.JuuSho</td>
                     <td>@emp.Keitai</td>
                     <td>@emp.Mail</td>
-                    <td>@emp.Salary</td>
-                    @*<td>Created At: @emp.CreatedAt.ToString("yyyy/MM/dd HH:mm:ss")</td> *@
-                    @*<td>Updated At: @emp.UpdatedAt.ToString("yyyy/MM/dd HH:mm:ss")</td> *@
+                    <td>@emp.Salary￥</td>
+                    <td>@emp.NyushaBi.ToString("yyyy/MM/dd")</td>
+                    <td>Created At: @emp.CreateDate.ToString("yyyy/MM/dd HH:mm:ss")</td>
+                    <td>Updated At: @emp.UpdateDate.ToString("yyyy/MM/dd HH:mm:ss")</td>
                     <td>
                         <a href="/details/@emp.Id">🔍 employee details</a> @* 社員情報詳細 *@
                         <a href="/update/@emp.Id">✏️ Edit</a> @* 社員情報更新 *@
@@ -81,7 +88,7 @@ else
     </table>
 }
 
-<Alert @ref="alert" Title= "Add Employee" Message="Are you sure want to add this employee?" OnConfirm="ConfirmDel" OnCancel="CancelDel" />
+<Alert @ref="alert" Title= "Delete Employee" Message="Are you sure want to delete this employee?" OnConfirm="ConfirmDel" OnCancel="CancelDel" />
 
 @code {
     private List<DtoEmployee> employeeDtos = new List<DtoEmployee>();

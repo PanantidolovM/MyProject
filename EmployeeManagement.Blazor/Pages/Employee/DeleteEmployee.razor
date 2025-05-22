@@ -55,19 +55,28 @@ else if (isDeleted && deletedEmployee != null)
             <li><strong>Name:</strong> @deletedEmployee.FirstName @deletedEmployee.LastName</li>
             <li><strong>Country:</strong> @deletedEmployee.KokuSeki</li>
             <li><strong>Passport:</strong> @deletedEmployee.Passport</li>
-            <li><strong>Qualification:</strong> @deletedEmployee.Shikaku</li>
+            <li><strong>Position:</strong> @deletedEmployee.Shikaku</li>
             <li><strong>My Number:</strong> @deletedEmployee.MyNumber</li>
             <li><strong>Notes:</strong> @deletedEmployee.BiKou</li>
             <li><strong>Address:</strong> @deletedEmployee.JuuSho</li>
             <li><strong>Phone:</strong> @deletedEmployee.Keitai</li>
             <li><strong>Email:</strong> @deletedEmployee.Mail</li>
             <li><strong>Salary:</strong> @deletedEmployee.Salary</li>
-            @* <li><strong>Created At:</strong> @deletedEmployee.CreatedAt.ToString("yyyy/MM/dd HH:mm:ss")</li>
-            <li><strong>Updated At:</strong> @deletedEmployee.UpdatedAt.ToString("yyyy/MM/dd HH:mm:ss")</li> *@
+            <li><strong>Hire Date:</strong> @deletedEmployee.NyushaBi.ToString("yyyy/MM/dd")</li>
+            <li><strong>Created At:</strong> @deletedEmployee.CreateDate.ToString("yyyy/MM/dd HH:mm:ss")</li>
+            <li><strong>Updated At:</strong> @deletedEmployee.UpdateDate.ToString("yyyy/MM/dd HH:mm:ss")</li>
         </ul>
+        <button type="button" class="btn btn-secondary" @onclick="GoBack">Cancel</button>
     </div>
 }
 else
 {
     <p>Deleting employee...</p>
+}
+@code{
+     private void GoBack()
+    {
+        NavigationManager.NavigateTo("/employees");
+    
+    }
 }

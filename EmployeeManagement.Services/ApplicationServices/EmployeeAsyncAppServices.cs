@@ -34,6 +34,7 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             throw new ArgumentException("メールを入力してください！");
         }
 
+        var now = DateTime.Now;
         Employee employee = new Employee(
             employeeDto.Id,
             employeeDto.FirstName,
@@ -46,7 +47,10 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             employeeDto.JuuSho,
             employeeDto.Keitai,
             employeeDto.Mail,
-            employeeDto.Salary
+            employeeDto.Salary,
+            employeeDto.NyushaBi, // NyushaBi
+            now, // CreateDate (set only once here)
+            now  // UpdateDate (same as create on add)
         );
 
         await _employeeDomainService.AddEmployee(employee);
@@ -76,6 +80,8 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             throw new ArgumentException("社員のメールは空にできません。");
         }
 
+        // Lấy employee gốc từ domain service theo id
+        var originalEmployee = await _employeeDomainService.GetEmployeeDetails(employeeDto.Id);
         Employee employee = new Employee(
             employeeDto.Id,
             employeeDto.FirstName,
@@ -88,11 +94,14 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             employeeDto.JuuSho,
             employeeDto.Keitai,
             employeeDto.Mail,
-            employeeDto.Salary
+            employeeDto.Salary,
+            employeeDto.NyushaBi, // NyushaBi
+            originalEmployee.CreateDate, // Keep original CreateDate
+            DateTime.Now // UpdateDate (set to now on update)
         );
 
         await _employeeDomainService.UpdateEmployee(employee);
-    }   
+    }
     
     // 社員一覧検索処理
     public async Task<IEnumerable<DtoEmployee>> GetAllEmployeesAsync(){
@@ -113,7 +122,7 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
         // DtoEmployeeのリストを作成
         var employeeDtos = employees.Select(e => new DtoEmployee(
             e.Id, e.FirstName, e.LastName, e.KokuSeki, e.Passport, e.Shikaku,
-            e.MyNumber, e.BiKou, e.JuuSho, e.Keitai, e.Mail, e.Salary
+            e.MyNumber, e.BiKou, e.JuuSho, e.Keitai, e.Mail, e.Salary, e.NyushaBi, e.CreateDate, e.UpdateDate
         ));
         
         return employeeDtos;
@@ -148,7 +157,10 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             employee.JuuSho,
             employee.Keitai,
             employee.Mail,
-            employee.Salary
+            employee.Salary,
+            employee.NyushaBi,
+            employee.CreateDate,
+            employee.UpdateDate
         );
 
         _logger.LogInformation("Employee details: {EmployeeJson}", JsonSerializer.Serialize(employee, new JsonSerializerOptions { WriteIndented = true }));
