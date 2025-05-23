@@ -1,4 +1,4 @@
-using EmployeeManagement.Core.Enities;
+using EmployeeManagement.Core.Entities;
 
 namespace EmployeeManagement.Core.Interfaces;
 public interface IEmployeeDomainService

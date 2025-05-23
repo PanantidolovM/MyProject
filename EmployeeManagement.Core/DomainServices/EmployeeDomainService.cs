@@ -1,4 +1,4 @@
-using EmployeeManagement.Core.Enities;
+using EmployeeManagement.Core.Entities;
 using EmployeeManagement.Core.Interfaces;
 
 namespace EmployeeManagement.Core.DomainServices;
@@ -24,23 +24,11 @@ public class EmployeeDomainService : IEmployeeDomainService
     {
         if (employee == null) throw new ArgumentNullException(nameof(employee));
 
-        // バリデーションチェック
-        if (string.IsNullOrWhiteSpace(employee.FirstName) || string.IsNullOrWhiteSpace(employee.LastName))
-        {
-            throw new ArgumentException("姓名を入力してください！");
-        }
-
-        if (string.IsNullOrWhiteSpace(employee.Mail))
-        {
-            throw new ArgumentException("メールを入力してください！");
-        }
-
         if (employee.Id == 0)
         {
             employee.Id = _idGenerator.GetNextEmployeeId();
         }
 
-        // CreateDateは追加時のみ設定
         _employees.Add(employee);
 
         await Task.CompletedTask;
@@ -48,28 +36,13 @@ public class EmployeeDomainService : IEmployeeDomainService
 
     public async Task UpdateEmployee(Employee employee)
     {
-        if (employee == null)
-            throw new ArgumentNullException(nameof(employee));
-
-        if (string.IsNullOrWhiteSpace(employee.FirstName) ||
-            string.IsNullOrWhiteSpace(employee.LastName))
-        {
-            throw new ArgumentException("姓名を入力してください！");
-        }
-
-        if (string.IsNullOrWhiteSpace(employee.Mail))
-        {
-            throw new ArgumentException("メールを入力してください！");
-        }
-
         var existingEmployee = _employees.FirstOrDefault(e => e.Id == employee.Id);
 
         if (existingEmployee == null)
         {
             throw new KeyNotFoundException($"社員の{employee.Id}が存在しません.");
         }
-
-        // CreateDateは変更しない
+        
         existingEmployee.FirstName = employee.FirstName;
         existingEmployee.LastName = employee.LastName;
         existingEmployee.KokuSeki = employee.KokuSeki;
@@ -82,23 +55,14 @@ public class EmployeeDomainService : IEmployeeDomainService
         existingEmployee.Mail = employee.Mail;
         existingEmployee.Salary = employee.Salary;
         existingEmployee.NyushaBi = employee.NyushaBi;
-        // UpdateDateのみ更新
         existingEmployee.UpdateDate = DateTime.Now;
-        // CreateDateは変更しない（何もしない）
         await Task.CompletedTask;
     }
 
     // 社員検索処理
     public async Task<Employee> GetEmployeeDetails(int id){
-        // idが0以下の場合、ArgumentExceptionをスローします。
-        if (id <= 0)
-        {
-            throw new ArgumentException($"無効な{id}.");
-        }
-
         // 社員情報の検索
         var employee = await Task.Run(() => _employees.FirstOrDefault(e => e.Id == id));
-
         // 社員が見つからない場合、KeyNotFoundExceptionをスローします。
         if (employee == null)
         {
@@ -109,11 +73,6 @@ public class EmployeeDomainService : IEmployeeDomainService
 
     //社員一覧検索処理
     public async Task<IEnumerable<Employee>> GetAllEmployees(){
-        // 社員リストに社員が存在しない場合、InvalidOperationExceptionをスローします。
-        if (_employees == null || !_employees.Any())
-        {
-            throw new InvalidOperationException("Không có nhân viên nào trong danh sách.");
-        }
         // 社員一覧の取得
         // ここでは、Task.FromResultを使用して、非同期メソッドのように振る舞います。
         return await Task.FromResult(_employees);
@@ -122,11 +81,6 @@ public class EmployeeDomainService : IEmployeeDomainService
     // 社員削除処理
     public async Task DelEmployee(int id){
         var employee = _employees.FirstOrDefault(e => e.Id == id);
-        // idが0以下の場合、ArgumentExceptionをスローします。
-        if (id <= 0)
-        {
-            throw new ArgumentException($"無効な{id}.");
-        }
 
         // 社員が見つからない場合、KeyNotFoundExceptionをスローします。 
         if (employee == null)

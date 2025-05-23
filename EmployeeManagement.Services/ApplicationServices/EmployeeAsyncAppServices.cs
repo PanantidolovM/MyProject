@@ -1,4 +1,4 @@
-using EmployeeManagement.Core.Enities;
+using EmployeeManagement.Core.Entities;
 using EmployeeManagement.Services.DtoEntities;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Core.Interfaces;
@@ -33,8 +33,7 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             _logger.LogWarning("Email is empty, cannot add employee.");
             throw new ArgumentException("メールを入力してください！");
         }
-
-        var now = DateTime.Now;
+        
         Employee employee = new Employee(
             employeeDto.Id,
             employeeDto.FirstName,
@@ -48,9 +47,9 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
             employeeDto.Keitai,
             employeeDto.Mail,
             employeeDto.Salary,
-            employeeDto.NyushaBi, // NyushaBi
-            now, // CreateDate (set only once here)
-            now  // UpdateDate (same as create on add)
+            employeeDto.NyushaBi,
+            DateTime.Now,
+            DateTime.Now
         );
 
         await _employeeDomainService.AddEmployee(employee);
@@ -82,6 +81,7 @@ public class EmployeeAsyncAppServices : IEmployeeAsyncAppService
 
         // Lấy employee gốc từ domain service theo id
         var originalEmployee = await _employeeDomainService.GetEmployeeDetails(employeeDto.Id);
+
         Employee employee = new Employee(
             employeeDto.Id,
             employeeDto.FirstName,

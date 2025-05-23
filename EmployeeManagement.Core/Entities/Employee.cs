@@ -1,5 +1,4 @@
-
-namespace EmployeeManagement.Core.Enities;
+namespace EmployeeManagement.Core.Entities;
 public class Employee
 {
     public int Id { get; internal  set; }
@@ -16,8 +15,7 @@ public class Employee
     public decimal Salary { get;  set; }
     public DateTime NyushaBi { get; set; }
     public DateTime CreateDate { get; set; }
-    public DateTime UpdateDate { get; set; }
-
+    public DateTime UpdateDate { get; set; } 
     public Employee(int id, string firstname, string lastname, string kokuseki, string passport, string shikaku, string mynumber, string bikou, string juusho, string keitai, string mail, decimal salary, DateTime nyushabi, DateTime createDate, DateTime updateDate)
     {
         Id = id;

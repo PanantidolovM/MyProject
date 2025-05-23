@@ -15,8 +15,8 @@ public class DtoEmployee
     public string Mail{get; set;} = string.Empty;
     public decimal Salary { get; set; }
     public DateTime NyushaBi { get; set; }
-    public DateTime CreateDate { get; set; }
-    public DateTime UpdateDate { get; set; }
+    public DateTime CreateDate { get; set; } = DateTime.Now;
+    public DateTime UpdateDate { get; set; } = DateTime.Now;
 
     public DtoEmployee(int id, string firstname, string lastname, string kokuseki, string passport, string shikaku, string mynumber, string bikou, string juusho, string keitai, string mail, decimal salary, DateTime nyushabi, DateTime createDate, DateTime updateDate)
     {
