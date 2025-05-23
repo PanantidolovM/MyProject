@@ -2,11 +2,45 @@ using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Core.Infrastructure;
 using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Services.Interfaces;
-using EmployeeManagement.Tests.UnitTest;
 using EmployeeManagement.Tests.ApiTests;
 using EmployeeManagement.Services.ApplicationServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Authentication service with JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    // Cofigure JWT token validation
+    // Validate the token using the secret key and issuer/audience
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(
+                builder.Configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key is not configured.")
+            )
+        )
+    };
+});
+// Configure Authorization
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireClaim("role", "admin"));
+});
+
 
 // Apply logging
 builder.Services.AddLogging(logging =>{
@@ -16,16 +50,16 @@ builder.Services.AddLogging(logging =>{
 
 // Apply Domain Service 
 builder.Services.AddSingleton<IEmployeeDomainService, EmployeeDomainService>();
-builder.Services.AddSingleton<IEmployeeRepository, NullEmployeeRepository>();
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
+
+// Apply Infrastructure Service
 builder.Services.AddSingleton<IEmployeeIdGenerator, InMemoryEmployeeIdGenerator>();
+
 // Apply Application Service
 builder.Services.AddSingleton<IEmployeeAsyncAppService, EmployeeAsyncAppServices>();
 
 // Apply EmployeeApiTestController for testing
 builder.Services.AddSingleton<EmployeeApiTester>();
-
-// Apply UserApiTestController for testing
-builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
 // Apply controller
 builder.Services.AddControllers();
