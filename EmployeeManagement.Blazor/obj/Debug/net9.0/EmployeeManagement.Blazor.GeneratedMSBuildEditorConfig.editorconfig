@@ -72,6 +72,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Protected.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvdGVjdGVkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Reports.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

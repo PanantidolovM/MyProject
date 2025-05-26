@@ -1,11 +1,10 @@
 @page "/admin"
-@attribute [Authorize(Roles = "Admin")]
-@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@attribute [Authorize(Roles = "admin")]
 
 <h3>Trang Quản trị</h3>
+<p>Chào mừng, bạn có quyền truy cập trang dành cho Admin!</p>
 
-<AuthorizeView Roles="Admin">
+<AuthorizeView Roles="admin">
     <Authorized>
         <p>Chào mừng, bạn có quyền truy cập trang dành cho Admin!</p>
     </Authorized>
