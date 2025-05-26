@@ -5,9 +5,9 @@ namespace EmployeeManagement.Services.Interfaces;
 public interface IUserAsyncService
 {
     
-    Task AddUserAsync(DtoEmployee employeeDto);
-    Task<DtoEmployee> GetUserDetailsAsync(int id);
-    Task<IEnumerable<DtoEmployee>> GetAllUsersAsync();
-    Task UpdateUserAsync(DtoEmployee employeeDto);
+    Task AddUserAsync(DtoUser userDto);
+    Task<DtoUser> GetUserDetailsAsync(string Email);
+    Task<IEnumerable<DtoUser>> GetAllUsersAsync();
+    Task UpdateUserAsync(DtoUser userDto);
     Task DelUserAsync(int id);
 }

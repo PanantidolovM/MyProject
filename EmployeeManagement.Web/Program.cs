@@ -57,6 +57,7 @@ builder.Services.AddSingleton<IEmployeeIdGenerator, InMemoryEmployeeIdGenerator>
 
 // Apply Application Service
 builder.Services.AddSingleton<IEmployeeAsyncAppService, EmployeeAsyncAppServices>();
+builder.Services.AddSingleton<IUserAsyncService, UserRepoAsyncServices>();
 
 // Apply EmployeeApiTestController for testing
 builder.Services.AddSingleton<EmployeeApiTester>();

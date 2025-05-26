@@ -1,5 +1,6 @@
 using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Services.DtoEntities;
+using EmployeeManagement.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -12,12 +13,12 @@ namespace UserApiTestController
     public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> _logger;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserAsyncService _userAsyncService;
 
-        public UsersController(ILogger<UsersController> logger, IUserRepository userRepository)
+        public UsersController(ILogger<UsersController> logger, IUserAsyncService userAsyncService)
         {
             _logger = logger;
-            _userRepository = userRepository;
+            _userAsyncService = userAsyncService;
         }
 
         [HttpGet("dashboard")]
@@ -37,9 +38,9 @@ namespace UserApiTestController
             try
             {
                 _logger.LogInformation("Controller: Adding new employee: {EmployeeJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
-                await _userRepository.AddUser(userDto);
+                await _userAsyncService.AddUserAsync(userDto);
                 _logger.LogInformation("✅ Employee added successfully: {EmployeeJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
-                return CreatedAtAction(nameof(GetEmployeeDetails), new { id = employeeDto.Id }, new { message = "Employee added successfully!", employee = employeeDto });
+                return CreatedAtAction(nameof(GetUserDetailsAsync), new { email = userDto.Email }, new { message = "User added successfully!", user = userDto });
             }
             catch (Exception)
             {
@@ -52,26 +53,26 @@ namespace UserApiTestController
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetEmployeeDetails(int id)
+        public async Task<IActionResult> GetUserDetailsAsync(string email)
         {
             try
             {
-                _logger.LogInformation("Controller: Getting employee details for ID: {Id}", id);
-                var employeeDto = await _employeeAsyncAppService.GetEmployeeDetailsAsync(id);
+                _logger.LogInformation("Controller: Getting employee details for Email: {Email}", email);
+                var userDto = await _userAsyncService.GetUserDetailsAsync(email);
 
-                if (employeeDto == null)
+                if (userDto == null)
                 {
-                    _logger.LogWarning("Employee not found for ID: {Id}", id);
-                    return NotFound(new { message = $"Employee with ID {id} not found." });
+                    _logger.LogWarning("Employee not found for Email: {Email}", email);
+                    return NotFound(new { message = $"User with Email {email} not found." });
                 }
                 
                 _logger.LogInformation("✅ Employee details retrieved successfully: {EmployeeJson}", 
-                    JsonSerializer.Serialize(employeeDto, new JsonSerializerOptions { WriteIndented = true }));
-                return Ok(employeeDto);
+                    JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
+                return Ok(userDto);
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error retrieving employee details for ID {Id}: {ErrorMessage}", id, ex.Message);
+                _logger.LogError("Error retrieving employee details for ID {Id}: {ErrorMessage}", email, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while retrieving employee details." });
             }
         }
@@ -84,11 +85,11 @@ namespace UserApiTestController
         {
             try
             {
-                _logger.LogInformation("Controller: Getting all employees");
-                var employees = await _employeeAsyncAppService.GetAllEmployeesAsync();
-                _logger.LogInformation("✅ Retrieved {Count} employees: {EmployeesJson}", 
-                    employees.Count(), JsonSerializer.Serialize(employees, new JsonSerializerOptions { WriteIndented = true }));
-                return Ok(employees);
+                _logger.LogInformation("Controller: Getting all users");
+                var users = await _userAsyncService.GetAllUsersAsync();
+                _logger.LogInformation("✅ Retrieved {Count} users: {UsersJson}", 
+                    users.Count(), JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true }));
+                return Ok(users);
             }
             catch (Exception ex)
             {
@@ -102,19 +103,19 @@ namespace UserApiTestController
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateEmployee([FromBody] DtoEmployee employeeDto)
+        public async Task<IActionResult> UpdateEmployee([FromBody] DtoUser userDto)
         {
             try
             {
-                _logger.LogInformation("Controller: Updating employee with ID: {Id}", employeeDto.Id);
-                await _employeeAsyncAppService.UpdateEmployeeAsync(employeeDto);
-                _logger.LogInformation("✅ Employee updated successfully: {EmployeeJson}", 
-                    JsonSerializer.Serialize(employeeDto, new JsonSerializerOptions { WriteIndented = true }));
+                _logger.LogInformation("Controller: Updating user with Email: {Email}", userDto.Email);
+                await _userAsyncService.UpdateUserAsync(userDto);
+                _logger.LogInformation("✅ User updated successfully: {UserJson}", 
+                    JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error updating employee with ID {Id}: {ErrorMessage}", employeeDto.Id, ex.Message);
+                _logger.LogError("Error updating user with Email {Email}: {ErrorMessage}", userDto.Email, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while updating the employee." });
             }
         }
@@ -127,14 +128,14 @@ namespace UserApiTestController
         {
             try
             {
-                _logger.LogInformation("Controller: Deleting employee with ID: {Id}", id);
-                await _employeeAsyncAppService.DelEmployeeAsync(id);
-                _logger.LogInformation("✅ Employee deleted successfully: ID {Id}", id);
+                _logger.LogInformation("Controller: Deleting user with ID: {Id}", id);
+                await _userAsyncService.DelUserAsync(id);
+                _logger.LogInformation("✅ User deleted successfully: ID {Id}", id);
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error deleting employee with ID {Id}: {ErrorMessage}", id, ex.Message);
+                _logger.LogError("Error deleting user with ID {Id}: {ErrorMessage}", id, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while deleting the employee." });
             }
         }

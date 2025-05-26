@@ -32,6 +32,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XFBhZ2VUaXRsZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Admin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Common/OfflineAlert.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tbW9uXE9mZmxpbmVBbGVydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -62,6 +66,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gttan/EmployeeProject/EmployeeManagement.Blazor/Pages/Reports.razor]
