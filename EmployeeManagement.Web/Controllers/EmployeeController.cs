@@ -5,6 +5,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
 
 namespace EmployeeManagement.Web.Controllers;
+
 [ApiController]
 [Route("api/employees")]
 public class EmployeeController(IEmployeeAsyncAppService employeeAsyncAppService, ILogger<EmployeeController> logger) : ControllerBase

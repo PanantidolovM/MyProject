@@ -1,8 +1,12 @@
 @page "/admin"
+@using Microsoft.AspNetCore.Authorization
+
 @attribute [Authorize(Roles = "admin")]
 
-<h3>Trang Quản trị</h3>
-<p>Chào mừng, bạn có quyền truy cập trang dành cho Admin!</p>
+<h3>Admin Page</h3>
+<p> Welcome, you have access to the Admin page! 
+    This page is protected and can only be accessed by users with the "admin" role.
+</p>
 
 <AuthorizeView Roles="admin">
     <Authorized>

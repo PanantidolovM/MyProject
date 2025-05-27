@@ -50,10 +50,12 @@ builder.Services.AddLogging(logging =>{
 
 // Apply Domain Service 
 builder.Services.AddSingleton<IEmployeeDomainService, EmployeeDomainService>();
+builder.Services.AddSingleton<UserDomainService>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
 // Apply Infrastructure Service
 builder.Services.AddSingleton<IEmployeeIdGenerator, InMemoryEmployeeIdGenerator>();
+builder.Services.AddSingleton<IUserIdGenerator, InMemoryUserIdGenerator>();
 
 // Apply Application Service
 builder.Services.AddSingleton<IEmployeeAsyncAppService, EmployeeAsyncAppServices>();

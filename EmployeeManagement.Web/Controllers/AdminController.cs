@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]")] // /api/admin
 public class AdminController : ControllerBase
 {
     [HttpGet("dashboard")]

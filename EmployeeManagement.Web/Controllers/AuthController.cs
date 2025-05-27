@@ -8,7 +8,7 @@ using System.Text;
 
 namespace EmployeeManagement.Web.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]")] // /api/auth
 [ApiController]
 public class AuthController : ControllerBase
 {
@@ -20,7 +20,15 @@ public class AuthController : ControllerBase
         _userDomainService = userDomainService;
     }
 
-    [HttpPost("login")]
+    [HttpPost("login")] // POST api/auth/login
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    /// <summary>
+    /// Login method to authenticate user and generate JWT token.
+    /// /// </summary>
+    /// <param name="loginDto">Login request containing email and password.</param>
     public async Task<IActionResult> Login([FromBody] LoginRequest loginDto)
     {
         // Xác thực người dùng. (Ví dụ: kiểm tra email và mật khẩu sau khi băm)

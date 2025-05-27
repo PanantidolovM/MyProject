@@ -8,11 +8,10 @@ using System;
 
 public class UserRepository : IUserRepository
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IEmployeeIdGenerator _idGenerator;
-    public UserRepository(IUserRepository userRepository, IEmployeeIdGenerator idGenerator)
+    private readonly List<User> _users = new List<User>();
+    private readonly IUserIdGenerator _idGenerator;
+    public UserRepository(IUserIdGenerator idGenerator)
     {
-        _userRepository = userRepository;
         _idGenerator = idGenerator ?? throw new ArgumentNullException(nameof(idGenerator));
     }
 
@@ -21,22 +20,34 @@ public class UserRepository : IUserRepository
         if (user == null) throw new ArgumentNullException(nameof(user));
         if (user.Id == 0)
         {
-            user.Id = _idGenerator.GetNextEmployeeId();
+            user.Id = _idGenerator.GetNextUserId();
         }
+
+         // Nếu PasswordHash chưa được tính toán, gán nó bằng cách băm mật khẩu tùy chỉnh.
+        if (string.IsNullOrEmpty(user.PasswordHash))
+        {
+            // Ví dụ: gán cho mật khẩu mặc định "Bmprao1234@"
+            user.PasswordHash = PasswordHelper.ComputeHash("Bmprao1234@");
+        }
+
         // Check if the email already exists
-        var existingUser = await _userRepository.GetUserByEmail(user.Email);
+        var existingUser = await Task.Run(() => _users.FirstOrDefault(e => e.Email == user.Email));
+
         if (existingUser != null)
         {
             throw new Exception("Email already exists");
         }
 
-        await _userRepository.AddUser(user);
+        _users.Add(user);
+
+        await Task.CompletedTask;
     }
     public async Task<User> GetUserByEmail(string email)
     {
         if (string.IsNullOrEmpty(email)) throw new ArgumentNullException(nameof(email));
 
-        var user = await _userRepository.GetUserByEmail(email);
+        var user = await Task.Run(() => _users.FirstOrDefault(e => e.Email == email));
+
         if (user == null)
         {
             throw new Exception("User not found");
@@ -47,40 +58,36 @@ public class UserRepository : IUserRepository
 
     public async Task<IEnumerable<User>> GetAll()
     {
-        var users = await _userRepository.GetAll();
-        if (users == null || !users.Any())
-        {
-            throw new Exception("No users found");
-        }
-
-        return users;
+        return await Task.FromResult(_users);
     }
 
     public async Task UpdateUser(User user)
     {
         if (user == null) throw new ArgumentNullException(nameof(user));
 
-        var existingUser = await _userRepository.GetUserByEmail(user.Email);
+        var existingUser = _users.FirstOrDefault(e => e.Email == user.Email);
+
         if (existingUser == null)
         {
             throw new Exception("User not found");
         }
+
         existingUser.Email = user.Email;
         existingUser.PasswordHash = user.PasswordHash;
         existingUser.UpdatedAt = DateTime.UtcNow;
-        await _userRepository.UpdateUser(user);
+        await Task.CompletedTask;
     }
 
     public async Task DelUser(int id)
     {
         if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id));
 
-        var user = await _userRepository.GetUserByEmail(id.ToString());
+        var user = _users.FirstOrDefault(e => e.Id == id);
         if (user == null)
         {
             throw new Exception("User not found");
         }
-
-        await _userRepository.DelUser(id);
+        _users.Remove(user);
+        await Task.CompletedTask;
     }
 }

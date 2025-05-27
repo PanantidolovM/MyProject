@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "c6obn5b59qo=",
+  "dgSpecHash": "AVxHKSDpmTM=",
   "success": true,
   "projectFilePath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Blazor\\EmployeeManagement.Blazor.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.aspnetcore.authorization\\9.0.5\\microsoft.aspnetcore.authorization.9.0.5.nupkg.sha512",
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.aspnetcore.components\\9.0.5\\microsoft.aspnetcore.components.9.0.5.nupkg.sha512",
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\9.0.5\\microsoft.aspnetcore.components.analyzers.9.0.5.nupkg.sha512",
+    "C:\\Users\\gttan\\.nuget\\packages\\microsoft.aspnetcore.components.authorization\\9.0.5\\microsoft.aspnetcore.components.authorization.9.0.5.nupkg.sha512",
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\9.0.5\\microsoft.aspnetcore.components.forms.9.0.5.nupkg.sha512",
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.aspnetcore.components.web\\9.0.5\\microsoft.aspnetcore.components.web.9.0.5.nupkg.sha512",
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\9.0.5\\microsoft.aspnetcore.components.webassembly.9.0.5.nupkg.sha512",
