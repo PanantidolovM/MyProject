@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Services.DtoEntities;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -8,12 +9,14 @@ namespace EmployeeManagement.Web.Controllers;
 
 [ApiController]
 [Route("api/employees")]
+[Authorize]
 public class EmployeeController(IEmployeeAsyncAppService employeeAsyncAppService, ILogger<EmployeeController> logger) : ControllerBase
 {
     private readonly IEmployeeAsyncAppService _employeeAsyncAppService = employeeAsyncAppService;
     private readonly ILogger<EmployeeController> _logger = logger;
 
     [HttpPost("add")] // POST api/employees/add
+    [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

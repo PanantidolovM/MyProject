@@ -1,7 +1,3 @@
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.AssemblyInfoInputs.cache
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.AssemblyInfo.cs
-C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.csproj.CoreCompileInputs.cache
 <<<<<<< HEAD
 c:\Users\Minh\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\testhost.dll
 c:\Users\Minh\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\testhost.exe
@@ -103,6 +99,7 @@ c:\Users\Minh\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\Employee
 c:\Users\Minh\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.genruntimeconfig.cache
 c:\Users\Minh\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\ref\EmployeeManagement.Tests.dll
 =======
+>>>>>>> refs/remotes/origin/feature/update-code
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_EmployeeManagement.Tests
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\CoverletSourceRootsMapping_EmployeeManagement.Tests
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\testhost.dll
@@ -222,6 +219,10 @@ C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\Employe
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\EmployeeManagement.Services.pdb
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\EmployeeManagement.Data.pdb
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.csproj.AssemblyReference.cache
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.AssemblyInfoInputs.cache
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.AssemblyInfo.cs
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.csproj.CoreCompileInputs.cache
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.sourcelink.json
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\Employee.6CE26445.Up2Date
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.dll
@@ -229,4 +230,3 @@ C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\refint\
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.pdb
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.genruntimeconfig.cache
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\ref\EmployeeManagement.Tests.dll
->>>>>>> refs/remotes/origin/feature/update-code

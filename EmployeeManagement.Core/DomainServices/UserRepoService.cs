@@ -23,12 +23,12 @@ public class UserRepository : IUserRepository
             user.Id = _idGenerator.GetNextUserId();
         }
 
-         // Nếu PasswordHash chưa được tính toán, gán nó bằng cách băm mật khẩu tùy chỉnh.
-        if (string.IsNullOrEmpty(user.PasswordHash))
-        {
-            // Ví dụ: gán cho mật khẩu mặc định "Bmprao1234@"
-            user.PasswordHash = PasswordHelper.ComputeHash("Bmprao1234@");
-        }
+        // Nếu Password chưa được tính toán, gán nó bằng cách băm mật khẩu tùy chỉnh.
+        // if (string.IsNullOrEmpty(user.Password))
+        // {
+        //     // Ví dụ: gán cho mật khẩu mặc định "Bmprao1234@"
+        //     user.Password = PasswordHelper.ComputeHash("Bmprao1234@");
+        // }
 
         // Check if the email already exists
         var existingUser = await Task.Run(() => _users.FirstOrDefault(e => e.Email == user.Email));
@@ -73,7 +73,7 @@ public class UserRepository : IUserRepository
         }
 
         existingUser.Email = user.Email;
-        existingUser.PasswordHash = user.PasswordHash;
+        existingUser.Password = user.Password;
         existingUser.UpdatedAt = DateTime.UtcNow;
         await Task.CompletedTask;
     }

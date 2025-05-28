@@ -84,6 +84,7 @@ var app = builder.Build();
 // Middleware
 app.UseRouting();
 app.UseCors("AllowAllOrigins");
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Map controllers

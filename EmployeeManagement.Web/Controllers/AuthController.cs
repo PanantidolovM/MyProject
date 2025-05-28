@@ -8,16 +8,18 @@ using System.Text;
 
 namespace EmployeeManagement.Web.Controllers;
 
-[Route("api/[controller]")] // /api/auth
 [ApiController]
+[Route("api/auth")] // /api/auth
 public class AuthController : ControllerBase
 {
     private readonly IConfiguration _configuration;
     private readonly UserDomainService _userDomainService;
-    public AuthController(IConfiguration configuration, UserDomainService userDomainService)
+    private readonly ILogger<AuthController> _logger;
+    public AuthController(IConfiguration configuration, UserDomainService userDomainService,ILogger<AuthController> logger)
     {
         _configuration = configuration;
         _userDomainService = userDomainService;
+        _logger = logger;
     }
 
     [HttpPost("login")] // POST api/auth/login
@@ -28,16 +30,20 @@ public class AuthController : ControllerBase
     /// <summary>
     /// Login method to authenticate user and generate JWT token.
     /// /// </summary>
-    /// <param name="loginDto">Login request containing email and password.</param>
-    public async Task<IActionResult> Login([FromBody] LoginRequest loginDto)
+    /// <param name="login">Login request containing email and password.</param>
+    public async Task<IActionResult> Login([FromBody] LoginRequest login)
     {
         // Xác thực người dùng. (Ví dụ: kiểm tra email và mật khẩu sau khi băm)
-        var user = await _userDomainService.Authenticate(loginDto.Email, loginDto.Password);
+        var user = await _userDomainService.Authenticate(login.Email, login.Password);
         if (user == null)
         {
             return Unauthorized("Email or password invalid.");
         }
 
+        // Log thông tin đăng nhập (chỉ dùng cho debug - không log password trong production)
+        _logger.LogInformation("Login attempt: Email: {Email}, Password: {Password}, Role: {Role}",
+            login.Email, login.Password, user.Role);
+            
         // Tạo claims cho token
         var claims = new[]
         {
@@ -72,7 +78,7 @@ public class AuthController : ControllerBase
         return Ok(new
         {
             Token = tokenString,
-            expiration = token.ValidTo
+            Expiration = token.ValidTo
         });
     }
 
@@ -350,7 +356,7 @@ public class AuthController : ControllerBase
             return Ok("Security pin sent successfully");
         }
 
-        public class UserLoginDto
+        public class Userlogin
         {
             public string Email { get; set; }
             public string Password { get; set; }

@@ -18,7 +18,7 @@ public class UserDomainService
     public async Task<User> Authenticate(string email, string password)
     {
         // Get user by email
-        User user = await _userRepository.GetUserByEmail(email); // user from entity
+        var user = await _userRepository.GetUserByEmail(email); // user from entity
         if (user == null)
         {
             throw new Exception("User not found");
@@ -62,8 +62,8 @@ public class UserDomainService
         // Check password with saved PasswordHash 
         // Note: In a real application, you should not return the password hash
         // for security reasons. Instead, you should return a token or some other form of authentication.
-        var passwordHash = PasswordHelper.ComputeHash(password);
-        if (user.PasswordHash == passwordHash)  // If the password is correct, return the user
+        // var passwordHash = PasswordHelper.ComputeHash(password);
+        if (user.Password == password)  // If the password is correct, return the user
         {
             return user;
         }

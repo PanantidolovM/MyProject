@@ -25,7 +25,7 @@ public class UserRepoAsyncServices : IUserAsyncService
 
         // バリデーションチェック
         if (string.IsNullOrWhiteSpace(userDto.Email) ||
-            string.IsNullOrWhiteSpace(userDto.PasswordHash))
+            string.IsNullOrWhiteSpace(userDto.Password))
         {
             _logger.LogWarning("User or Password cannot be empty.");
             throw new ArgumentException("ID、パスポートを入力してください!");
@@ -33,7 +33,7 @@ public class UserRepoAsyncServices : IUserAsyncService
 
         User user = new User(
             userDto.Email,
-            userDto.PasswordHash,
+            userDto.Password,
             userDto.Role,
             DateTime.Now,
             DateTime.Now
@@ -56,7 +56,7 @@ public class UserRepoAsyncServices : IUserAsyncService
 
         // バリデーションチェック
         if (string.IsNullOrWhiteSpace(userDto.Email) ||
-            string.IsNullOrWhiteSpace(userDto.PasswordHash))
+            string.IsNullOrWhiteSpace(userDto.Password))
         {
             _logger.LogWarning("User or Password cannot be empty.");
             throw new ArgumentException("ID、パスポートを入力してください!");
@@ -67,7 +67,7 @@ public class UserRepoAsyncServices : IUserAsyncService
 
         User user = new User(
             userDto.Email,
-            userDto.PasswordHash,
+            userDto.Password,
             userDto.Role,
             originalEmployee.CreatedAt,
             DateTime.Now
@@ -94,15 +94,13 @@ public class UserRepoAsyncServices : IUserAsyncService
         }
 
         // DtoUserのリストを作成
-        var userDtos = users.Select(e => new DtoUser
-        {
-            Id = e.Id,
-            Email = e.Email,
-            PasswordHash = e.PasswordHash,
-            Role = e.Role,
-            CreatedAt = e.CreatedAt,
-            UpdatedAt = e.UpdatedAt
-        });
+        var userDtos = users.Select(e => new DtoUser(
+            e.Email,
+            e.Password,
+            e.Role,
+            e.CreatedAt,
+            e.UpdatedAt
+        ));
 
         return userDtos;
     }
@@ -125,15 +123,13 @@ public class UserRepoAsyncServices : IUserAsyncService
             throw new KeyNotFoundException($"ユーザの{email}が検索できません.");
         }
 
-        var userDto = new DtoUser
-        {
-            Id = user.Id,
-            Email = user.Email,
-            PasswordHash = user.PasswordHash,
-            Role = user.Role,
-            CreatedAt = user.CreatedAt,
-            UpdatedAt = user.UpdatedAt
-        };
+        var userDto = new DtoUser(
+            user.Email,
+            user.Password,
+            user.Role,
+            user.CreatedAt,
+            user.UpdatedAt
+        );
 
         _logger.LogInformation("User details: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
         _logger.LogInformation("User details retrieved for Email: {Email}", email);
