@@ -1,36 +1,44 @@
 @page "/admin"
 @using Microsoft.AspNetCore.Authorization
 @using System.Security.Claims
-@* @attribute [Authorize(Roles = "admin")] *@
+@inject ILogger<Admin> Logger
 
 <AuthorizeView Roles="admin">
     <Authorized>
         <h3>Admin Page</h3>
         <p>
             Welcome, you have access to the Admin page!
-            IsInRole("admin") = @currentUser.IsInRole("admin")
+            <a href="/logout">logout</a>
         </p>
-        <ul>
-            @foreach (var claim in currentUser.Claims)
-            {
-                <li>@claim.Type : @claim.Value</li>
-            }
-        </ul>
     </Authorized>
     <NotAuthorized>
-        <p>Bạn không có quyền truy cập trang này. Vui lòng đăng nhập với tài khoản Admin.</p>
+        <p>You don't have access to this page. Please Relogin.</p>
         <a href="/login">Login</a>
     </NotAuthorized>
 </AuthorizeView>
+
 @code {
     private ClaimsPrincipal currentUser = new();
+    [Inject]
+    public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         currentUser = authState.User;
-    }
 
-    [Inject]
-    public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
+        // Kiểm tra quyền và ghi log kết quả
+        bool isAdmin = currentUser.IsInRole("admin");
+        Logger.LogInformation("IsInRole(\"admin\") = {IsAdmin}", isAdmin);
+
+        // Log các claim của người dùng
+        foreach (var claim in currentUser.Claims)
+        {
+            // Ghi log vào hệ thống log của ASP.NET Core (có thể cấu hình để in ra console, file,...)
+            Logger.LogInformation("Claim: {ClaimType} = {ClaimValue}", claim.Type, claim.Value);
+
+            // Nếu bạn chạy Blazor WebAssembly và cần ghi ra console của trình duyệt, có thể dùng JavaScript interop
+            // Ví dụ: await JSRuntime.InvokeVoidAsync("console.log", $"Claim: {claim.Type} = {claim.Value}");
+        }
+    }
 }

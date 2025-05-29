@@ -1,0 +1,22 @@
+@page "/logout"
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@inject CustomAuthenticationStateProvider AuthStateProvider
+
+<h3>Logging out...</h3>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        // Remove JWT token from localStorage
+        // await JS.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+        // Notify the authentication state provider
+        await AuthStateProvider.NotifyUserLogoutAsync();
+
+        // Wait for 2 sec before navigate to Login page
+        await Task.Delay(2000);
+
+        // Redirect to login page
+        Navigation.NavigateTo("/login", forceLoad: true);
+    }
+}

@@ -9,9 +9,9 @@
 
 <h3>Login</h3>
 
-@if (!string.IsNullOrEmpty(ErrorMessage))
+@if (!string.IsNullOrEmpty(Error))
 {
-    <div class="alert alert-danger">@ErrorMessage</div>
+    <div class="alert alert-danger">@Error</div>
 }
 
 <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
@@ -31,55 +31,40 @@
 
 @code {
     private LoginModel loginModel = new();
-    private string ErrorMessage = string.Empty;
+    private string Error = string.Empty;
 
     private async Task HandleLogin()
     {
-        ErrorMessage = string.Empty;
+        Error = string.Empty;
         try
         {
             var response = await Http.PostAsJsonAsync("http://localhost:5048/api/auth/login", loginModel);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<LoginResult>();
-                if (result == null || string.IsNullOrEmpty(result.Token))
+                if (result?.Token is null || result.Expiration < DateTime.UtcNow)
                 {
-                    ErrorMessage = "Login failed. Please try again.";
+                    Error = "Login token has expired. Please login again.";
                     return;
                 }
-                else if (result.Expiration < DateTime.UtcNow)
-                {
-                    ErrorMessage = "Login token has expired. Please log in again.";
-                    return;
-                }
-                // Log thông tin đăng nhập ra console (dùng dành cho debug)
+                // Log login information outto console (dùng dành cho debug)
                 await JS.InvokeVoidAsync("console.log", $"Email: {loginModel.Email}, Password: {loginModel.Password}, Token: {result.Token}");
-                // Lưu token vào localStorage qua JS Interop để sử dụng cho các API sau này.
+                // Save token into localStorage through JS Interop using for API.
                 await JS.InvokeVoidAsync("localStorage.setItem", "jwtToken", result.Token);
-                // Cập nhật trạng thái xác thực trong toàn ứng dụng.
+                // Update Authorize status for all aplication
                 await AuthStateProvider.NotifyUserAuthenticationAsync(result.Token);
-                // Sau khi đăng nhập thành công, chuyển hướng đến trang chính hoặc trang bảo mật.
                 Navigation.NavigateTo("/admin",forceLoad: true);
             }
             else
             {
-                ErrorMessage = "Invalid username or password.";
+                Error = "Invalid username or password.";
             }
-        }
-        catch (HttpRequestException httpEx)
-        {
-            ErrorMessage = "Unable to connect to server. Please try again later.";
-            Console.Error.WriteLine($"HTTP error during login: {httpEx.Message}");
-        }
-        catch (JsonException jsonEx)
-        {
-            ErrorMessage = "Received invalid data from the server.";
-            Console.Error.WriteLine($"JSON parse error: {jsonEx.Message}");
         }
         catch (Exception ex)
         {
-            ErrorMessage = "An error occurred during login.";
-            Console.Error.WriteLine($"Unexpected error during login: {ex.Message}");
+            // Exception
+            Error = "Login failed. Please try again.";
+            Console.Error.WriteLine(ex);
         }
     }
 }

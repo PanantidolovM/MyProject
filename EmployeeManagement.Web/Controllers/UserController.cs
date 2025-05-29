@@ -15,7 +15,7 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
     private readonly IUserAsyncService _userAsyncService = userAsyncService;
 
     [HttpGet("dashboard")]
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "admin")]
     public IActionResult GetUserDashboard()
     {
         return Ok("Dữ liệu dashboard dành cho Admin.");
@@ -29,10 +29,10 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
     {
         try
         {
-            _logger.LogInformation("Controller: Adding new employee: {EmployeeJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
+            _logger.LogInformation("Controller: Adding new user: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
             await _userAsyncService.AddUserAsync(userDto);
-            _logger.LogInformation("✅ Employee added successfully: {EmployeeJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
-            return CreatedAtAction(nameof(GetUserDetailsAsync), new { email = userDto.Email }, new { message = "User added successfully!", user = userDto });
+            _logger.LogInformation("✅ User added successfully: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
+            return CreatedAtAction(nameof(GetUserDetails), new { email = userDto.Email }, new { message = "User added successfully!", user = userDto });
         }
         catch (Exception)
         {
@@ -40,32 +40,32 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
         }
     }
 
-    [HttpGet("get/{email}",Name = "GetUserDetailsAsync")] // GET api/users/get/{email}
+    [HttpGet("get/{email}")] // GET api/users/get/{email}
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetUserDetailsAsync(string email)
+    public async Task<IActionResult> GetUserDetails(string email)
     {
         try
         {
-            _logger.LogInformation("Controller: Getting employee details for Email: {Email}", email);
+            _logger.LogInformation("Controller: Getting user details for Email: {Email}", email);
             var userDto = await _userAsyncService.GetUserDetailsAsync(email);
 
             if (userDto == null)
             {
-                _logger.LogWarning("Employee not found for Email: {Email}", email);
+                _logger.LogWarning("User not found for Email: {Email}", email);
                 return NotFound(new { message = $"User with Email {email} not found." });
             }
             
-            _logger.LogInformation("✅ Employee details retrieved successfully: {EmployeeJson}", 
+            _logger.LogInformation("✅ User details retrieved successfully: {UserJson}", 
                 JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
             return Ok(userDto);
         }
         catch (Exception ex)
         {
-            _logger.LogError("Error retrieving employee details for ID {Id}: {ErrorMessage}", email, ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while retrieving employee details." });
+            _logger.LogError("Error retrieving user details for Email {Email}: {ErrorMessage}", email, ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while retrieving user details." });
         }
     }
 
@@ -85,8 +85,8 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
         }
         catch (Exception ex)
         {
-            _logger.LogError("Error retrieving employees: {ErrorMessage}", ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while retrieving employees." });
+            _logger.LogError("Error retrieving users: {ErrorMessage}", ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while retrieving users." });
         }
     }
     
@@ -108,7 +108,7 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
         catch (Exception ex)
         {
             _logger.LogError("Error updating user with Email {Email}: {ErrorMessage}", userDto.Email, ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while updating the employee." });
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while updating the user." });
         }
     }
 
@@ -128,7 +128,7 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
         catch (Exception ex)
         {
             _logger.LogError("Error deleting user with ID {Id}: {ErrorMessage}", id, ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while deleting the employee." });
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while deleting the user." });
         }
     }
 }

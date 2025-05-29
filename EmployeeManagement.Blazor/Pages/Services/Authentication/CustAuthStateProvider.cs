@@ -12,7 +12,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
         _jsRuntime = jsRuntime;
         // Thiết lập mapping toàn cục một lần khi khởi động.
-        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+        // JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
     }
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()

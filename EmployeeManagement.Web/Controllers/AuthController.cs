@@ -33,7 +33,7 @@ public class AuthController : ControllerBase
     /// <param name="login">Login request containing email and password.</param>
     public async Task<IActionResult> Login([FromBody] LoginRequest login)
     {
-        // Xác thực người dùng. (Ví dụ: kiểm tra email và mật khẩu sau khi băm)
+        // Xác thực người dùng. (Ví dụ: kiểm tra email và mật khẩu)
         var user = await _userDomainService.Authenticate(login.Email, login.Password);
         if (user == null)
         {
