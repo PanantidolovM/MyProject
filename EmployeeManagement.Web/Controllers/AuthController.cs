@@ -105,16 +105,23 @@ public class AuthController : ControllerBase
             {
                 return BadRequest("User data is required.");
             }
+            CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
+            // Chuyển đổi ra chuỗi Base64
+            string hashString = Convert.ToBase64String(passwordHash);
+            string saltString = Convert.ToBase64String(passwordSalt);
+
+            // Kết hợp salt và hash theo định dạng "salt:hash"
+            string storedPassword = $"{saltString}:{hashString}";
+            
             DtoUser userDto = new DtoUser(
                 user.Email,
-                user.PasswordHash,
+                storedPassword,
                 user.Role,
                 DateTime.Now,
                 DateTime.Now
             );
 
-            CreatePasswordHash(user.PasswordHash, out byte[] passwordHash, out byte[] passwordSalt);
             _logger.LogInformation("Controller: Adding new user: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
             await _userAsyncService.AddUserAsync(userDto);
              _logger.LogInformation("✅ User added successfully: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
@@ -124,7 +131,6 @@ public class AuthController : ControllerBase
         {
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while adding the user." }); // Trả về 500 Internal Server Error
         }
-        
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

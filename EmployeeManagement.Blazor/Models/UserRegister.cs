@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-public class User
+public class UserRegister
 {
     [Required, EmailAddress]
     public string Email { get; set; } = string.Empty;
     [Required]
-    public string Password { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
 }

@@ -62,8 +62,8 @@ public class UserDomainService
         // Check password with saved PasswordHash 
         // Note: In a real application, you should not return the password hash
         // for security reasons. Instead, you should return a token or some other form of authentication.
-        // var passwordHash = PasswordHelper.ComputeHash(password);
-        if (user.PasswordHash == password)  // If the password is correct, return the user
+        // Assuming user.Password is the stored hash and user.PasswordSalt is the stored salt
+        if (PasswordHelper.VerifyPassword(password, user.Password))
         {
             return user;
         }

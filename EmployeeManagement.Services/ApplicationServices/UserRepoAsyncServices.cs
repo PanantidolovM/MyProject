@@ -96,7 +96,7 @@ public class UserRepoAsyncServices : IUserAsyncService
         // DtoUserのリストを作成
         var userDtos = users.Select(e => new DtoUser(
             e.Email,
-            e.PasswordHash,
+            e.Password,
             e.Role,
             e.CreatedAt,
             e.UpdatedAt
@@ -125,7 +125,7 @@ public class UserRepoAsyncServices : IUserAsyncService
 
         var userDto = new DtoUser(
             user.Email,
-            user.PasswordHash,
+            user.Password,
             user.Role,
             user.CreatedAt,
             user.UpdatedAt

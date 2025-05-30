@@ -39,11 +39,11 @@ public class UserRepository : IUserRepository
         }
 
         // Hash the password before storing
-        if (!string.IsNullOrEmpty(user.PasswordHash))
-        {
-            user.PasswordHash = PasswordHelper.ComputeHash(user.PasswordHash);
-            user.PasswordHash = ""; // Clear plain password
-        }
+        // if (!string.IsNullOrEmpty(user.Password))
+        // {
+        //     user.Password = PasswordHelper.ComputeHash(user.Password);
+        //     user.Password = ""; // Clear plain password
+        // }
 
         _users.Add(user);
 
@@ -95,7 +95,7 @@ public class UserRepository : IUserRepository
         }
 
         existingUser.Email = user.Email;
-        existingUser.PasswordHash = user.PasswordHash;
+        existingUser.Password = user.Password;
         existingUser.UpdatedAt = DateTime.UtcNow;
         await Task.CompletedTask;
     }
