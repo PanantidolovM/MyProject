@@ -63,13 +63,13 @@ public class UserRepoAsyncServices : IUserAsyncService
         }
 
         // Lấy employee gốc từ domain service theo id
-        var originalEmployee = await _userRepository.GetUserByEmail(userDto.Email);
+        var originalUser = await _userRepository.GetUserById(userDto.Id);
 
         User user = new User(
             userDto.Email,
             userDto.Password,
             userDto.Role,
-            originalEmployee.CreatedAt,
+            originalUser.CreatedAt,
             DateTime.Now
         );
 
@@ -96,7 +96,7 @@ public class UserRepoAsyncServices : IUserAsyncService
         // DtoUserのリストを作成
         var userDtos = users.Select(e => new DtoUser(
             e.Email,
-            e.Password,
+            e.PasswordHash,
             e.Role,
             e.CreatedAt,
             e.UpdatedAt
@@ -106,33 +106,33 @@ public class UserRepoAsyncServices : IUserAsyncService
     }
 
     // 社員詳細検索処理
-    public async Task<DtoUser> GetUserDetailsAsync(string email)
+    public async Task<DtoUser> GetUserDetailsAsync(int id)
     {
-        var user = await _userRepository.GetUserByEmail(email);
+        var user = await _userRepository.GetUserById(id);
 
-        // emailがNullの場合、ArgumentExceptionをスローします。
-        if (string.IsNullOrWhiteSpace(email))
+        // idが0以下の場合、ArgumentExceptionをスローします。
+        if (id <= 0)
         {
-            _logger.LogWarning("Invalid user Email: {Email}", email); // もし無効なら、エラーログを出力して、ArgumentExceptionをスローする
-            throw new ArgumentException($"無効なEmail: {email}.");
+            _logger.LogWarning("Invalid user id: {Id}", id); // もし無効なら、エラーログを出力して、ArgumentExceptionをスローする
+            throw new ArgumentException($"無効なID: {id}.");
         }
         // userのnullチェック
         if (user == null)
         {
-            _logger.LogWarning("user not found for Email: {Email}", email); // もしnullなら、エラーログを出力して、KeyNotFoundExceptionをスローする
-            throw new KeyNotFoundException($"ユーザの{email}が検索できません.");
+            _logger.LogWarning("user not found for id: {Id}", id); // もしnullなら、エラーログを出力して、KeyNotFoundExceptionをスローする
+            throw new KeyNotFoundException($"ユーザの{id}が検索できません.");
         }
 
         var userDto = new DtoUser(
             user.Email,
-            user.Password,
+            user.PasswordHash,
             user.Role,
             user.CreatedAt,
             user.UpdatedAt
         );
 
         _logger.LogInformation("User details: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
-        _logger.LogInformation("User details retrieved for Email: {Email}", email);
+        _logger.LogInformation("User details retrieved for id: {Id}", id);
         return userDto;
     }
 

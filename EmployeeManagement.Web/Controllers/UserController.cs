@@ -36,26 +36,26 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
         }
         catch (Exception)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while adding the employee." }); // Trả về 500 Internal Server Error
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while adding the user." }); // Trả về 500 Internal Server Error
         }
     }
 
-    [HttpGet("get/{email}")] // GET api/users/get/{email}
+    [HttpGet("get/{id}")] // GET api/users/get/{email}
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetUserDetails(string email)
+    public async Task<IActionResult> GetUserDetails(int id)
     {
         try
         {
-            _logger.LogInformation("Controller: Getting user details for Email: {Email}", email);
-            var userDto = await _userAsyncService.GetUserDetailsAsync(email);
+            _logger.LogInformation("Controller: Getting user details for id: {Id}", id);
+            var userDto = await _userAsyncService.GetUserDetailsAsync(id);
 
             if (userDto == null)
             {
-                _logger.LogWarning("User not found for Email: {Email}", email);
-                return NotFound(new { message = $"User with Email {email} not found." });
+                _logger.LogWarning("User not found for id: {Id}", id);
+                return NotFound(new { message = $"User with id {id} not found." });
             }
             
             _logger.LogInformation("✅ User details retrieved successfully: {UserJson}", 
@@ -64,7 +64,7 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
         }
         catch (Exception ex)
         {
-            _logger.LogError("Error retrieving user details for Email {Email}: {ErrorMessage}", email, ex.Message);
+            _logger.LogError("Error retrieving user details for id {Id}: {ErrorMessage}", id, ex.Message);
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while retrieving user details." });
         }
     }

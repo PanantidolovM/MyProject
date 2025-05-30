@@ -38,10 +38,32 @@ public class UserRepository : IUserRepository
             throw new Exception("Email already exists");
         }
 
+        // Hash the password before storing
+        if (!string.IsNullOrEmpty(user.PasswordHash))
+        {
+            user.PasswordHash = PasswordHelper.ComputeHash(user.PasswordHash);
+            user.PasswordHash = ""; // Clear plain password
+        }
+
         _users.Add(user);
 
         await Task.CompletedTask;
     }
+
+    public async Task<User> GetUserById(int id)
+    {
+        if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id));
+
+        var user = await Task.Run(() => _users.FirstOrDefault(e => e.Id == id));
+
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+
+        return user;
+    }
+
     public async Task<User> GetUserByEmail(string email)
     {
         if (string.IsNullOrEmpty(email)) throw new ArgumentNullException(nameof(email));
@@ -73,7 +95,7 @@ public class UserRepository : IUserRepository
         }
 
         existingUser.Email = user.Email;
-        existingUser.Password = user.Password;
+        existingUser.PasswordHash = user.PasswordHash;
         existingUser.UpdatedAt = DateTime.UtcNow;
         await Task.CompletedTask;
     }

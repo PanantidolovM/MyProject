@@ -6,7 +6,7 @@ public interface IUserAsyncService
 {
     
     Task AddUserAsync(DtoUser userDto);
-    Task<DtoUser> GetUserDetailsAsync(string Email);
+    Task<DtoUser> GetUserDetailsAsync(int id);
     Task<IEnumerable<DtoUser>> GetAllUsersAsync();
     Task UpdateUserAsync(DtoUser userDto);
     Task DelUserAsync(int id);

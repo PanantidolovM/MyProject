@@ -1,10 +1,15 @@
+using EmployeeManagement.Core.Entities;
 using EmployeeManagement.Core.DomainServices;
+using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Services.DtoEntities;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.IdentityModel.Tokens.Jwt;
+using JsonSerializer = System.Text.Json.JsonSerializer;
+using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
 
 namespace EmployeeManagement.Web.Controllers;
 
@@ -14,11 +19,13 @@ public class AuthController : ControllerBase
 {
     private readonly IConfiguration _configuration;
     private readonly UserDomainService _userDomainService;
+    private readonly IUserAsyncService _userAsyncService;
     private readonly ILogger<AuthController> _logger;
-    public AuthController(IConfiguration configuration, UserDomainService userDomainService,ILogger<AuthController> logger)
+    public AuthController(IConfiguration configuration, UserDomainService userDomainService, IUserAsyncService userAsyncService, ILogger<AuthController> logger)
     {
         _configuration = configuration;
         _userDomainService = userDomainService;
+        _userAsyncService = userAsyncService;
         _logger = logger;
     }
 
@@ -43,99 +50,92 @@ public class AuthController : ControllerBase
         // Log thông tin đăng nhập (chỉ dùng cho debug - không log password trong production)
         _logger.LogInformation("Login attempt: Email: {Email}, Password: {Password}, Role: {Role}",
             login.Email, login.Password, user.Role);
-            
-        // Tạo claims cho token
+
+        // Gọi GenerateJwtToken chỉ với đối tượng user
+        var tokenData = GenerateJwtToken(user);
+
+        // Trả về token và thời gian hết hạn
+        return Ok(new{tokenData.Token, tokenData.Expiration});
+    }
+
+    private (string Token, DateTime Expiration) GenerateJwtToken(User user)
+    {
+        var expiration = DateTime.Now.AddHours(2);
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Email),
             new Claim("UserId", user.Id.ToString()),
-            new Claim(ClaimTypes.Role, user.Role),
+            new Claim("role", user.Role),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
-        // Tạo token
+        // Key create
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key is not configured.")));
-
-        /* Tạo SigningCredentials
-            SigningCredentials là thông tin để ký token
-            Chúng ta sử dụng HMAC SHA256 để ký token
-            Chúng ta cũng cần cung cấp key để xác thực token
-            Chúng ta sẽ sử dụng key mà chúng ta đã tạo ở trên
-            Chúng ta cũng cần cung cấp algorithm để xác thực token
-        */
+        // /*  SigningCredentials create
+        //     SigningCredentials là thông tin để ký token
+        //     Chúng ta sử dụng HMAC SHA256 để ký token
+        //     Chúng ta cũng cần cung cấp key để xác thực token
+        //     Chúng ta sẽ sử dụng key mà chúng ta đã tạo ở trên
+        //     Chúng ta cũng cần cung cấp algorithm để xác thực token
+        // */
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+        // Token create
         var token = new JwtSecurityToken(
             issuer: _configuration["Jwt:Issuer"],
             audience: _configuration["Jwt:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddHours(2),
+            expires: expiration,
             signingCredentials: creds);
 
-        // Trả về token
+        // token return
         var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-        // Trả về thông tin người dùng và token
-        return Ok(new
-        {
-            Token = tokenString,
-            Expiration = token.ValidTo
-        });
+        return (tokenString, token.ValidTo);
     }
 
-    /*
-        private string GenerateJwtToken(User user)
+    [HttpPost("register")] // POST api/auth/register
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Register([FromBody] User user)
+    {
+        try
         {
-            var claims = new[]
+            if (user == null)
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("role", user.Role)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegisterDto registerDto)
-        {
-            if (await _userRepository.GetUserByEmail(registerDto.Email) != null)
-            {
-                return BadRequest("Email already exists");
+                return BadRequest("User data is required.");
             }
 
-            CreatePasswordHash(registerDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            DtoUser userDto = new DtoUser(
+                user.Email,
+                user.PasswordHash,
+                user.Role,
+                DateTime.Now,
+                DateTime.Now
+            );
 
-            var user = new User
-            {
-                Email = registerDto.Email,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
-                Role = "user"
-            };
-
-            await _userRepository.AddUser(user);
-            return Ok();
+            CreatePasswordHash(user.PasswordHash, out byte[] passwordHash, out byte[] passwordSalt);
+            _logger.LogInformation("Controller: Adding new user: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
+            await _userAsyncService.AddUserAsync(userDto);
+             _logger.LogInformation("✅ User added successfully: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
+            return CreatedAtAction(nameof(Register), new { email = user.Email }, new { message = "User added successfully!", user = userDto });
         }
-
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        catch (Exception)
         {
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            }
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while adding the user." }); // Trả về 500 Internal Server Error
         }
-    */
+        
+    }
+
+    private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+    {
+        using (var hmac = new HMACSHA512())
+        {
+            passwordSalt = hmac.Key;
+            passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+        }
+    }
+    
     /*
         [HttpGet("users")]
         public async Task<IActionResult> GetAllUsers()

@@ -63,7 +63,7 @@ public class UserDomainService
         // Note: In a real application, you should not return the password hash
         // for security reasons. Instead, you should return a token or some other form of authentication.
         // var passwordHash = PasswordHelper.ComputeHash(password);
-        if (user.Password == password)  // If the password is correct, return the user
+        if (user.PasswordHash == password)  // If the password is correct, return the user
         {
             return user;
         }
