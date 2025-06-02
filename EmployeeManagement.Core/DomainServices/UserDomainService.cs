@@ -1,8 +1,5 @@
-
 using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Core.Entities;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
 namespace EmployeeManagement.Core.DomainServices;
 
@@ -15,14 +12,16 @@ public class UserDomainService
         _userRepository = userRepository;
     }
 
-    public async Task<User> Authenticate(string email, string password)
+    public async Task<User> Authenticate(string email, string password)// Bmprao1234@
     {
         // Get user by email
         var user = await _userRepository.GetUserByEmail(email); // user from entity
+        
         if (user == null)
         {
             throw new Exception("User not found");
         }
+
         // Check if the password is empty
         if (string.IsNullOrEmpty(password))
         {
@@ -58,19 +57,17 @@ public class UserDomainService
         {
             throw new Exception("Password must contain at least one lowercase letter");
         }
-        
-        // Check password with saved PasswordHash 
-        // Note: In a real application, you should not return the password hash
-        // for security reasons. Instead, you should return a token or some other form of authentication.
-        // Assuming user.Password is the stored hash and user.PasswordSalt is the stored salt
-        if (PasswordHelper.VerifyPassword(password, user.Password))
-        {
-            return user;
-        }
-        else
+
+        bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+
+        if (!isPasswordValid)
         {
             throw new Exception("Invalid password");
         }
+        else
+        {
+            return user;
+        }     
     }
 }
 

@@ -150,3 +150,4 @@ C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\refint\Em
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\EmployeeManagement.Web.pdb
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\EmployeeManagement.Web.genruntimeconfig.cache
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\obj\Debug\net9.0\ref\EmployeeManagement.Web.dll
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Web\bin\Debug\net9.0\BCrypt.Net-Next.dll

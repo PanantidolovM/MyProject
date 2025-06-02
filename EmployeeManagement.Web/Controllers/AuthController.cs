@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Cryptography;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
 
@@ -34,10 +34,6 @@ public class AuthController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    /// <summary>
-    /// Login method to authenticate user and generate JWT token.
-    /// /// </summary>
-    /// <param name="login">Login request containing email and password.</param>
     public async Task<IActionResult> Login([FromBody] LoginRequest login)
     {
         // Xác thực người dùng. (Ví dụ: kiểm tra email và mật khẩu)
@@ -105,18 +101,18 @@ public class AuthController : ControllerBase
             {
                 return BadRequest("User data is required.");
             }
-            CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            // Chuyển đổi ra chuỗi Base64
-            string hashString = Convert.ToBase64String(passwordHash);
-            string saltString = Convert.ToBase64String(passwordSalt);
+            var existingUser = await _userAsyncService.GetUserDetailsAsync(user.Id);
+            if (existingUser != null)
+            {
+                return Conflict(new { message = "Email already exists." });
+            }
 
-            // Kết hợp salt và hash theo định dạng "salt:hash"
-            string storedPassword = $"{saltString}:{hashString}";
-            
-            DtoUser userDto = new DtoUser(
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
+            var userDto = new DtoUser(
                 user.Email,
-                storedPassword,
+                hashedPassword,
                 user.Role,
                 DateTime.Now,
                 DateTime.Now
@@ -130,15 +126,6 @@ public class AuthController : ControllerBase
         catch (Exception)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while adding the user." }); // Trả về 500 Internal Server Error
-        }
-    }
-
-    private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-    {
-        using (var hmac = new HMACSHA512())
-        {
-            passwordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         }
     }
     

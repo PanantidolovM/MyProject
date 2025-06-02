@@ -45,12 +45,12 @@ public class UserRepoAsyncServices : IUserAsyncService
     // 社員更新処理
     public async Task UpdateUserAsync(DtoUser userDto)
     {
-        _logger.LogInformation("Updating employee: {DtoUser}", userDto);
+        _logger.LogInformation("Updating user: {DtoUser}", userDto);
 
         //　Employeeのnullチェック
         if (userDto == null)
         {
-            _logger.LogError("Employee is null, cannot update employee. Please check the input."); // もしnullなら、エラーログを出力して、ArgumentNullExceptionをスローする
+            _logger.LogError("User is null, cannot update user. Please check the input."); // もしnullなら、エラーログを出力して、ArgumentNullExceptionをスローする
             throw new ArgumentNullException(nameof(userDto));
         }
 
@@ -84,7 +84,7 @@ public class UserRepoAsyncServices : IUserAsyncService
         // Employeeのnullチェック
         if (!users.Any())
         {
-            _logger.LogWarning("No employees found");
+            _logger.LogWarning("No users found");
             return Enumerable.Empty<DtoUser>(); // もしnullなら、エラーログを出力して、Empty list を返す
         }
 
@@ -119,7 +119,7 @@ public class UserRepoAsyncServices : IUserAsyncService
         // userのnullチェック
         if (user == null)
         {
-            _logger.LogWarning("user not found for id: {Id}", id); // もしnullなら、エラーログを出力して、KeyNotFoundExceptionをスローする
+            _logger.LogWarning("User not found for id: {Id}", id); // もしnullなら、エラーログを出力して、KeyNotFoundExceptionをスローする
             throw new KeyNotFoundException($"ユーザの{id}が検索できません.");
         }
 

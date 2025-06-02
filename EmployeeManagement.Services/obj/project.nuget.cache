@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "lBbA2tEc1bg=",
+  "dgSpecHash": "zfrhXAkyZpA=",
   "success": true,
   "projectFilePath": "C:\\Users\\gttan\\EmployeeProject\\EmployeeManagement.Services\\EmployeeManagement.Services.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\gttan\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.4\\microsoft.extensions.dependencyinjection.9.0.4.nupkg.sha512",
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.4\\microsoft.extensions.dependencyinjection.abstractions.9.0.4.nupkg.sha512",
     "C:\\Users\\gttan\\.nuget\\packages\\microsoft.extensions.logging\\9.0.4\\microsoft.extensions.logging.9.0.4.nupkg.sha512",

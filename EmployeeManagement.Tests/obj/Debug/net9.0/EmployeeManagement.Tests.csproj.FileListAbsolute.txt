@@ -230,3 +230,4 @@ C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\refint\
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.pdb
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\EmployeeManagement.Tests.genruntimeconfig.cache
 C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\obj\Debug\net9.0\ref\EmployeeManagement.Tests.dll
+C:\Users\gttan\EmployeeProject\EmployeeManagement.Tests\bin\Debug\net9.0\BCrypt.Net-Next.dll
