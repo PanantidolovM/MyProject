@@ -7,9 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Cryptography;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
+using EmployeeManagement.Core.Interfaces;
 
 namespace EmployeeManagement.Web.Controllers;
 
@@ -19,12 +19,14 @@ public class AuthController : ControllerBase
 {
     private readonly IConfiguration _configuration;
     private readonly UserDomainService _userDomainService;
+    private readonly IUserRepository _userRepository;
     private readonly IUserAsyncService _userAsyncService;
     private readonly ILogger<AuthController> _logger;
-    public AuthController(IConfiguration configuration, UserDomainService userDomainService, IUserAsyncService userAsyncService, ILogger<AuthController> logger)
+    public AuthController(IConfiguration configuration, UserDomainService userDomainService,IUserRepository userRepository, IUserAsyncService userAsyncService, ILogger<AuthController> logger)
     {
         _configuration = configuration;
         _userDomainService = userDomainService;
+        _userRepository = userRepository;
         _userAsyncService = userAsyncService;
         _logger = logger;
     }
@@ -102,7 +104,7 @@ public class AuthController : ControllerBase
                 return BadRequest("User data is required.");
             }
 
-            var existingUser = await _userAsyncService.GetUserDetailsAsync(user.Id);
+            var existingUser = await _userRepository.GetUserByEmail(user.Email);
             if (existingUser != null)
             {
                 return Conflict(new { message = "Email already exists." });
@@ -121,11 +123,16 @@ public class AuthController : ControllerBase
             _logger.LogInformation("Controller: Adding new user: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
             await _userAsyncService.AddUserAsync(userDto);
              _logger.LogInformation("✅ User added successfully: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
-            return CreatedAtAction(nameof(Register), new { email = user.Email }, new { message = "User added successfully!", user = userDto });
+            return Ok(new { message = "User added successfully!", user = userDto });
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while adding the user." }); // Trả về 500 Internal Server Error
+            // Log lỗi chi tiết qua logger và in ra console để debug
+            _logger.LogError(ex, "An error occurred while adding the user.");
+            Console.WriteLine(ex.ToString());
+
+            return StatusCode(StatusCodes.Status500InternalServerError, 
+                new { message = "An error occurred while adding the user." });
         }
     }
     

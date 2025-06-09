@@ -8,7 +8,7 @@ public interface IUserRepository
     //追加
     Task AddUser(User user);
     //検索
-    Task<User> GetUserByEmail(string email);
+    Task<User?> GetUserByEmail(string email);
     Task<User> GetUserById(int id);
     //一覧検索
     Task<IEnumerable<User>> GetAll();

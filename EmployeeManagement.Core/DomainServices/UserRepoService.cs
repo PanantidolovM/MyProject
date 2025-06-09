@@ -52,7 +52,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetUserById(int id)
     {
-        if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id));
+        if (id < 0) throw new ArgumentOutOfRangeException(nameof(id));
 
         var user = await Task.Run(() => _users.FirstOrDefault(e => e.Id == id));
 
@@ -64,19 +64,18 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<User> GetUserByEmail(string email)
-    {
-        if (string.IsNullOrEmpty(email)) throw new ArgumentNullException(nameof(email));
+    public async Task<User?> GetUserByEmail(string email)
+{
+    if (string.IsNullOrEmpty(email))
+        throw new ArgumentNullException(nameof(email));
 
-        var user = await Task.Run(() => _users.FirstOrDefault(e => e.Email == email));
+    // Tìm kiếm user trong danh sách _users dựa trên email
+    var user = await Task.Run(() => _users.FirstOrDefault(e => e.Email == email));
 
-        if (user == null)
-        {
-            throw new Exception("User not found");
-        }
+    // Nếu không tìm thấy, trả về null (điều này cho phép xử lý trong Register phù hợp)
+    return user;
+}
 
-        return user;
-    }
 
     public async Task<IEnumerable<User>> GetAll()
     {

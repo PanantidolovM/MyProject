@@ -37,6 +37,7 @@ public class EmployeeController(IEmployeeAsyncAppService employeeAsyncAppService
     }
 
     [HttpGet("get/{id}")] // GET api/employees/get/{id}
+    [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -66,6 +67,7 @@ public class EmployeeController(IEmployeeAsyncAppService employeeAsyncAppService
     }
 
     [HttpGet("getAll")] // GET api/employees/getAll
+    [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -87,6 +89,7 @@ public class EmployeeController(IEmployeeAsyncAppService employeeAsyncAppService
     }
     
     [HttpPut("update")]// PUT api/employees/update
+    [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -109,6 +112,7 @@ public class EmployeeController(IEmployeeAsyncAppService employeeAsyncAppService
     }
 
     [HttpDelete("delete/{id}")]// DELETE api/employees/delete/{id}
+    [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]

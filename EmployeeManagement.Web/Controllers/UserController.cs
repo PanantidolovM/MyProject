@@ -32,7 +32,7 @@ public class UsersController(IUserAsyncService userAsyncService, ILogger<UsersCo
             _logger.LogInformation("Controller: Adding new user: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
             await _userAsyncService.AddUserAsync(userDto);
             _logger.LogInformation("✅ User added successfully: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
-            return CreatedAtAction(nameof(GetUserDetails), new { email = userDto.Email }, new { message = "User added successfully!", user = userDto });
+            return CreatedAtAction(nameof(GetUserDetails), new { id = userDto.Id }, new { message = "User added successfully!", user = userDto });
         }
         catch (Exception)
         {
