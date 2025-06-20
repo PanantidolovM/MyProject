@@ -35,6 +35,18 @@ main {
         align-items: center;
     }
 
+    .bi-alert-fill-nav-menu {
+        display: inline-block;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        top: -1px;
+        background-image: url('/images/bell.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
     /* Các quy tắc dành cho link nằm trong top-row */
     .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;

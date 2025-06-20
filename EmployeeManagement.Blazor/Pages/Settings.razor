@@ -105,11 +105,30 @@
     private void SavePreferences()
     {
         // Save preferences logic here
+        // Example: Save preferences to local storage or call an API
+        // For demonstration, just display a message (replace with real logic)
+        Console.WriteLine($"Preferences saved: Theme={preferences.Theme}, Language={preferences.Language}, Notifications={preferences.EnableNotifications}, Frequency={preferences.NotificationFrequency}, ExportFormat={preferences.ExportFormat}, IncludeHeaders={preferences.IncludeHeaders}");
     }
 
     private void SaveAccount()
     {
         // Save account settings logic here
+        // Example: Validate input
+        if (string.IsNullOrWhiteSpace(account.Email) || string.IsNullOrWhiteSpace(account.DisplayName))
+        {
+            // Show error message (implement your own notification logic)
+            Console.WriteLine("Email and Display Name are required.");
+            return;
+        }
+
+        // Example: Call an API to save account settings (pseudo-code)
+        // await AccountService.UpdateAccountAsync(account);
+
+        // Example: Show success message
+        Console.WriteLine("Account settings saved successfully.");
+
+        // Clear the password field for security
+        account.NewPassword = string.Empty;
     }
 
     public class Preferences

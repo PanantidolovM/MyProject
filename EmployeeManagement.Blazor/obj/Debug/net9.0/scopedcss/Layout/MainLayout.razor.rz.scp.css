@@ -35,6 +35,18 @@ main[b-vk7gyd07cy] {
         align-items: center;
     }
 
+    .bi-alert-fill-nav-menu[b-vk7gyd07cy] {
+        display: inline-block;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        top: -1px;
+        background-image: url('/images/bell.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
     /* Các quy tắc dành cho link nằm trong top-row */
     .top-row[b-vk7gyd07cy]  a, .top-row[b-vk7gyd07cy]  .btn-link {
         white-space: nowrap;
