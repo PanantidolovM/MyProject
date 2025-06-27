@@ -1,4 +1,5 @@
 using EmployeeManagement.Core.Entities;
+using EmployeeManagement.Core.Interfaces;
 using EmployeeManagement.Core.DomainServices;
 using EmployeeManagement.Services.Interfaces;
 using EmployeeManagement.Services.DtoEntities;
@@ -9,7 +10,6 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
-using EmployeeManagement.Core.Interfaces;
 
 namespace EmployeeManagement.Web.Controllers;
 
@@ -22,7 +22,7 @@ public class AuthController : ControllerBase
     private readonly IUserRepository _userRepository;
     private readonly IUserAsyncService _userAsyncService;
     private readonly ILogger<AuthController> _logger;
-    public AuthController(IConfiguration configuration, UserDomainService userDomainService,IUserRepository userRepository, IUserAsyncService userAsyncService, ILogger<AuthController> logger)
+    public AuthController(IConfiguration configuration, UserDomainService userDomainService, IUserRepository userRepository, IUserAsyncService userAsyncService, ILogger<AuthController> logger)
     {
         _configuration = configuration;
         _userDomainService = userDomainService;
@@ -53,7 +53,7 @@ public class AuthController : ControllerBase
         var tokenData = GenerateJwtToken(user);
 
         // Trả về token và thời gian hết hạn
-        return Ok(new{tokenData.Token, tokenData.Expiration});
+        return Ok(new { tokenData.Token, tokenData.Expiration });
     }
 
     private (string Token, DateTime Expiration) GenerateJwtToken(User user)
@@ -122,7 +122,7 @@ public class AuthController : ControllerBase
 
             _logger.LogInformation("Controller: Adding new user: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
             await _userAsyncService.AddUserAsync(userDto);
-             _logger.LogInformation("✅ User added successfully: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
+            _logger.LogInformation("✅ User added successfully: {UserJson}", JsonSerializer.Serialize(userDto, new JsonSerializerOptions { WriteIndented = true }));
             return Ok(new { message = "User added successfully!", user = userDto });
         }
         catch (Exception ex)
@@ -131,9 +131,29 @@ public class AuthController : ControllerBase
             _logger.LogError(ex, "An error occurred while adding the user.");
             Console.WriteLine(ex.ToString());
 
-            return StatusCode(StatusCodes.Status500InternalServerError, 
+            return StatusCode(StatusCodes.Status500InternalServerError,
                 new { message = "An error occurred while adding the user." });
         }
+    }
+
+    [HttpPut("update/{email}")] // PUT api/auth/update/{email}
+    public async Task<IActionResult> UpdateUser(string email, [FromBody] Account account)
+    {
+        if (account == null)
+        {
+            return BadRequest("User data is required.");
+        }
+
+        var userDto = new DtoUser(
+            email,
+            BCrypt.Net.BCrypt.HashPassword(account.NewPassword),
+            account.DisplayName,
+            DateTime.Now,
+            DateTime.Now
+        );
+
+        await _userAsyncService.UpdateUserAsync(userDto);
+        return NoContent();
     }
     
     /*

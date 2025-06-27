@@ -16,11 +16,4 @@ public class DtoUser
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
     }
-
-    // Ví dụ: phương thức nghiệp vụ để thay đổi email (và có thể bổ sung thay đổi Role theo nghiệp vụ)
-    // public void ChangeEmail(string newEmail)
-    // {
-    //     // Thêm các validate nếu cần
-    //     Email = newEmail;
-    // }
 }

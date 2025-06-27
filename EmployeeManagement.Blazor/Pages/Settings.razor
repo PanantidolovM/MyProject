@@ -1,5 +1,10 @@
 @page "/settings"
+@using EmployeeManagement.Blazor.Ui
+@using EmployeeManagement.Blazor.Models
 @using Microsoft.AspNetCore.Components.Forms
+@using System.Net.Http.Json
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
 
 @code {
 
@@ -46,7 +51,7 @@
 <EditForm Model="@preferences" OnValidSubmit="SavePreferences">
     <div class="mb-3">
         <label>Enable Notifications:</label>
-        <InputCheckbox @bind-Value="preferences.EnableNotifications" />
+        <InputCheckbox @bind-Value="preferences.EnableNotifications"/>
     </div>
     <div class="mb-3">
         <label>Notification Frequency:</label>
@@ -85,22 +90,27 @@
 <EditForm Model="@account" OnValidSubmit="SaveAccount">
     <div class="mb-3">
         <label>Email:</label>
-        <InputText @bind-Value="account.Email" class="form-control" />
+        <InputText @bind-Value="account.Email" class="form-control" placehodlder="自分のメールアドレスの入力"/>
     </div>
     <div class="mb-3">
         <label>Display Name:</label>
-        <InputText @bind-Value="account.DisplayName" class="form-control" />
+        <InputText @bind-Value="account.DisplayName" class="form-control" placehodlder="表示名の入力"/>
     </div>
     <div class="mb-3">
         <label>Change Password:</label>
-        <InputText @bind-Value="account.NewPassword" type="password" class="form-control" />
+        <InputText @bind-Value="account.NewPassword" type="password" class="form-control" placeholder="新しいパスワードを入力"/>
     </div>
     <button type="submit" class="btn btn-primary">Save Account Settings</button>
 </EditForm>
 
+<Alert @ref="alert" Title= "New Password" Message="Are you sure want to change the password?" OnConfirm="ConfirmSave" OnCancel="CancelSave" />
+
 @code {
     private Preferences preferences = new Preferences();
     private AccountSettings account = new AccountSettings();
+    private Alert alert = default!;
+
+    private string errorMessage = string.Empty;
 
     private void SavePreferences()
     {
@@ -120,33 +130,34 @@
             Console.WriteLine("Email and Display Name are required.");
             return;
         }
-
-        // Example: Call an API to save account settings (pseudo-code)
-        // await AccountService.UpdateAccountAsync(account);
-
-        // Example: Show success message
-        Console.WriteLine("Account settings saved successfully.");
-
+        alert.ShowAsync();
         // Clear the password field for security
         account.NewPassword = string.Empty;
     }
 
-    public class Preferences
+     private async Task ConfirmSave()
     {
-        public string Theme { get; set; } = "Light";
-        public string Language { get; set; } = "en";
-        public bool EnableNotifications { get; set; } = true;
-        public string NotificationFrequency { get; set; } = "Immediate";
-        public string ExportFormat { get; set; } = "CSV";
-        public bool IncludeHeaders { get; set; } = true;
-        public string CustomTheme { get; set; } = "";
-        public string CustomFont { get; set; } = "";
+        try
+        {
+            var response = await Http.PutAsJsonAsync($"api/auth/update", account);
+            if (response.IsSuccessStatusCode)
+            {
+                return;
+            }
+            else
+            {
+                errorMessage = "Failed to update account.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error settings account: {ex.Message}";
+        }
+        Console.WriteLine("Account settings saved successfully.");
     }
-
-    public class AccountSettings
+    private void CancelSave()
     {
-        public string Email { get; set; } = "";
-        public string DisplayName { get; set; } = "";
-        public string NewPassword { get; set; } = "";
+        // Xử lý hủy thêm nhân viên ở đây
+        Console.WriteLine("Người dùng đã hủy thao tác thay đổi mật khẩu.");
     }
 }
